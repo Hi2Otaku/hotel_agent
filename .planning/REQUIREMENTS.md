@@ -9,10 +9,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Authentication
 
-- [ ] **AUTH-01**: Guest can create account with email and password
-- [ ] **AUTH-02**: Guest can log in and stay logged in across sessions (JWT)
+- [x] **AUTH-01**: Guest can create account with email and password
+- [x] **AUTH-02**: Guest can log in and stay logged in across sessions (JWT)
 - [ ] **AUTH-03**: Guest can reset password via email link (simulated)
-- [ ] **AUTH-04**: Staff can log in with role-based access (admin, manager, front desk)
+- [x] **AUTH-04**: Staff can log in with role-based access (admin, manager, front desk)
 
 ### Room Search & Availability
 
@@ -104,10 +104,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUTH-01 | Phase 1 | Pending |
-| AUTH-02 | Phase 1 | Pending |
+| AUTH-01 | Phase 1 | Complete |
+| AUTH-02 | Phase 1 | Complete |
 | AUTH-03 | Phase 1 | Pending |
-| AUTH-04 | Phase 1 | Pending |
+| AUTH-04 | Phase 1 | Complete |
 | RMGT-01 | Phase 2 | Pending |
 | RMGT-02 | Phase 2 | Pending |
 | RMGT-03 | Phase 2 | Pending |
