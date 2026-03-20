@@ -33,11 +33,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Staff member can log in and the system correctly identifies their role (admin, manager, or front desk)
   4. API rejects unauthenticated requests to protected endpoints and returns appropriate error responses
   5. Database schema is deployed via migrations, async engine is configured, and the booking state machine enum exists in the schema
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
+- [ ] 01-01-PLAN.md — Monorepo scaffolding, Docker Compose, shared library, Auth models/migrations
+- [ ] 01-02-PLAN.md — Auth service endpoints (register, login, RBAC) and integration tests
+- [ ] 01-03-PLAN.md — Password reset flow, staff invite system, gateway proxy, remaining tests
 
 ### Phase 2: Room & Rate Management
 **Goal**: Staff can fully manage the hotel's room inventory, room types, pricing, and room status through API endpoints
@@ -153,7 +154,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Authentication | 0/2 | Not started | - |
+| 1. Foundation & Authentication | 0/3 | Planning complete | - |
 | 2. Room & Rate Management | 0/2 | Not started | - |
 | 3. Availability & Search | 0/2 | Not started | - |
 | 4. Booking Engine | 0/3 | Not started | - |
