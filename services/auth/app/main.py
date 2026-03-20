@@ -4,38 +4,23 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import select
 
 from app.core.config import settings
 from app.core.database import async_session_factory, engine
+from app.api.v1.auth import router as auth_router
+from app.api.v1.users import router as users_router
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan: seed first admin on startup, dispose engine on shutdown."""
-    # Startup: seed first admin user
-    from app.models.user import User, UserRole
-    from app.core.security import hash_password
+    from app.services.user import get_or_create_admin
 
     async with async_session_factory() as session:
-        result = await session.execute(
-            select(User).where(User.email == settings.FIRST_ADMIN_EMAIL)
+        admin = await get_or_create_admin(
+            session, settings.FIRST_ADMIN_EMAIL, settings.FIRST_ADMIN_PASSWORD
         )
-        existing_admin = result.scalar_one_or_none()
-        if not existing_admin:
-            admin = User(
-                email=settings.FIRST_ADMIN_EMAIL,
-                password_hash=hash_password(settings.FIRST_ADMIN_PASSWORD),
-                first_name="Admin",
-                last_name="User",
-                role=UserRole.ADMIN,
-                is_active=True,
-            )
-            session.add(admin)
-            await session.commit()
-            print(f"First admin created: {settings.FIRST_ADMIN_EMAIL}")
-        else:
-            print(f"Admin already exists: {settings.FIRST_ADMIN_EMAIL}")
+        print(f"Admin ready: {admin.email}")
 
     yield
 
@@ -57,6 +42,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include API routers
+app.include_router(auth_router)
+app.include_router(users_router)
 
 
 @app.get("/health")
