@@ -1,0 +1,154 @@
+services:
+  # --- Databases ---
+  auth_db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: auth
+      POSTGRES_USER: auth_user
+      POSTGRES_PASSWORD: auth_pass
+    volumes:
+      - auth_db_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U auth_user -d auth"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  room_db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: rooms
+      POSTGRES_USER: room_user
+      POSTGRES_PASSWORD: room_pass
+    volumes:
+      - room_db_data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U room_user -d rooms"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  booking_db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: bookings
+      POSTGRES_USER: booking_user
+      POSTGRES_PASSWORD: booking_pass
+    volumes:
+      - booking_db_data:/var/lib/postgresql/data
+    ports:
+      - "5435:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U booking_user -d bookings"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # --- Message Queue ---
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: hotel
+      RABBITMQ_DEFAULT_PASS: hotel_pass
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # --- Email ---
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    environment:
+      MP_MAX_MESSAGES: 500
+
+  # --- Services ---
+  auth:
+    build:
+      context: .
+      dockerfile: services/auth/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+asyncpg://auth_user:auth_pass@auth_db:5432/auth
+      JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
+      JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
+      MAIL_SERVER: mailpit
+      MAIL_PORT: 1025
+      RABBITMQ_URL: amqp://hotel:hotel_pass@rabbitmq:5672/
+      FIRST_ADMIN_EMAIL: admin@hotel.local
+      FIRST_ADMIN_PASSWORD: admin123
+    depends_on:
+      auth_db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./keys:/run/secrets:ro
+      - ./shared:/app/shared:ro
+
+  room:
+    build:
+      context: .
+      dockerfile: services/room/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+asyncpg://room_user:room_pass@room_db:5432/rooms
+      JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
+      RABBITMQ_URL: amqp://hotel:hotel_pass@rabbitmq:5672/
+    depends_on:
+      room_db:
+        condition: service_healthy
+    ports:
+      - "8002:8000"
+    volumes:
+      - ./keys:/run/secrets:ro
+      - ./shared:/app/shared:ro
+
+  booking:
+    build:
+      context: .
+      dockerfile: services/booking/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+asyncpg://booking_user:booking_pass@booking_db:5432/bookings
+      JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
+      RABBITMQ_URL: amqp://hotel:hotel_pass@rabbitmq:5672/
+    depends_on:
+      booking_db:
+        condition: service_healthy
+    ports:
+      - "8003:8000"
+    volumes:
+      - ./keys:/run/secrets:ro
+      - ./shared:/app/shared:ro
+
+  gateway:
+    build:
+      context: .
+      dockerfile: services/gateway/Dockerfile
+    environment:
+      AUTH_SERVICE_URL: http://auth:8000
+      ROOM_SERVICE_URL: http://room:8000
+      BOOKING_SERVICE_URL: http://booking:8000
+      JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
+    depends_on:
+      - auth
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./keys:/run/secrets:ro
+      - ./shared:/app/shared:ro
+
+volumes:
+  auth_db_data:
+  room_db_data:
+  booking_db_data:

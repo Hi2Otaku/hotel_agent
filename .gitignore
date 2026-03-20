@@ -1,0 +1,24 @@
+# JWT Keys
+keys/*.pem
+keys/jwt_*
+
+# Python
+*.pyc
+__pycache__/
+*.egg-info/
+.venv/
+.pytest_cache/
+
+# Environment
+.env
+
+# Alembic compiled
+alembic/versions/*.pyc
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hotelbook-shared"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "PyJWT[crypto]",
+    "aio-pika>=9.6",
+    "sqlalchemy[asyncio]>=2.0",
+    "asyncpg",
+    "pydantic>=2.0",
+]
