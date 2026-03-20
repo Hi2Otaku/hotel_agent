@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.core.database import async_session_factory, engine
 from app.api.v1.auth import router as auth_router
+from app.api.v1.invite import router as invite_router
 from app.api.v1.users import router as users_router
 
 
@@ -45,6 +46,7 @@ app.add_middleware(
 
 # Include API routers
 app.include_router(auth_router)
+app.include_router(invite_router)
 app.include_router(users_router)
 
 

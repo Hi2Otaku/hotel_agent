@@ -1,14 +1,21 @@
-"""Auth API routes: registration, login, and current user."""
+"""Auth API routes: registration, login, password reset, and current user."""
 
 from fastapi import APIRouter, Depends, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.deps import get_db, get_current_user
+from app.api.deps import get_current_user, get_db
 from app.models.user import User
-from app.schemas.auth import RegisterRequest, TokenResponse
+from app.schemas.auth import (
+    MessageResponse,
+    PasswordResetConfirm,
+    PasswordResetRequest,
+    RegisterRequest,
+    TokenResponse,
+)
 from app.schemas.user import UserResponse
 from app.services.auth import authenticate_user, register_user
+from app.services.password_reset import confirm_password_reset, request_password_reset
 
 router = APIRouter(prefix="/api/v1/auth", tags=["auth"])
 
@@ -47,6 +54,28 @@ async def login(
         db, email=form_data.username, password=form_data.password
     )
     return TokenResponse(access_token=access_token)
+
+
+@router.post("/password-reset/request", response_model=MessageResponse)
+async def password_reset_request(
+    payload: PasswordResetRequest,
+    db: AsyncSession = Depends(get_db),
+):
+    """Request a password reset email. Always returns 200 (no info leakage)."""
+    await request_password_reset(db, payload.email)
+    return MessageResponse(
+        message="If that email exists, a reset link has been sent"
+    )
+
+
+@router.post("/password-reset/confirm", response_model=MessageResponse)
+async def password_reset_confirm(
+    payload: PasswordResetConfirm,
+    db: AsyncSession = Depends(get_db),
+):
+    """Confirm password reset with token and new password."""
+    await confirm_password_reset(db, payload.token, payload.new_password)
+    return MessageResponse(message="Password reset successful")
 
 
 @router.get("/me", response_model=UserResponse)
