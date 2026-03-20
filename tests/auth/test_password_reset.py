@@ -1,36 +1,117 @@
-"""RED phase: Password reset import and basic behavior tests.
+"""Integration tests for password reset flow (AUTH-03)."""
 
-These tests verify that the password reset module exists and exports
-the expected functions. They will FAIL until the implementation is created.
-"""
+import secrets
+from datetime import datetime, timedelta, timezone
+from unittest.mock import AsyncMock, patch
 
 import pytest
 
+from app.models.token import PasswordResetToken
+from app.services.user import get_user_by_email
 
-class TestPasswordResetImports:
-    """Verify password reset module exports exist."""
 
-    def test_password_reset_imports(self):
-        from app.services.password_reset import (
-            request_password_reset,
-            confirm_password_reset,
+class TestPasswordReset:
+    """Password reset request and confirm tests."""
+
+    async def test_request_reset_registered_email(self, client, registered_guest):
+        """Requesting reset for registered email returns 200 and sends email."""
+        user_data, _ = registered_guest
+        with patch(
+            "app.services.password_reset.send_password_reset_email",
+            new_callable=AsyncMock,
+        ) as mock_email:
+            resp = await client.post(
+                "/api/v1/auth/password-reset/request",
+                json={"email": user_data["email"]},
+            )
+            assert resp.status_code == 200
+            body = resp.json()
+            assert "sent" in body["message"].lower() or "reset" in body["message"].lower()
+            mock_email.assert_called_once()
+
+    async def test_request_reset_unknown_email(self, client):
+        """Requesting reset for unknown email returns 200 (no info leakage)."""
+        with patch(
+            "app.services.password_reset.send_password_reset_email",
+            new_callable=AsyncMock,
+        ) as mock_email:
+            resp = await client.post(
+                "/api/v1/auth/password-reset/request",
+                json={"email": "nobody@nowhere.com"},
+            )
+            assert resp.status_code == 200
+            mock_email.assert_not_called()
+
+    async def test_confirm_reset_valid_token(
+        self, client, registered_guest, db_session
+    ):
+        """Valid reset token allows password change."""
+        user_data, _ = registered_guest
+
+        user = await get_user_by_email(db_session, user_data["email"])
+        raw_token = secrets.token_urlsafe(32)
+        reset = PasswordResetToken(
+            user_id=user.id,
+            token_hash=PasswordResetToken.hash_token(raw_token),
+            expires_at=datetime.now(timezone.utc) + timedelta(minutes=15),
         )
-        assert callable(request_password_reset)
-        assert callable(confirm_password_reset)
+        db_session.add(reset)
+        await db_session.commit()
 
-    def test_email_service_imports(self):
-        from app.services.email import (
-            send_password_reset_email,
-            send_invite_email,
+        resp = await client.post(
+            "/api/v1/auth/password-reset/confirm",
+            json={"token": raw_token, "new_password": "newpassword123"},
         )
-        assert callable(send_password_reset_email)
-        assert callable(send_invite_email)
+        assert resp.status_code == 200
 
-    def test_invite_service_imports(self):
-        from app.services.invite import create_invite, accept_invite
-        assert callable(create_invite)
-        assert callable(accept_invite)
+        # Verify new password works
+        resp = await client.post(
+            "/api/v1/auth/login",
+            data={"username": user_data["email"], "password": "newpassword123"},
+        )
+        assert resp.status_code == 200
 
-    def test_invite_router_imports(self):
-        from app.api.v1.invite import router
-        assert router is not None
+    async def test_confirm_reset_expired_token(
+        self, client, registered_guest, db_session
+    ):
+        """Expired token is rejected."""
+        user_data, _ = registered_guest
+
+        user = await get_user_by_email(db_session, user_data["email"])
+        raw_token = secrets.token_urlsafe(32)
+        reset = PasswordResetToken(
+            user_id=user.id,
+            token_hash=PasswordResetToken.hash_token(raw_token),
+            expires_at=datetime.now(timezone.utc) - timedelta(minutes=1),  # expired
+        )
+        db_session.add(reset)
+        await db_session.commit()
+
+        resp = await client.post(
+            "/api/v1/auth/password-reset/confirm",
+            json={"token": raw_token, "new_password": "newpassword123"},
+        )
+        assert resp.status_code == 400
+
+    async def test_confirm_reset_used_token(
+        self, client, registered_guest, db_session
+    ):
+        """Already-used token is rejected."""
+        user_data, _ = registered_guest
+
+        user = await get_user_by_email(db_session, user_data["email"])
+        raw_token = secrets.token_urlsafe(32)
+        reset = PasswordResetToken(
+            user_id=user.id,
+            token_hash=PasswordResetToken.hash_token(raw_token),
+            expires_at=datetime.now(timezone.utc) + timedelta(minutes=15),
+            used=True,  # already used
+        )
+        db_session.add(reset)
+        await db_session.commit()
+
+        resp = await client.post(
+            "/api/v1/auth/password-reset/confirm",
+            json={"token": raw_token, "new_password": "newpassword123"},
+        )
+        assert resp.status_code == 400
