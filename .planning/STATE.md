@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Phase 1 context gathered
-last_updated: "2026-03-20T15:53:35.212Z"
+stopped_at: Completed 01-02-PLAN.md
+last_updated: "2026-03-20T15:59:35.382Z"
 progress:
   total_phases: 8
   completed_phases: 0
   total_plans: 3
-  completed_plans: 1
+  completed_plans: 2
 ---
 
 # Project State
@@ -24,21 +24,21 @@ See: .planning/PROJECT.md (updated 2026-03-20)
 ## Current Position
 
 Phase: 01 (Foundation & Authentication) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 1
-- Average duration: 5min
-- Total execution time: 0.08 hours
+- Total plans completed: 2
+- Average duration: 4min
+- Total execution time: 0.13 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01 | 1 | 5min | 5min |
+| 01 | 2 | 8min | 4min |
 
 **Recent Trend:**
 
@@ -60,6 +60,8 @@ Recent decisions affecting current work:
 - [01-01]: Database-per-service with 3 separate PostgreSQL containers
 - [01-01]: RabbitMQ for inter-service messaging (guaranteed delivery over Redis Streams)
 - [01-01]: BookingStatus enum defined in auth migration for cross-service availability
+- [Phase 01]: Service layer pattern: business logic in services/, routes in api/v1/ for testability
+- [Phase 01]: OAuth2PasswordRequestForm for login endpoint enables Swagger UI testing
 
 ### Pending Todos
 
@@ -71,6 +73,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-20T15:49:14Z
-Stopped at: Completed 01-01-PLAN.md
-Resume file: .planning/phases/01-foundation-authentication/01-02-PLAN.md
+Last session: 2026-03-20T15:59:35.379Z
+Stopped at: Completed 01-02-PLAN.md
+Resume file: None
