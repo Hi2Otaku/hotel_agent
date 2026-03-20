@@ -23,7 +23,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Booking Flow
 
-- [ ] **BOOK-01**: Guest can complete multi-step booking (select room → guest details → payment → confirmation)
+- [ ] **BOOK-01**: Guest can complete multi-step booking (select room -> guest details -> payment -> confirmation)
 - [ ] **BOOK-02**: Guest completes mock payment with Stripe-like card form
 - [ ] **BOOK-03**: Guest receives booking confirmation page with confirmation number
 - [ ] **BOOK-04**: Guest receives mock email confirmation
@@ -89,7 +89,7 @@ Deferred to future release. Tracked but not in current roadmap.
 
 | Feature | Reason |
 |---------|--------|
-| Real payment processing | Mock payments only — avoids PCI complexity while demonstrating integration pattern |
+| Real payment processing | Mock payments only -- avoids PCI complexity while demonstrating integration pattern |
 | Multi-property support | Single hotel keeps data model focused; multi-property doubles complexity |
 | OTA integration (Booking.com, Expedia) | Requires API partnerships and complex inventory sync |
 | Real-time chat/messaging | Orthogonal to reservation domain; high complexity, low portfolio value |
@@ -104,44 +104,44 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUTH-01 | — | Pending |
-| AUTH-02 | — | Pending |
-| AUTH-03 | — | Pending |
-| AUTH-04 | — | Pending |
-| ROOM-01 | — | Pending |
-| ROOM-02 | — | Pending |
-| ROOM-03 | — | Pending |
-| ROOM-04 | — | Pending |
-| BOOK-01 | — | Pending |
-| BOOK-02 | — | Pending |
-| BOOK-03 | — | Pending |
-| BOOK-04 | — | Pending |
-| BOOK-05 | — | Pending |
-| MGMT-01 | — | Pending |
-| MGMT-02 | — | Pending |
-| MGMT-03 | — | Pending |
-| STAF-01 | — | Pending |
-| STAF-02 | — | Pending |
-| STAF-03 | — | Pending |
-| STAF-04 | — | Pending |
-| RMGT-01 | — | Pending |
-| RMGT-02 | — | Pending |
-| RMGT-03 | — | Pending |
-| RMGT-04 | — | Pending |
-| RATE-01 | — | Pending |
-| RATE-02 | — | Pending |
-| REPT-01 | — | Pending |
-| REPT-02 | — | Pending |
-| REPT-03 | — | Pending |
-| INFR-01 | — | Pending |
-| INFR-02 | — | Pending |
-| INFR-03 | — | Pending |
+| AUTH-01 | Phase 1 | Pending |
+| AUTH-02 | Phase 1 | Pending |
+| AUTH-03 | Phase 1 | Pending |
+| AUTH-04 | Phase 1 | Pending |
+| RMGT-01 | Phase 2 | Pending |
+| RMGT-02 | Phase 2 | Pending |
+| RMGT-03 | Phase 2 | Pending |
+| RMGT-04 | Phase 2 | Pending |
+| RATE-01 | Phase 2 | Pending |
+| RATE-02 | Phase 2 | Pending |
+| ROOM-01 | Phase 3 | Pending |
+| ROOM-02 | Phase 3 | Pending |
+| ROOM-03 | Phase 3 | Pending |
+| ROOM-04 | Phase 3 | Pending |
+| BOOK-01 | Phase 4 | Pending |
+| BOOK-02 | Phase 4 | Pending |
+| BOOK-03 | Phase 4 | Pending |
+| BOOK-04 | Phase 4 | Pending |
+| BOOK-05 | Phase 4 | Pending |
+| MGMT-01 | Phase 4 | Pending |
+| MGMT-02 | Phase 4 | Pending |
+| MGMT-03 | Phase 4 | Pending |
+| INFR-01 | Phase 5 | Pending |
+| STAF-01 | Phase 6 | Pending |
+| STAF-02 | Phase 6 | Pending |
+| STAF-03 | Phase 6 | Pending |
+| STAF-04 | Phase 6 | Pending |
+| REPT-01 | Phase 7 | Pending |
+| REPT-02 | Phase 7 | Pending |
+| REPT-03 | Phase 7 | Pending |
+| INFR-02 | Phase 8 | Pending |
+| INFR-03 | Phase 8 | Pending |
 
 **Coverage:**
 - v1 requirements: 32 total
-- Mapped to phases: 0
-- Unmapped: 32 ⚠️
+- Mapped to phases: 32
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-20*
-*Last updated: 2026-03-20 after initial definition*
+*Last updated: 2026-03-20 after roadmap creation*
