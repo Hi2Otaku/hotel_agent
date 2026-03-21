@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 05-03-PLAN.md
-last_updated: "2026-03-21T08:33:55.947Z"
+stopped_at: Completed 05-02-PLAN.md
+last_updated: "2026-03-21T08:37:36.437Z"
 progress:
   total_phases: 8
   completed_phases: 4
   total_plans: 18
-  completed_plans: 15
+  completed_plans: 16
 ---
 
 # Project State
@@ -24,7 +24,7 @@ See: .planning/PROJECT.md (updated 2026-03-20)
 ## Current Position
 
 Phase: 05 (Guest Frontend) — EXECUTING
-Plan: 4 of 6
+Plan: 3 of 6
 
 ## Performance Metrics
 
@@ -58,6 +58,7 @@ Plan: 4 of 6
 | Phase 05 P00 | 1min | 2 tasks | 5 files |
 | Phase 05 P01 | 8min | 2 tasks | 48 files |
 | Phase 05 P03 | 3min | 2 tasks | 5 files |
+| Phase 05 P02 | 5min | 2 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -109,6 +110,9 @@ Recent decisions affecting current work:
 - [Phase 05-01]: AppRoutes exported separately from App for test wrapping with MemoryRouter
 - [Phase 05]: AxiosError instanceof check for 409/400 status differentiation in auth error handling
 - [Phase 05-03]: Centered card auth layout pattern: max-w-400px, F8FAFC background, HotelBook logo, accent CTAs
+- [Phase 05]: Filter state persisted in URL search params for shareable/bookmarkable search URLs
+- [Phase 05]: PricingCalendar groups days by month with weekday alignment padding
+- [Phase 05]: Responsive filter pattern: desktop sidebar (w-64) + mobile Sheet trigger
 
 ### Pending Todos
 
@@ -120,6 +124,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T08:33:55.940Z
-Stopped at: Completed 05-03-PLAN.md
+Last session: 2026-03-21T08:37:36.433Z
+Stopped at: Completed 05-02-PLAN.md
 Resume file: None
