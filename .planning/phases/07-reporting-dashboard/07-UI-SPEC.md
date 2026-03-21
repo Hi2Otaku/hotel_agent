@@ -40,7 +40,7 @@ Declared values (must be multiples of 4):
 | 2xl | 48px | Page top/bottom padding |
 | 3xl | 64px | Not used in this phase |
 
-Exceptions: Chart internal margins follow Nivo defaults (top: 20, right: 30, bottom: 40, left: 50) for axis label clearance. Drill-down panel width is 400px on desktop.
+Exceptions: Chart internal margins follow adjusted Nivo config (top: 20, right: 32, bottom: 40, left: 48) for axis label clearance. Drill-down panel width is 400px on desktop.
 
 ---
 
@@ -146,6 +146,8 @@ Accent reserved for: KPI card icons, "Export CSV" button, "Export PDF" button, a
 ---
 
 ## Layout Contract
+
+**Primary visual anchor:** KPI row — four metric values at 32px/600 draw the eye first on page load.
 
 ### Page Structure
 
@@ -270,7 +272,7 @@ Accent reserved for: KPI card icons, "Export CSV" button, "Export PDF" button, a
 | PDF success toast | PDF downloaded successfully |
 | PDF error toast | Failed to generate PDF. Please try again. |
 | Drill-down panel title | Bookings for {date} |
-| Drill-down empty | No bookings found for this date. |
+| Drill-down empty | No bookings found for this date. Try selecting a different date on the chart. |
 
 ---
 
