@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 06-03-PLAN.md
-last_updated: "2026-03-21T10:02:42.000Z"
+stopped_at: Completed 06-04-PLAN.md
+last_updated: "2026-03-21T10:07:04.188Z"
 progress:
   total_phases: 8
-  completed_phases: 5
+  completed_phases: 6
   total_plans: 22
-  completed_plans: 21
+  completed_plans: 22
 ---
 
 # Project State
@@ -64,6 +64,7 @@ Plan: 4 of 4
 | Phase 06 P01 | 3min | 2 tasks | 7 files |
 | Phase 06 P02 | 7min | 2 tasks | 46 files |
 | Phase 06 P03 | 5min | 2 tasks | 8 files |
+| Phase 06 P04 | 7min | 2 tasks | 14 files |
 
 ## Accumulated Context
 
@@ -132,6 +133,9 @@ Recent decisions affecting current work:
 - [Phase 06-03]: Lazy-load OverviewPage and ReservationsPage for code splitting
 - [Phase 06-03]: Debounce search 300ms, immediate emit for dropdown/date filter changes
 - [Phase 06-03]: Windowed pagination showing max 5 page numbers centered on current page
+- [Phase 06]: Auto-assign room: sort by floor ASC then room_number ASC, pick first
+- [Phase 06]: Dialog reuse pattern: CheckInDialog/CheckOutDialog shared across 3 pages
+- [Phase 06]: Room status transitions via popover with STATUS_ACTIONS map for valid transitions
 
 ### Pending Todos
 
@@ -143,6 +147,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T10:02:42.000Z
-Stopped at: Completed 06-03-PLAN.md
+Last session: 2026-03-21T10:07:04.184Z
+Stopped at: Completed 06-04-PLAN.md
 Resume file: None
