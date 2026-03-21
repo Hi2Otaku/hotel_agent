@@ -9,6 +9,7 @@ from fastapi import FastAPI
 from app.api.v1.room_types import router as room_types_router
 from app.api.v1.rooms import router as rooms_router
 from app.api.v1.rates import router as rates_router
+from app.api.v1.reports import router as reports_router
 from app.api.v1.search import router as search_router
 from app.services.event_consumer import start_event_consumer
 
@@ -68,6 +69,7 @@ app.include_router(room_types_router)
 app.include_router(rooms_router)
 app.include_router(rates_router)
 app.include_router(search_router)
+app.include_router(reports_router)
 
 
 @app.get("/health")
