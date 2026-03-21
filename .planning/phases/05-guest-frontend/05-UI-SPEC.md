@@ -55,9 +55,9 @@ Exceptions: Touch targets minimum 44px height for all interactive elements (butt
 | Role | Size | Weight | Line Height | Usage |
 |------|------|--------|-------------|-------|
 | Body | 16px | 400 (regular) | 1.5 | Paragraphs, descriptions, form help text |
-| Label | 14px | 500 (medium) | 1.4 | Form labels, meta text, badge text, nav items |
+| Label | 14px | 400 (regular) | 1.4 | Form labels, meta text, badge text, nav items |
 | Heading | 24px | 600 (semibold) | 1.2 | Page titles, section headings, card titles |
-| Display | 36px | 700 (bold) | 1.1 | Landing page hero text, confirmation number |
+| Display | 36px | 600 (semibold) | 1.1 | Landing page hero text, confirmation number |
 
 Font stack: `"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif`
 
@@ -125,6 +125,8 @@ Font stack: `"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif`
 
 ### Landing Page
 
+**Primary visual anchor: search card form** -- the white elevated card containing check-in/check-out dates, guest count, and "Search Rooms" CTA is the focal point of the landing page, drawing the guest toward initiating a search.
+
 - Split layout: 50/50 on desktop, stacked on mobile
 - Left: Search card form on white card with shadow, vertically centered
 - Right: Full-height resort photo with subtle overlay gradient at bottom
@@ -136,7 +138,7 @@ Font stack: `"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif`
 - Top: Search summary bar (dates, guests, "Modify Search" link)
 - Left sidebar desktop / slide-out sheet mobile: Filters (price range, room type, amenities)
 - Main: Room cards in vertical list (1 column mobile, 2 columns tablet+)
-- Each room card: Large photo (16:9 aspect ratio), room type name (heading), price per night (accent color, bold), amenity tags (badges), "Book Now" button
+- Each room card: Large photo (16:9 aspect ratio), room type name (heading), price per night (accent color, semibold), amenity tags (badges), "Book Now" button
 
 ### Booking Wizard
 
