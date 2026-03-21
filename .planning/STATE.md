@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 06-01-PLAN.md
-last_updated: "2026-03-21T09:47:25.332Z"
+stopped_at: Completed 06-02-PLAN.md
+last_updated: "2026-03-21T09:57:01.803Z"
 progress:
   total_phases: 8
   completed_phases: 5
   total_plans: 22
-  completed_plans: 19
+  completed_plans: 20
 ---
 
 # Project State
@@ -24,7 +24,7 @@ See: .planning/PROJECT.md (updated 2026-03-20)
 ## Current Position
 
 Phase: 06 (Staff Dashboard) — EXECUTING
-Plan: 2 of 4
+Plan: 3 of 4
 
 ## Performance Metrics
 
@@ -62,6 +62,7 @@ Plan: 2 of 4
 | Phase 05 P04 | 6min | 2 tasks | 8 files |
 | Phase 05 P05 | 5min | 2 tasks | 6 files |
 | Phase 06 P01 | 3min | 2 tasks | 7 files |
+| Phase 06 P02 | 7min | 2 tasks | 46 files |
 
 ## Accumulated Context
 
@@ -124,6 +125,9 @@ Recent decisions affecting current work:
 - [Phase 06]: Staff router registered before guest router in booking service for path precedence
 - [Phase 06]: Gateway BFF check-in/out orchestrates booking + room services with graceful degradation
 - [Phase 06]: Auth /search endpoint placed before /{user_id} for path precedence
+- [Phase 06]: staff_access_token localStorage key separates staff auth from guest auth
+- [Phase 06]: Always-dark theme via CSS variables in :root (no .dark class toggle needed)
+- [Phase 06]: Staff frontend on port 5174 to avoid conflict with guest frontend on 5173
 
 ### Pending Todos
 
@@ -135,6 +139,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T09:47:25.329Z
-Stopped at: Completed 06-01-PLAN.md
+Last session: 2026-03-21T09:57:01.800Z
+Stopped at: Completed 06-02-PLAN.md
 Resume file: None
