@@ -37,10 +37,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Staff Reservations
 
-- [ ] **STAF-01**: Staff can view all reservations with search/filter (name, date, status, confirmation #)
-- [ ] **STAF-02**: Staff can check in guests (assign specific room)
-- [ ] **STAF-03**: Staff can check out guests
-- [ ] **STAF-04**: Staff can view guest profile with booking history
+- [x] **STAF-01**: Staff can view all reservations with search/filter (name, date, status, confirmation #)
+- [x] **STAF-02**: Staff can check in guests (assign specific room)
+- [x] **STAF-03**: Staff can check out guests
+- [x] **STAF-04**: Staff can view guest profile with booking history
 
 ### Room Management
 
@@ -127,10 +127,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MGMT-02 | Phase 4 | Complete |
 | MGMT-03 | Phase 4 | Complete |
 | INFR-01 | Phase 5 | Complete |
-| STAF-01 | Phase 6 | Pending |
-| STAF-02 | Phase 6 | Pending |
-| STAF-03 | Phase 6 | Pending |
-| STAF-04 | Phase 6 | Pending |
+| STAF-01 | Phase 6 | Complete |
+| STAF-02 | Phase 6 | Complete |
+| STAF-03 | Phase 6 | Complete |
+| STAF-04 | Phase 6 | Complete |
 | REPT-01 | Phase 7 | Pending |
 | REPT-02 | Phase 7 | Pending |
 | REPT-03 | Phase 7 | Pending |

@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Phase 6 UI-SPEC approved
-last_updated: "2026-03-21T09:26:54.964Z"
+stopped_at: Completed 06-01-PLAN.md
+last_updated: "2026-03-21T09:47:25.332Z"
 progress:
   total_phases: 8
   completed_phases: 5
-  total_plans: 18
-  completed_plans: 18
+  total_plans: 22
+  completed_plans: 19
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-20)
 
 **Core value:** Guests can seamlessly search, book, and manage room reservations with a polished experience that demonstrates real-world full-stack competency.
-**Current focus:** Phase 05 — Guest Frontend
+**Current focus:** Phase 06 — Staff Dashboard
 
 ## Current Position
 
-Phase: 05 (Guest Frontend) — EXECUTING
-Plan: 5 of 6
+Phase: 06 (Staff Dashboard) — EXECUTING
+Plan: 2 of 4
 
 ## Performance Metrics
 
@@ -61,6 +61,7 @@ Plan: 5 of 6
 | Phase 05 P02 | 5min | 2 tasks | 12 files |
 | Phase 05 P04 | 6min | 2 tasks | 8 files |
 | Phase 05 P05 | 5min | 2 tasks | 6 files |
+| Phase 06 P01 | 3min | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -120,6 +121,9 @@ Recent decisions affecting current work:
 - [Phase 05]: StatusBadge uses custom className overrides on shadcn Badge for precise color control per status
 - [Phase 05]: StatusTimeline renders cancelled/no_show as all-muted dots with red label instead of partial progress
 - [Phase 05]: ModifyDialog uses modifyBooking response shape (old_total, new_total, price_difference) for price diff toast
+- [Phase 06]: Staff router registered before guest router in booking service for path precedence
+- [Phase 06]: Gateway BFF check-in/out orchestrates booking + room services with graceful degradation
+- [Phase 06]: Auth /search endpoint placed before /{user_id} for path precedence
 
 ### Pending Todos
 
@@ -131,6 +135,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T09:26:54.961Z
-Stopped at: Phase 6 UI-SPEC approved
-Resume file: .planning/phases/06-staff-dashboard/06-UI-SPEC.md
+Last session: 2026-03-21T09:47:25.329Z
+Stopped at: Completed 06-01-PLAN.md
+Resume file: None

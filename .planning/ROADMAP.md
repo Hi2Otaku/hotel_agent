@@ -166,6 +166,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 3. Availability & Search | 3/3 | Complete   | 2026-03-21 |
 | 4. Booking Engine | 2/3 | In Progress|  |
 | 5. Guest Frontend | 5/6 | In Progress|  |
-| 6. Staff Dashboard | 0/4 | Planning complete | - |
+| 6. Staff Dashboard | 1/4 | In Progress|  |
 | 7. Reporting Dashboard | 0/1 | Not started | - |
 | 8. Testing & Deployment | 0/2 | Not started | - |
