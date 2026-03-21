@@ -134,10 +134,12 @@ Plans:
   1. Staff dashboard shows occupancy rate visualization filterable by date range
   2. Staff dashboard shows revenue summary for selected periods
   3. Staff dashboard shows interactive booking trend charts that respond to user interaction (hover, filter, zoom)
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 07-01: TBD
+- [ ] 07-01-PLAN.md — Backend reporting endpoints (occupancy, revenue, trends, KPIs), gateway BFF orchestration, historical seed data
+- [ ] 07-02-PLAN.md — Frontend reports page with Nivo charts (calendar heatmap, stacked bar, line), date range picker, KPI cards
+- [ ] 07-03-PLAN.md — Drill-down panel, CSV/PDF export, chart click interactivity wiring
 
 ### Phase 8: Testing & Deployment
 **Goal**: The application is production-hardened with comprehensive tests, automated CI/CD, and a live demo URL that showcases the portfolio piece
@@ -167,5 +169,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 4. Booking Engine | 2/3 | In Progress|  |
 | 5. Guest Frontend | 5/6 | In Progress|  |
 | 6. Staff Dashboard | 3/4 | In Progress|  |
-| 7. Reporting Dashboard | 0/1 | Not started | - |
+| 7. Reporting Dashboard | 0/3 | Planning complete | - |
 | 8. Testing & Deployment | 0/2 | Not started | - |
