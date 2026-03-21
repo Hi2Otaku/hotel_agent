@@ -12,6 +12,7 @@ SERVICE_MAP = {
     "/api/v1/invite": settings.AUTH_SERVICE_URL,
     "/api/v1/users": settings.AUTH_SERVICE_URL,
     "/api/v1/rooms": settings.ROOM_SERVICE_URL,
+    "/api/v1/search": settings.ROOM_SERVICE_URL,
     "/api/v1/bookings": settings.BOOKING_SERVICE_URL,
 }
 
