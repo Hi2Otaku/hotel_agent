@@ -31,9 +31,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Booking Management
 
-- [ ] **MGMT-01**: Guest can view upcoming and past bookings with status
-- [ ] **MGMT-02**: Guest can cancel a booking (with policy enforcement)
-- [ ] **MGMT-03**: Guest can modify booking dates/room with automatic price recalculation
+- [x] **MGMT-01**: Guest can view upcoming and past bookings with status
+- [x] **MGMT-02**: Guest can cancel a booking (with policy enforcement)
+- [x] **MGMT-03**: Guest can modify booking dates/room with automatic price recalculation
 
 ### Staff Reservations
 
@@ -123,9 +123,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | BOOK-03 | Phase 4 | Complete |
 | BOOK-04 | Phase 4 | Complete |
 | BOOK-05 | Phase 4 | Complete |
-| MGMT-01 | Phase 4 | Pending |
-| MGMT-02 | Phase 4 | Pending |
-| MGMT-03 | Phase 4 | Pending |
+| MGMT-01 | Phase 4 | Complete |
+| MGMT-02 | Phase 4 | Complete |
+| MGMT-03 | Phase 4 | Complete |
 | INFR-01 | Phase 5 | Pending |
 | STAF-01 | Phase 6 | Pending |
 | STAF-02 | Phase 6 | Pending |

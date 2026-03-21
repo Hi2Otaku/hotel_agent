@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 current_plan: 3 of 3
-status: unknown
-stopped_at: Completed 04-02-PLAN.md
-last_updated: "2026-03-21T06:54:08.846Z"
+status: phase-complete
+stopped_at: Completed 04-03-PLAN.md
+last_updated: "2026-03-21T07:01:24.000Z"
 progress:
   total_phases: 8
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 12
-  completed_plans: 11
+  completed_plans: 12
 ---
 
 # Project State
@@ -24,8 +24,8 @@ See: .planning/PROJECT.md (updated 2026-03-20)
 
 ## Current Position
 
-Phase: 04 (Booking Engine) — EXECUTING
-Current Plan: 3 of 3
+Phase: 04 (Booking Engine) — COMPLETE
+Current Plan: 3 of 3 (all complete)
 
 ## Performance Metrics
 
@@ -55,6 +55,7 @@ Current Plan: 3 of 3
 | Phase 03 P02 | 5min | 2 tasks | 7 files |
 | Phase 04 P01 | 5min | 2 tasks | 21 files |
 | Phase 04 P02 | 13min | 2 tasks | 13 files |
+| Phase 04 P03 | 6min | 2 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -96,6 +97,10 @@ Recent decisions affecting current work:
 - [Phase 04-01]: All monetary fields use Numeric(10,2) in models and Decimal in schemas (never float)
 - [Phase 04]: patch.object on imported module reference to avoid multi-service app namespace collision in tests
 - [Phase 04]: Email and event errors caught silently -- booking flow must never crash due to side-effect failures
+- [Phase 04-03]: GET / list route placed before GET /{id} to avoid FastAPI UUID parsing conflict
+- [Phase 04-03]: Modify availability re-check excludes current booking from blocking count (self-exclusion)
+- [Phase 04-03]: BFF booking endpoints gracefully degrade if Room service is unavailable
+- [Phase 04-03]: Late cancellation fee = price_per_night (first night charge)
 
 ### Pending Todos
 
@@ -107,6 +112,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T06:54:08.842Z
-Stopped at: Completed 04-02-PLAN.md
+Last session: 2026-03-21T07:01:24Z
+Stopped at: Completed 04-03-PLAN.md
 Resume file: None
