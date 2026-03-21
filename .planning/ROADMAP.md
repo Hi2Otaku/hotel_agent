@@ -159,7 +159,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 1. Foundation & Authentication | 0/3 | Planning complete | - |
 | 2. Room & Rate Management | 3/3 | Complete   | 2026-03-21 |
 | 3. Availability & Search | 3/3 | Complete   | 2026-03-21 |
-| 4. Booking Engine | 1/3 | In Progress|  |
+| 4. Booking Engine | 2/3 | In Progress|  |
 | 5. Guest Frontend | 0/3 | Not started | - |
 | 6. Staff Dashboard | 0/2 | Not started | - |
 | 7. Reporting Dashboard | 0/1 | Not started | - |

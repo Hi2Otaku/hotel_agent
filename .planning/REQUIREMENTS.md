@@ -27,7 +27,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **BOOK-02**: Guest completes mock payment with Stripe-like card form
 - [x] **BOOK-03**: Guest receives booking confirmation page with confirmation number
 - [x] **BOOK-04**: Guest receives mock email confirmation
-- [ ] **BOOK-05**: Cancellation policy displayed during booking flow
+- [x] **BOOK-05**: Cancellation policy displayed during booking flow
 
 ### Booking Management
 
@@ -122,7 +122,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | BOOK-02 | Phase 4 | Complete |
 | BOOK-03 | Phase 4 | Complete |
 | BOOK-04 | Phase 4 | Complete |
-| BOOK-05 | Phase 4 | Pending |
+| BOOK-05 | Phase 4 | Complete |
 | MGMT-01 | Phase 4 | Pending |
 | MGMT-02 | Phase 4 | Pending |
 | MGMT-03 | Phase 4 | Pending |
