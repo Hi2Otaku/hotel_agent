@@ -4,3 +4,6 @@ sqlalchemy[asyncio]>=2.0.48
 asyncpg
 pydantic-settings>=2.0
 httpx
+alembic>=1.18.0
+aio-pika>=9.0
+fastapi-mail

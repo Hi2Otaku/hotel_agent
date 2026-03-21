@@ -148,8 +148,13 @@ services:
       DATABASE_URL: postgresql+asyncpg://booking_user:booking_pass@booking_db:5432/bookings
       JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
       RABBITMQ_URL: amqp://hotel:hotel_pass@rabbitmq:5672/
+      MAIL_SERVER: mailpit
+      MAIL_PORT: 1025
+      ROOM_SERVICE_URL: http://room:8000
     depends_on:
       booking_db:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
     ports:
       - "8003:8000"
