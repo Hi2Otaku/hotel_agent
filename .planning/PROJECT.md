@@ -20,13 +20,13 @@ Guests can seamlessly search, book, and manage room reservations with a polished
 - ✓ Rate management (seasonal pricing, discounts) — Phase 2
 - ✓ Guest room search by date and filters — Phase 3
 - ✓ Room availability calendar — Phase 3
+- ✓ Full booking flow (select room → guest details → mock payment → confirmation) — Phase 4
+- ✓ Guest booking management (view, modify, cancel) — Phase 4
+- ✓ Email confirmation (mock/simulated) — Phase 4
 
 ### Active
 
 <!-- Current scope. Building toward these. -->
-- [ ] Full booking flow (select room → guest details → mock payment → confirmation)
-- [ ] Guest booking management (view, modify, cancel)
-- [ ] Email confirmation (mock/simulated)
 - [ ] Staff booking management (view all, check-in, check-out)
 - [ ] Guest history and profiles (staff view)
 - [ ] Reporting dashboard (occupancy, revenue, booking trends)
@@ -68,4 +68,4 @@ Guests can seamlessly search, book, and manage room reservations with a polished
 | Single property | Keeps data model focused; multi-property adds complexity without portfolio value | — Pending |
 
 ---
-*Last updated: 2026-03-21 after Phase 3 completion*
+*Last updated: 2026-03-21 after Phase 4 completion*
