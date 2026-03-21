@@ -64,7 +64,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **INFR-01**: Responsive design for guest-facing site (mobile-first)
 - [ ] **INFR-02**: Unit and integration tests with CI/CD pipeline (GitHub Actions)
-- [ ] **INFR-03**: Deployed with live demo URL and documentation
+- [x] **INFR-03**: Deployed with live demo URL and documentation
 
 ## v2 Requirements
 
@@ -135,7 +135,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | REPT-02 | Phase 7 | Complete |
 | REPT-03 | Phase 7 | Complete |
 | INFR-02 | Phase 8 | Pending |
-| INFR-03 | Phase 8 | Pending |
+| INFR-03 | Phase 8 | Complete |
 
 **Coverage:**
 - v1 requirements: 32 total

@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Phase 8 context gathered
-last_updated: "2026-03-21T16:58:22.160Z"
+stopped_at: Completed 08-02-PLAN.md
+last_updated: "2026-03-21T17:25:40.034Z"
 progress:
   total_phases: 8
   completed_phases: 7
-  total_plans: 26
-  completed_plans: 26
+  total_plans: 29
+  completed_plans: 27
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-20)
 
 **Core value:** Guests can seamlessly search, book, and manage room reservations with a polished experience that demonstrates real-world full-stack competency.
-**Current focus:** Phase 07 — reporting-dashboard
+**Current focus:** Phase 08 — testing-deployment
 
 ## Current Position
 
-Phase: 07 (reporting-dashboard) — EXECUTING
-Plan: 4 of 4
+Phase: 08 (testing-deployment) — EXECUTING
+Plan: 2 of 3
 
 ## Performance Metrics
 
@@ -69,6 +69,7 @@ Plan: 4 of 4
 | Phase 07 P01 | 3min | 2 tasks | 8 files |
 | Phase 07 P02 | 3min | 2 tasks | 14 files |
 | Phase 07 P03 | 2min | 2 tasks | 7 files |
+| Phase 08 P02 | 4min | 2 tasks | 18 files |
 
 ## Accumulated Context
 
@@ -150,6 +151,8 @@ Recent decisions affecting current work:
 - [Phase 07]: DrillDownPanel uses shadcn Sheet with side=right for slide-out interaction
 - [Phase 07]: getDrillDownBookings reuses existing staff bookings endpoint with date_from/date_to params
 - [Phase 07]: PDF export captures dashboardRef div (KPIs + charts) excluding date picker header
+- [Phase 08]: Docker Compose override pattern: prod layers on dev compose, removing gateway port and adding nginx
+- [Phase 08]: Nginx routes /api/ to gateway, /staff/ to staff frontend, / to guest frontend (catch-all)
 
 ### Pending Todos
 
@@ -161,6 +164,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T16:58:22.156Z
-Stopped at: Phase 8 context gathered
-Resume file: .planning/phases/08-testing-deployment/08-CONTEXT.md
+Last session: 2026-03-21T17:25:40.030Z
+Stopped at: Completed 08-02-PLAN.md
+Resume file: None
