@@ -5,10 +5,10 @@ dependency overrides for session management. Each test runs in a
 nested savepoint that rolls back after the test.
 """
 
-import asyncio
 import os
 
 import pytest
+import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import (
     AsyncSession,
@@ -26,15 +26,7 @@ TEST_DB_URL = os.getenv(
 )
 
 
-@pytest.fixture(scope="session")
-def event_loop():
-    """Create a session-scoped event loop for async tests."""
-    loop = asyncio.new_event_loop()
-    yield loop
-    loop.close()
-
-
-@pytest.fixture(scope="session")
+@pytest_asyncio.fixture(scope="session", loop_scope="session")
 async def test_engine():
     """Create a test database engine and set up/tear down tables."""
     engine = create_async_engine(TEST_DB_URL, echo=False)
@@ -47,46 +39,33 @@ async def test_engine():
     await engine.dispose()
 
 
-@pytest.fixture
+@pytest_asyncio.fixture(loop_scope="session")
 async def db_session(test_engine):
-    """Provide a transactional database session for each test."""
-    async with test_engine.connect() as conn:
-        trans = await conn.begin()
-        session = AsyncSession(bind=conn, expire_on_commit=False)
+    """Provide a database session for each test."""
+    _session_maker = async_sessionmaker(test_engine, expire_on_commit=False)
+    async with _session_maker() as session:
         yield session
-        await session.close()
-        await trans.rollback()
 
 
-@pytest.fixture
+@pytest_asyncio.fixture(loop_scope="session")
 async def client(test_engine):
     """Provide an async HTTP client with database dependency override.
 
-    Uses a single connection with a transaction + savepoint per request
-    to avoid asyncpg 'another operation in progress' errors.
+    Each request gets its own connection + transaction that is rolled back
+    after the request completes, keeping tests isolated.
+
+    The client object has a ``_test_engine`` attribute for direct SQL access.
     """
-    async with test_engine.connect() as conn:
-        trans = await conn.begin()
+    _session_maker = async_sessionmaker(test_engine, expire_on_commit=False)
 
-        # Create a session factory bound to this single connection
-        async def override_get_db():
-            # Use a nested savepoint so each request can commit
-            # without affecting the outer transaction
-            nested = await conn.begin_nested()
-            session = AsyncSession(bind=conn, expire_on_commit=False)
-            try:
-                yield session
-                await session.commit()
-            except Exception:
-                await session.rollback()
-                raise
-            finally:
-                await session.close()
+    async def override_get_db():
+        async with _session_maker() as session:
+            yield session
 
-        app.dependency_overrides[get_db] = override_get_db
-        transport = ASGITransport(app=app)
-        async with AsyncClient(transport=transport, base_url="http://test") as ac:
-            yield ac
+    app.dependency_overrides[get_db] = override_get_db
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as ac:
+        ac._test_engine = test_engine  # type: ignore[attr-defined]
+        yield ac
 
-        app.dependency_overrides.clear()
-        await trans.rollback()
+    app.dependency_overrides.clear()
