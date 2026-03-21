@@ -7,6 +7,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.bookings import router as bookings_router
+from app.api.v1.staff import router as staff_router
 from app.services.expiry import expire_pending_bookings
 
 
@@ -32,6 +33,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(staff_router)       # Staff routes before guest routes for path precedence
 app.include_router(bookings_router)
 
 
