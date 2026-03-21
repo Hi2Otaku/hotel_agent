@@ -16,6 +16,8 @@ Guests can seamlessly search, book, and manage room reservations with a polished
 
 - ✓ Guest account creation and login — Phase 1
 - ✓ Staff authentication and role-based access — Phase 1
+- ✓ Room management (types, rates, availability, status) — Phase 2
+- ✓ Rate management (seasonal pricing, discounts) — Phase 2
 
 ### Active
 
@@ -27,8 +29,6 @@ Guests can seamlessly search, book, and manage room reservations with a polished
 - [ ] Guest booking management (view, modify, cancel)
 - [ ] Email confirmation (mock/simulated)
 - [ ] Staff booking management (view all, check-in, check-out)
-- [ ] Room management (types, rates, availability, status)
-- [ ] Rate management (seasonal pricing, discounts)
 - [ ] Guest history and profiles (staff view)
 - [ ] Reporting dashboard (occupancy, revenue, booking trends)
 - [ ] Mock payment integration (simulated Stripe-like flow)
@@ -69,4 +69,4 @@ Guests can seamlessly search, book, and manage room reservations with a polished
 | Single property | Keeps data model focused; multi-property adds complexity without portfolio value | — Pending |
 
 ---
-*Last updated: 2026-03-20 after Phase 1 completion*
+*Last updated: 2026-03-21 after Phase 2 completion*
