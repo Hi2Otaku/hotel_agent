@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 05-00-PLAN.md
-last_updated: "2026-03-21T08:19:05.990Z"
+stopped_at: Completed 05-01-PLAN.md
+last_updated: "2026-03-21T08:28:10.905Z"
 progress:
   total_phases: 8
   completed_phases: 4
   total_plans: 18
-  completed_plans: 13
+  completed_plans: 14
 ---
 
 # Project State
@@ -56,6 +56,7 @@ Plan: 2 of 6
 | Phase 04 P02 | 13min | 2 tasks | 13 files |
 | Phase 04 P03 | 6min | 2 tasks | 10 files |
 | Phase 05 P00 | 1min | 2 tasks | 5 files |
+| Phase 05 P01 | 8min | 2 tasks | 48 files |
 
 ## Accumulated Context
 
@@ -103,6 +104,8 @@ Recent decisions affecting current work:
 - [Phase 04-03]: Late cancellation fee = price_per_night (first night charge)
 - [Phase 05-00]: Vitest with jsdom for React component testing (consistent with Vite toolchain)
 - [Phase 05-00]: Todo stubs (.todo) for tests before components exist -- Plans 01-05 convert to real tests
+- [Phase 05-01]: Node 25 localStorage polyfill in test setup for Zustand store compatibility
+- [Phase 05-01]: AppRoutes exported separately from App for test wrapping with MemoryRouter
 
 ### Pending Todos
 
@@ -114,6 +117,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T08:19:05.987Z
-Stopped at: Completed 05-00-PLAN.md
+Last session: 2026-03-21T08:28:10.902Z
+Stopped at: Completed 05-01-PLAN.md
 Resume file: None
