@@ -151,11 +151,12 @@ Plans:
   2. GitHub Actions pipeline runs lint, test, and build on every push and pull request
   3. Application is deployed and accessible at a live URL with both guest and staff interfaces functional
   4. Project includes documentation sufficient for a reviewer to understand the architecture and run it locally
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 08-01: TBD
-- [ ] 08-02: TBD
+- [ ] 08-01-PLAN.md — Frontend component/store tests (guest + staff) and Playwright E2E project setup
+- [ ] 08-02-PLAN.md — Production deployment infrastructure (Docker Compose override, Nginx, frontend Dockerfiles)
+- [ ] 08-03-PLAN.md — GitHub Actions CI/CD pipeline and developer README documentation
 
 ## Progress
 
@@ -171,4 +172,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 5. Guest Frontend | 5/6 | In Progress|  |
 | 6. Staff Dashboard | 3/4 | In Progress|  |
 | 7. Reporting Dashboard | 4/4 | Complete   | 2026-03-21 |
-| 8. Testing & Deployment | 0/2 | Not started | - |
+| 8. Testing & Deployment | 0/3 | Not started | - |
