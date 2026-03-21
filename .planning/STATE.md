@@ -2,14 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
+current_plan: 2 of 3
 status: unknown
-stopped_at: Completed 08-02-PLAN.md
-last_updated: "2026-03-21T17:25:40.034Z"
+stopped_at: Completed 08-01-PLAN.md
+last_updated: "2026-03-21T17:42:34.169Z"
 progress:
   total_phases: 8
   completed_phases: 7
   total_plans: 29
-  completed_plans: 27
+  completed_plans: 28
 ---
 
 # Project State
@@ -24,7 +25,7 @@ See: .planning/PROJECT.md (updated 2026-03-20)
 ## Current Position
 
 Phase: 08 (testing-deployment) — EXECUTING
-Plan: 2 of 3
+Current Plan: 2 of 3
 
 ## Performance Metrics
 
@@ -70,6 +71,7 @@ Plan: 2 of 3
 | Phase 07 P02 | 3min | 2 tasks | 14 files |
 | Phase 07 P03 | 2min | 2 tasks | 7 files |
 | Phase 08 P02 | 4min | 2 tasks | 18 files |
+| Phase 08 P01 | 20min | 3 tasks | 18 files |
 
 ## Accumulated Context
 
@@ -153,6 +155,9 @@ Recent decisions affecting current work:
 - [Phase 07]: PDF export captures dashboardRef div (KPIs + charts) excluding date picker header
 - [Phase 08]: Docker Compose override pattern: prod layers on dev compose, removing gateway port and adding nginx
 - [Phase 08]: Nginx routes /api/ to gateway, /staff/ to staff frontend, / to guest frontend (catch-all)
+- [Phase 08]: pytest_asyncio fixtures with loop_scope=session replacing deprecated event_loop fixture
+- [Phase 08]: vi.mocked() import pattern after vi.mock() to avoid hoisting issues with vi.fn()
+- [Phase 08]: Idempotent test fixtures handle 409 conflict by fallback to login
 
 ### Pending Todos
 
@@ -164,6 +169,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T17:25:40.030Z
-Stopped at: Completed 08-02-PLAN.md
+Last session: 2026-03-21T17:42:34.166Z
+Stopped at: Completed 08-01-PLAN.md
 Resume file: None
