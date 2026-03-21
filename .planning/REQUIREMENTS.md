@@ -56,9 +56,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Reporting
 
-- [ ] **REPT-01**: Staff dashboard shows occupancy rate by date range
-- [ ] **REPT-02**: Staff dashboard shows revenue summary
-- [ ] **REPT-03**: Staff dashboard shows booking trend charts (interactive)
+- [x] **REPT-01**: Staff dashboard shows occupancy rate by date range
+- [x] **REPT-02**: Staff dashboard shows revenue summary
+- [x] **REPT-03**: Staff dashboard shows booking trend charts (interactive)
 
 ### Infrastructure
 
@@ -131,9 +131,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | STAF-02 | Phase 6 | Complete |
 | STAF-03 | Phase 6 | Complete |
 | STAF-04 | Phase 6 | Complete |
-| REPT-01 | Phase 7 | Pending |
-| REPT-02 | Phase 7 | Pending |
-| REPT-03 | Phase 7 | Pending |
+| REPT-01 | Phase 7 | Complete |
+| REPT-02 | Phase 7 | Complete |
+| REPT-03 | Phase 7 | Complete |
 | INFR-02 | Phase 8 | Pending |
 | INFR-03 | Phase 8 | Pending |
 
