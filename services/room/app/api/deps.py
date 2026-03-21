@@ -80,5 +80,5 @@ def require_role(*roles: str):
 # Convenience dependencies for common role combinations
 require_admin = require_role("admin")
 require_manager_or_above = require_role("admin", "manager")
-require_staff = require_role("admin", "manager", "front_desk")
-require_any_staff = require_role("admin", "manager", "front_desk")
+require_staff = require_role("admin", "manager", "front_desk", "housekeeping")
+require_any_staff = require_role("admin", "manager", "front_desk", "housekeeping")
