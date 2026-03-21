@@ -14,8 +14,20 @@ from app.services.expiry import expire_pending_bookings
 
 @asynccontextmanager
 async def lifespan(application: FastAPI):
-    """Application lifespan: start background expiry task for PENDING bookings."""
+    """Application lifespan: start background expiry task and seed demo data."""
     task = asyncio.create_task(expire_pending_bookings())
+
+    # Seed historical bookings for demo
+    try:
+        from app.core.database import async_session_factory
+        from app.services.seed_bookings import seed_historical_bookings
+
+        async with async_session_factory() as session:
+            await seed_historical_bookings(session)
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).warning("Booking seed failed: %s", e)
+
     yield
     task.cancel()
 
