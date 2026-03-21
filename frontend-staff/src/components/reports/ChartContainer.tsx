@@ -34,6 +34,7 @@ export function ChartContainer({
             variant="ghost"
             size="sm"
             onClick={onExportCSV}
+            disabled={loading || empty}
             className="text-[#94A3B8] hover:text-[#F1F5F9]"
           >
             <Download className="mr-1 h-4 w-4" />
