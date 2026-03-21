@@ -22,3 +22,5 @@ alembic/versions/*.pyc
 # OS
 .DS_Store
 Thumbs.db
+frontend-staff/dist/
+frontend-staff/node_modules/
