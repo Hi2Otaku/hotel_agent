@@ -122,3 +122,55 @@ export interface StaffBookingParams {
   check_in_from?: string;
   check_in_to?: string;
 }
+
+// ---- Reports ----
+
+export interface OccupancyDay {
+  day: string;    // "YYYY-MM-DD"
+  value: number;  // 0-100 percentage
+}
+
+export interface OccupancyData {
+  daily: OccupancyDay[];
+  total_rooms: number;
+  avg_occupancy: number;
+}
+
+export interface RevenueRow {
+  room_type_id: string;
+  period: string;       // "YYYY-MM-DD"
+  revenue: string;      // Decimal as string
+  count: number;
+}
+
+export interface RevenueData {
+  data: RevenueRow[];
+  group_by: 'day' | 'week' | 'month';
+}
+
+export interface TrendDay {
+  day: string;   // "YYYY-MM-DD"
+  value: number;
+}
+
+export interface TrendsData {
+  data: TrendDay[];
+}
+
+export interface KpiData {
+  total_revenue: string;
+  total_bookings: number;
+  avg_daily_rate: string;
+}
+
+export interface ReportResponse {
+  occupancy: OccupancyData;
+  revenue: RevenueData;
+  trends: TrendsData;
+  kpis: KpiData;
+}
+
+export interface DateRange {
+  from: string;  // "YYYY-MM-DD"
+  to: string;    // "YYYY-MM-DD"
+}
