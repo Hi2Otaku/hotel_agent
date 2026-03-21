@@ -83,12 +83,12 @@ Plans:
   3. Guest receives a mock email confirmation after booking and sees the cancellation policy during the booking flow
   4. Guest can view upcoming and past bookings with status, cancel a booking (with policy enforcement), and modify dates/room with automatic price recalculation
   5. Booking state machine enforces valid transitions (PENDING -> CONFIRMED -> CHECKED_IN -> CHECKED_OUT, PENDING -> CANCELLED, etc.) and expired PENDING bookings are automatically cleaned up
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 04-01: TBD
-- [ ] 04-02: TBD
-- [ ] 04-03: TBD
+- [ ] 04-01-PLAN.md — Booking service scaffolding, models, migrations, schemas, config, deps, email template
+- [ ] 04-02-PLAN.md — Core 3-step booking flow, mock payment, event publisher, confirmation email, integration tests
+- [ ] 04-03-PLAN.md — Booking management (list, cancel, modify), expiry background task, gateway BFF
 
 ### Phase 5: Guest Frontend
 **Goal**: Guests have a polished, responsive React application for the complete booking journey -- from searching rooms to managing reservations
@@ -159,7 +159,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 1. Foundation & Authentication | 0/3 | Planning complete | - |
 | 2. Room & Rate Management | 3/3 | Complete   | 2026-03-21 |
 | 3. Availability & Search | 3/3 | Complete   | 2026-03-21 |
-| 4. Booking Engine | 0/3 | Not started | - |
+| 4. Booking Engine | 0/3 | Planning complete | - |
 | 5. Guest Frontend | 0/3 | Not started | - |
 | 6. Staff Dashboard | 0/2 | Not started | - |
 | 7. Reporting Dashboard | 0/1 | Not started | - |
