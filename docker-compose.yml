@@ -72,6 +72,24 @@ services:
     environment:
       MP_MAX_MESSAGES: 500
 
+  # --- Object Storage ---
+  minio:
+    image: minio/minio:RELEASE.2025-09-07T16-13-09Z
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
   # --- Services ---
   auth:
     build:
@@ -105,8 +123,16 @@ services:
       DATABASE_URL: postgresql+asyncpg://room_user:room_pass@room_db:5432/rooms
       JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
       RABBITMQ_URL: amqp://hotel:hotel_pass@rabbitmq:5672/
+      MINIO_ENDPOINT: minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+      MINIO_BUCKET: hotelbook
+      MINIO_SECURE: "false"
+      SEED_ON_STARTUP: "true"
     depends_on:
       room_db:
+        condition: service_healthy
+      minio:
         condition: service_healthy
     ports:
       - "8002:8000"
@@ -152,3 +178,4 @@ volumes:
   auth_db_data:
   room_db_data:
   booking_db_data:
+  minio_data:
