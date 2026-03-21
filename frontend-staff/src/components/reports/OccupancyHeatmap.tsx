@@ -46,7 +46,7 @@ export function OccupancyHeatmap({ data, from, to, onDayClick }: OccupancyHeatma
         direction={calendarConfig.direction}
         theme={nivoTheme}
         onClick={(datum) => onDayClick(datum.day)}
-        tooltip={({ day, value, color }) => (
+        tooltip={({ day, value }) => (
           <div
             style={{
               background: '#1E293B',

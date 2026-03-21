@@ -41,7 +41,8 @@ export function BookingTrendsChart({ data, onPointClick }: BookingTrendsChartPro
           format: '%b %d',
           tickRotation: -45,
         }}
-        onClick={(point) => onPointClick(String(point.data.x))}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onClick={(point: any) => onPointClick(String(point.data.x))}
       />
     </div>
   );

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it } from 'vitest';
 
 describe('DateRangePicker', () => {
   it.todo('renders preset buttons (7d, 30d, 90d, This Month, This Year)');

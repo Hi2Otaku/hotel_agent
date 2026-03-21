@@ -1,6 +1,4 @@
-import type { Theme } from '@nivo/core';
-
-export const nivoTheme: Theme = {
+export const nivoTheme = {
   background: 'transparent',
   text: {
     fill: '#94A3B8',

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, vi } from 'vitest';
 
 // Mock Nivo calendar since jsdom cannot render SVG
 vi.mock('@nivo/calendar', () => ({

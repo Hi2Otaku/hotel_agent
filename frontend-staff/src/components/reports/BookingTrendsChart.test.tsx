@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, vi } from 'vitest';
 
 // Mock Nivo line since jsdom cannot render SVG
 vi.mock('@nivo/line', () => ({

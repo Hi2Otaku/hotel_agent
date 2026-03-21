@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { subDays, startOfMonth, startOfYear, format, isEqual, parseISO } from 'date-fns';
+import { subDays, startOfMonth, startOfYear, format, parseISO } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';

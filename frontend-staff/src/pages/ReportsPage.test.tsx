@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, vi } from 'vitest';
 
 // Mock all Nivo chart packages since jsdom cannot render SVG
 vi.mock('@nivo/calendar', () => ({ ResponsiveCalendar: vi.fn(() => null) }));

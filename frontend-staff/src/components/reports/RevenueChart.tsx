@@ -9,7 +9,7 @@ interface RevenueChartProps {
   onBarClick: (period: string, roomType: string) => void;
 }
 
-export function RevenueChart({ data, groupBy, onBarClick }: RevenueChartProps) {
+export function RevenueChart({ data, groupBy: _groupBy, onBarClick }: RevenueChartProps) {
   const { barData, roomTypeKeys } = useMemo(() => {
     const periodMap = new Map<string, Record<string, number>>();
     const roomTypes = new Set<string>();
