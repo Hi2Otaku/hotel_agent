@@ -99,12 +99,14 @@ Plans:
   2. The multi-step booking wizard maintains state across steps (room selection, guest details, payment, confirmation) without data loss
   3. Guest-facing site is fully responsive and usable on mobile devices (mobile-first design)
   4. Loading states, error messages, and empty states are handled gracefully throughout the application
-**Plans**: TBD
+**Plans**: 5 plans
 
 Plans:
-- [ ] 05-01: TBD
-- [ ] 05-02: TBD
-- [ ] 05-03: TBD
+- [ ] 05-01-PLAN.md — Vite + React + Tailwind v4 + shadcn/ui scaffolding, API client layer, stores, layout shell (Navbar/Footer), router
+- [ ] 05-02-PLAN.md — Landing page with search form, search results with filter drawer, room detail with photo gallery, pricing calendar
+- [ ] 05-03-PLAN.md — Login, Register, Password Reset pages with form validation and auth hooks
+- [ ] 05-04-PLAN.md — 4-step booking wizard with sidebar navigation, summary panel, state persistence
+- [ ] 05-05-PLAN.md — My Bookings list, Booking Detail with status timeline, cancel/modify dialogs
 
 ### Phase 6: Staff Dashboard
 **Goal**: Hotel staff can manage daily operations -- viewing reservations, checking guests in and out, and reviewing guest history -- through a dedicated dashboard
@@ -160,7 +162,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 2. Room & Rate Management | 3/3 | Complete   | 2026-03-21 |
 | 3. Availability & Search | 3/3 | Complete   | 2026-03-21 |
 | 4. Booking Engine | 2/3 | In Progress|  |
-| 5. Guest Frontend | 0/3 | Not started | - |
+| 5. Guest Frontend | 0/5 | Not started | - |
 | 6. Staff Dashboard | 0/2 | Not started | - |
 | 7. Reporting Dashboard | 0/1 | Not started | - |
 | 8. Testing & Deployment | 0/2 | Not started | - |
