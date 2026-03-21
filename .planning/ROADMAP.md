@@ -50,11 +50,12 @@ Plans:
   3. Staff can view a room status board showing current state of all rooms
   4. Housekeeping status automatically marks rooms dirty on checkout and staff can toggle clean/inspected
   5. Staff can set base rates per room type and create seasonal pricing rules with date-range overrides and weekend surcharges
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: TBD
-- [ ] 02-02: TBD
+- [ ] 02-01-PLAN.md — Room service scaffolding, models, migrations, schemas, MinIO, Docker infrastructure
+- [ ] 02-02-PLAN.md — Room type CRUD with photos, room management with status state machine, integration tests
+- [ ] 02-03-PLAN.md — Rate management, pricing engine with multiplicative stacking, seed data, tests
 
 ### Phase 3: Availability & Search
 **Goal**: Guests can search for available rooms by dates and filters, view room details, and see per-night pricing -- backed by a correctness-guaranteed availability engine
@@ -155,7 +156,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Authentication | 0/3 | Planning complete | - |
-| 2. Room & Rate Management | 0/2 | Not started | - |
+| 2. Room & Rate Management | 0/3 | Planning complete | - |
 | 3. Availability & Search | 0/2 | Not started | - |
 | 4. Booking Engine | 0/3 | Not started | - |
 | 5. Guest Frontend | 0/3 | Not started | - |
