@@ -36,7 +36,7 @@ const navItems: NavItem[] = [
   { label: 'Check-in/out', icon: LogIn, path: '/check-in-out' },
   { label: 'Room Status', icon: BedDouble, path: '/room-status' },
   { label: 'Guests', icon: Users, path: '/guests' },
-  { label: 'Reports', icon: BarChart3, path: '/reports', disabled: true },
+  { label: 'Reports', icon: BarChart3, path: '/reports' },
 ];
 
 function NavItemContent({

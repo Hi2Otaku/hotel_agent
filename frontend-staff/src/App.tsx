@@ -10,6 +10,7 @@ const ReservationsPage = lazy(() => import('@/pages/ReservationsPage'));
 const CheckInOutPage = lazy(() => import('@/pages/CheckInOutPage'));
 const RoomStatusPage = lazy(() => import('@/pages/RoomStatusPage'));
 const GuestProfilePage = lazy(() => import('@/pages/GuestProfilePage'));
+const ReportsPage = lazy(() => import('@/pages/ReportsPage'));
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
@@ -19,12 +20,6 @@ function ProtectedRoute({ children }: { children: ReactNode }) {
   }
 
   return <>{children}</>;
-}
-
-function PlaceholderPage({ name }: { name: string }) {
-  return (
-    <div className="text-slate-100 text-xl font-semibold">{name}</div>
-  );
 }
 
 export default function App() {
@@ -44,7 +39,7 @@ export default function App() {
         <Route path="check-in-out" element={<Suspense fallback={<LoadingSpinner />}><CheckInOutPage /></Suspense>} />
         <Route path="room-status" element={<Suspense fallback={<LoadingSpinner />}><RoomStatusPage /></Suspense>} />
         <Route path="guests" element={<Suspense fallback={<LoadingSpinner />}><GuestProfilePage /></Suspense>} />
-        <Route path="reports" element={<PlaceholderPage name="Reports - Coming in Phase 7" />} />
+        <Route path="reports" element={<Suspense fallback={<LoadingSpinner />}><ReportsPage /></Suspense>} />
       </Route>
     </Routes>
   );
