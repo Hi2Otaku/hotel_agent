@@ -1,0 +1,47 @@
+services:
+  auth:
+    restart: always
+    environment:
+      FIRST_ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@hotel.local}
+      FIRST_ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
+
+  room:
+    restart: always
+    environment:
+      SEED_ON_STARTUP: "true"
+
+  booking:
+    restart: always
+
+  gateway:
+    restart: always
+    ports: []
+
+  frontend-guest:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+
+  frontend-staff:
+    build:
+      context: ./frontend-staff
+      dockerfile: Dockerfile
+    restart: always
+
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - letsencrypt_data:/etc/letsencrypt:ro
+    depends_on:
+      - gateway
+      - frontend-guest
+      - frontend-staff
+    restart: always
+
+volumes:
+  letsencrypt_data:
