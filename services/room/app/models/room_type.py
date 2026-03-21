@@ -2,8 +2,9 @@
 
 import uuid
 from datetime import datetime
+from decimal import Decimal
 
-from sqlalchemy import Boolean, DateTime, Integer, String, Text, func
+from sqlalchemy import Boolean, DateTime, Integer, Numeric, String, Text, func
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -26,6 +27,9 @@ class RoomType(Base):
     bed_config: Mapped[list] = mapped_column(JSONB, nullable=False, default=list)
     amenities: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
     photo_urls: Mapped[list] = mapped_column(JSONB, nullable=False, default=list)
+    overbooking_pct: Mapped[Decimal] = mapped_column(
+        Numeric(5, 2), nullable=False, server_default="0.00"
+    )
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()

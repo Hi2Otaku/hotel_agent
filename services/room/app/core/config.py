@@ -9,6 +9,9 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: str = "postgresql+asyncpg://room_user:room_pass@room_db:5432/rooms"
 
+    # RabbitMQ
+    RABBITMQ_URL: str = "amqp://hotel:hotel_pass@rabbitmq:5672/"
+
     # JWT (public key only -- room service verifies, never signs)
     JWT_PUBLIC_KEY_PATH: str = "/run/secrets/jwt_public_key"
 

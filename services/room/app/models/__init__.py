@@ -4,6 +4,7 @@ from app.models.room_type import RoomType
 from app.models.room import Room, RoomStatus
 from app.models.rate import BaseRate, SeasonalRate, WeekendSurcharge
 from app.models.status_log import RoomStatusChange
+from app.models.reservation import ReservationProjection
 
 __all__ = [
     "RoomType",
@@ -13,4 +14,5 @@ __all__ = [
     "SeasonalRate",
     "WeekendSurcharge",
     "RoomStatusChange",
+    "ReservationProjection",
 ]
