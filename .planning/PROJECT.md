@@ -23,6 +23,8 @@ Guests can seamlessly search, book, and manage room reservations with a polished
 - ✓ Full booking flow (select room → guest details → mock payment → confirmation) — Phase 4
 - ✓ Guest booking management (view, modify, cancel) — Phase 4
 - ✓ Email confirmation (mock/simulated) — Phase 4
+- ✓ Mock payment integration (simulated Stripe-like flow) — Phase 4
+- ✓ Responsive design for guest-facing site — Phase 5
 
 ### Active
 
@@ -30,8 +32,6 @@ Guests can seamlessly search, book, and manage room reservations with a polished
 - [ ] Staff booking management (view all, check-in, check-out)
 - [ ] Guest history and profiles (staff view)
 - [ ] Reporting dashboard (occupancy, revenue, booking trends)
-- [ ] Mock payment integration (simulated Stripe-like flow)
-- [ ] Responsive design for guest-facing site
 - [ ] Tests and CI/CD pipeline
 - [ ] Deployment-ready with documentation
 
@@ -68,4 +68,4 @@ Guests can seamlessly search, book, and manage room reservations with a polished
 | Single property | Keeps data model focused; multi-property adds complexity without portfolio value | — Pending |
 
 ---
-*Last updated: 2026-03-21 after Phase 4 completion*
+*Last updated: 2026-03-21 after Phase 5 completion*
