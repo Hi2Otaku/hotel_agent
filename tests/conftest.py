@@ -1,7 +1,8 @@
 """Core test fixtures for the HotelBook test suite.
 
 Uses a real PostgreSQL database (from Docker Compose) with FastAPI
-dependency overrides for session management.
+dependency overrides for session management. Each test runs in a
+nested savepoint that rolls back after the test.
 """
 
 import asyncio
@@ -49,23 +50,43 @@ async def test_engine():
 @pytest.fixture
 async def db_session(test_engine):
     """Provide a transactional database session for each test."""
-    session_factory = async_sessionmaker(test_engine, expire_on_commit=False)
-    async with session_factory() as session:
+    async with test_engine.connect() as conn:
+        trans = await conn.begin()
+        session = AsyncSession(bind=conn, expire_on_commit=False)
         yield session
-        await session.rollback()
+        await session.close()
+        await trans.rollback()
 
 
 @pytest.fixture
 async def client(test_engine):
-    """Provide an async HTTP client with database dependency override."""
-    session_factory = async_sessionmaker(test_engine, expire_on_commit=False)
+    """Provide an async HTTP client with database dependency override.
 
-    async def override_get_db():
-        async with session_factory() as session:
-            yield session
+    Uses a single connection with a transaction + savepoint per request
+    to avoid asyncpg 'another operation in progress' errors.
+    """
+    async with test_engine.connect() as conn:
+        trans = await conn.begin()
 
-    app.dependency_overrides[get_db] = override_get_db
-    transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://test") as ac:
-        yield ac
-    app.dependency_overrides.clear()
+        # Create a session factory bound to this single connection
+        async def override_get_db():
+            # Use a nested savepoint so each request can commit
+            # without affecting the outer transaction
+            nested = await conn.begin_nested()
+            session = AsyncSession(bind=conn, expire_on_commit=False)
+            try:
+                yield session
+                await session.commit()
+            except Exception:
+                await session.rollback()
+                raise
+            finally:
+                await session.close()
+
+        app.dependency_overrides[get_db] = override_get_db
+        transport = ASGITransport(app=app)
+        async with AsyncClient(transport=transport, base_url="http://test") as ac:
+            yield ac
+
+        app.dependency_overrides.clear()
+        await trans.rollback()

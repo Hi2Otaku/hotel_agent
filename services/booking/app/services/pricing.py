@@ -88,14 +88,22 @@ async def get_room_count_for_type(room_type_id: UUID) -> int:
         if now - cached_at < _CACHE_TTL_SECONDS:
             return count
 
-    url = f"{settings.ROOM_SERVICE_URL}/api/v1/rooms/types/{room_type_id}"
+    # Use the public search availability endpoint which returns total_rooms
+    from datetime import date, timedelta
+
+    tomorrow = date.today() + timedelta(days=1)
+    day_after = tomorrow + timedelta(days=1)
+    url = (
+        f"{settings.ROOM_SERVICE_URL}/api/v1/search/room-types/{room_type_id}"
+        f"?check_in={tomorrow}&check_out={day_after}&guests=1"
+    )
     try:
         async with httpx.AsyncClient(timeout=10.0) as client:
             response = await client.get(url)
             response.raise_for_status()
             data = response.json()
 
-        room_count = data.get("room_count", data.get("total_rooms", 1))
+        room_count = data.get("total_rooms", 1)
         _room_count_cache[cache_key] = (room_count, now)
         return room_count
     except httpx.HTTPError as exc:

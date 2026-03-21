@@ -309,6 +309,8 @@ async def get_seasonal_multiplier(
             SeasonalRate.start_date <= target_date,
             SeasonalRate.end_date >= target_date,
         )
+        .order_by(SeasonalRate.start_date.desc())
+        .limit(1)
     )
     seasonal = result.scalar_one_or_none()
     if seasonal is None:

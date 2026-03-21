@@ -55,10 +55,10 @@ async def create_booking(
     if data.check_in < date.today():
         raise HTTPException(status_code=400, detail="Check-in cannot be in the past")
 
-    # Pessimistic locking: count overlapping blocking bookings FOR UPDATE
+    # Pessimistic locking: lock overlapping bookings then count in Python
+    # (PostgreSQL forbids FOR UPDATE with aggregate functions)
     blocking_query = (
-        select(func.count())
-        .select_from(Booking)
+        select(Booking.id)
         .where(
             Booking.room_type_id == data.room_type_id,
             Booking.status.in_([
@@ -72,7 +72,7 @@ async def create_booking(
         .with_for_update()
     )
     result = await db.execute(blocking_query)
-    blocking_count = result.scalar_one()
+    blocking_count = len(result.all())
 
     # Check against available room count
     total_rooms = await get_room_count_for_type(data.room_type_id)
@@ -526,9 +526,9 @@ async def modify_booking(
             raise HTTPException(status_code=400, detail="Check-in must be before check-out")
 
         # Re-check availability with pessimistic locking, excluding current booking
+        # (PostgreSQL forbids FOR UPDATE with aggregate functions)
         blocking_query = (
-            select(func.count())
-            .select_from(Booking)
+            select(Booking.id)
             .where(
                 Booking.room_type_id == new_room_type_id,
                 Booking.status.in_([
@@ -543,7 +543,7 @@ async def modify_booking(
             .with_for_update()
         )
         result = await db.execute(blocking_query)
-        blocking_count = result.scalar_one()
+        blocking_count = len(result.all())
 
         total_rooms = await get_room_count_for_type(new_room_type_id)
         if blocking_count >= total_rooms:
