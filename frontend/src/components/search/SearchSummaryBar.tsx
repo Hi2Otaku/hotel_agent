@@ -17,7 +17,9 @@ export function SearchSummaryBar({
   return (
     <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#E2E8F0] bg-[#F8FAFC] px-4 py-4 md:px-8">
       <p className="text-sm text-slate-700">
-        {formatDateRange(checkIn, checkOut)} &middot;{' '}
+        {checkIn && checkOut
+          ? `${formatDateRange(checkIn, checkOut)} \u00B7 `
+          : ''}
         {guests} {guests === 1 ? 'guest' : 'guests'} &middot;{' '}
         {total} {total === 1 ? 'room' : 'rooms'} found
       </p>

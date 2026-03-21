@@ -23,6 +23,6 @@ describe('Responsive Layout - INFR-01', () => {
       </MemoryRouter>,
     );
     expect(screen.getByText('HotelBook')).toBeInTheDocument();
-    expect(screen.getByText('Search Results')).toBeInTheDocument();
+    expect(screen.getByText('Modify Search')).toBeInTheDocument();
   });
 });
