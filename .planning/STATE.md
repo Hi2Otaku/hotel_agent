@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 07-00-PLAN.md
-last_updated: "2026-03-21T16:32:15.196Z"
+stopped_at: Completed 07-01-PLAN.md
+last_updated: "2026-03-21T16:34:51.484Z"
 progress:
   total_phases: 8
   completed_phases: 6
   total_plans: 26
-  completed_plans: 23
+  completed_plans: 24
 ---
 
 # Project State
@@ -66,6 +66,7 @@ Plan: 2 of 4
 | Phase 06 P03 | 5min | 2 tasks | 8 files |
 | Phase 06 P04 | 7min | 2 tasks | 14 files |
 | Phase 07 P00 | 2min | 1 tasks | 5 files |
+| Phase 07 P01 | 3min | 2 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -138,6 +139,10 @@ Recent decisions affecting current work:
 - [Phase 06]: Dialog reuse pattern: CheckInDialog/CheckOutDialog shared across 3 pages
 - [Phase 06]: Room status transitions via popover with STATUS_ACTIONS map for valid transitions
 - [Phase 07]: Nivo mock pattern: vi.mock returns vi.fn(() => null) for each chart component
+- [Phase 07]: Auto-compute group_by from date range: day (<30d), week (30-90d), month (>90d)
+- [Phase 07]: Occupancy uses reservation_projections table to avoid cross-service calls
+- [Phase 07]: Gateway BFF reports uses 30s timeout for aggregation queries
+- [Phase 07]: Seed script fetches room type UUIDs from room service API for referential integrity
 
 ### Pending Todos
 
@@ -149,6 +154,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T16:32:15.192Z
-Stopped at: Completed 07-00-PLAN.md
+Last session: 2026-03-21T16:34:51.480Z
+Stopped at: Completed 07-01-PLAN.md
 Resume file: None
