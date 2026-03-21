@@ -1,5 +1,6 @@
 """HotelBook Room Service -- FastAPI application entry point."""
 
+import asyncio
 import logging
 from contextlib import asynccontextmanager
 
@@ -8,13 +9,14 @@ from fastapi import FastAPI
 from app.api.v1.room_types import router as room_types_router
 from app.api.v1.rooms import router as rooms_router
 from app.api.v1.rates import router as rates_router
+from app.services.event_consumer import start_event_consumer
 
 logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Application lifespan handler: MinIO bucket init + seed data."""
+    """Application lifespan handler: MinIO bucket init + seed data + event consumer."""
     # MinIO bucket
     try:
         from app.core.storage import get_minio_client
@@ -36,7 +38,22 @@ async def lifespan(app: FastAPI):
         async with async_session_factory() as session:
             await seed_data(session)
 
+    # Start RabbitMQ event consumer for booking projections
+    consumer_task = None
+    try:
+        consumer_task = asyncio.create_task(start_event_consumer())
+    except Exception as e:
+        logger.warning(f"RabbitMQ consumer failed to start: {e}")
+
     yield
+
+    # Graceful shutdown of event consumer
+    if consumer_task is not None:
+        consumer_task.cancel()
+        try:
+            await consumer_task
+        except asyncio.CancelledError:
+            pass
 
 
 app = FastAPI(
