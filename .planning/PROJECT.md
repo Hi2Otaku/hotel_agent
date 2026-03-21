@@ -28,12 +28,13 @@ Guests can seamlessly search, book, and manage room reservations with a polished
 - ✓ Staff booking management (view all, check-in, check-out) — Phase 6
 - ✓ Guest history and profiles (staff view) — Phase 6
 - ✓ Reporting dashboard (occupancy, revenue, booking trends) — Phase 7
+- ✓ Tests and CI/CD pipeline — Phase 8
+- ✓ Deployment-ready with documentation — Phase 8
 
 ### Active
 
 <!-- Current scope. Building toward these. -->
-- [ ] Tests and CI/CD pipeline
-- [ ] Deployment-ready with documentation
+(All v1.0 requirements complete)
 
 ### Out of Scope
 
@@ -68,4 +69,4 @@ Guests can seamlessly search, book, and manage room reservations with a polished
 | Single property | Keeps data model focused; multi-property adds complexity without portfolio value | — Pending |
 
 ---
-*Last updated: 2026-03-21 after Phase 7 completion*
+*Last updated: 2026-03-21 after Phase 8 completion — v1.0 milestone complete*
