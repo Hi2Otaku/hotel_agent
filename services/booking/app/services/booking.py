@@ -375,6 +375,228 @@ async def _get_booking_with_ownership(
     return booking
 
 
+async def list_bookings(
+    db: AsyncSession,
+    user_id: UUID,
+    status_filter: str | None = None,
+    skip: int = 0,
+    limit: int = 20,
+) -> tuple[list[Booking], int]:
+    """List bookings for a guest with optional status filter and pagination.
+
+    Performs on-demand expiry check on any PENDING bookings in the results.
+
+    Args:
+        db: Async database session.
+        user_id: The authenticated user's UUID.
+        status_filter: Optional status string to filter by (e.g., "confirmed", "cancelled").
+        skip: Number of records to skip for pagination.
+        limit: Maximum number of records to return.
+
+    Returns:
+        Tuple of (list of Booking instances, total count).
+    """
+    base_filter = [Booking.user_id == user_id]
+    if status_filter:
+        base_filter.append(Booking.status == status_filter)
+
+    # Get total count
+    count_query = select(func.count()).select_from(Booking).where(*base_filter)
+    total = (await db.execute(count_query)).scalar_one()
+
+    # Get paginated results
+    query = (
+        select(Booking)
+        .where(*base_filter)
+        .order_by(Booking.created_at.desc())
+        .offset(skip)
+        .limit(limit)
+    )
+    result = await db.execute(query)
+    bookings = list(result.scalars().all())
+
+    # On-demand expiry check for PENDING bookings
+    for i, booking in enumerate(bookings):
+        bookings[i] = await _check_expiry(db, booking)
+
+    return bookings, total
+
+
+async def cancel_booking(
+    db: AsyncSession, booking_id: UUID, user_id: UUID
+) -> Booking:
+    """Cancel a booking with policy-based fee enforcement.
+
+    For PENDING bookings: free cancellation, no fee.
+    For CONFIRMED bookings: fee depends on proximity to check-in date.
+      - If within CANCELLATION_POLICY_DAYS of check-in: fee = price_per_night (first night).
+      - Otherwise: free cancellation.
+
+    Args:
+        db: Async database session.
+        booking_id: The booking UUID.
+        user_id: The authenticated user's UUID.
+
+    Returns:
+        The cancelled Booking.
+
+    Raises:
+        HTTPException(404): Booking not found.
+        HTTPException(403): Not the booking owner.
+        HTTPException(400): Booking cannot be cancelled from current status.
+    """
+    booking = await _get_booking_with_ownership(db, booking_id, user_id)
+
+    current = booking.status if isinstance(booking.status, str) else booking.status.value
+
+    # Only pending and confirmed can be cancelled (per VALID_TRANSITIONS)
+    if current not in ("pending", "confirmed"):
+        raise HTTPException(
+            status_code=400,
+            detail=f"Cannot cancel a booking with status '{current}'",
+        )
+
+    # Calculate cancellation fee for confirmed bookings
+    if current == "confirmed":
+        check_in_date = booking.check_in if isinstance(booking.check_in, date) else booking.check_in.date()
+        free_before = check_in_date - timedelta(days=settings.CANCELLATION_POLICY_DAYS)
+        if date.today() >= free_before:
+            # Late cancellation: charge first night
+            booking.cancellation_fee = Decimal(str(booking.price_per_night)) if booking.price_per_night else None
+        else:
+            booking.cancellation_fee = None
+
+    booking = await transition_booking(db, booking, "cancelled", reason="guest_cancelled")
+    return booking
+
+
+async def modify_booking(
+    db: AsyncSession, booking_id: UUID, user_id: UUID, data
+) -> dict:
+    """Modify an existing CONFIRMED booking with availability re-check and price recalculation.
+
+    Only CONFIRMED bookings can be modified. If dates or room type change,
+    availability is re-checked with pessimistic locking and pricing is
+    recalculated from the Room service.
+
+    Args:
+        db: Async database session.
+        booking_id: The booking UUID.
+        user_id: The authenticated user's UUID.
+        data: BookingModifyRequest with optional fields.
+
+    Returns:
+        Dict with: booking, old_total, new_total, price_difference.
+
+    Raises:
+        HTTPException(404): Booking not found.
+        HTTPException(403): Not the booking owner.
+        HTTPException(400): Booking not in CONFIRMED status.
+        HTTPException(409): No rooms available for new dates.
+        HTTPException(502): Room service unreachable.
+    """
+    booking = await _get_booking_with_ownership(db, booking_id, user_id)
+
+    current = booking.status if isinstance(booking.status, str) else booking.status.value
+    if current != "confirmed":
+        raise HTTPException(
+            status_code=400,
+            detail="Only confirmed bookings can be modified",
+        )
+
+    old_total = Decimal(str(booking.total_price)) if booking.total_price else Decimal("0")
+
+    # Determine new values
+    new_check_in = data.check_in if data.check_in is not None else booking.check_in
+    new_check_out = data.check_out if data.check_out is not None else booking.check_out
+    new_room_type_id = data.room_type_id if data.room_type_id is not None else booking.room_type_id
+    new_guest_count = data.guest_count if data.guest_count is not None else booking.guest_count
+
+    # Check if pricing-relevant fields changed
+    pricing_changed = (
+        new_check_in != booking.check_in
+        or new_check_out != booking.check_out
+        or str(new_room_type_id) != str(booking.room_type_id)
+        or new_guest_count != booking.guest_count
+    )
+
+    if pricing_changed:
+        # Validate dates
+        if new_check_in >= new_check_out:
+            raise HTTPException(status_code=400, detail="Check-in must be before check-out")
+
+        # Re-check availability with pessimistic locking, excluding current booking
+        blocking_query = (
+            select(func.count())
+            .select_from(Booking)
+            .where(
+                Booking.room_type_id == new_room_type_id,
+                Booking.status.in_([
+                    BookingStatus.PENDING,
+                    BookingStatus.CONFIRMED,
+                    BookingStatus.CHECKED_IN,
+                ]),
+                Booking.check_in < new_check_out,
+                Booking.check_out > new_check_in,
+                Booking.id != booking.id,  # Exclude current booking
+            )
+            .with_for_update()
+        )
+        result = await db.execute(blocking_query)
+        blocking_count = result.scalar_one()
+
+        total_rooms = await get_room_count_for_type(new_room_type_id)
+        if blocking_count >= total_rooms:
+            raise HTTPException(status_code=409, detail="No rooms available for selected dates")
+
+        # Re-fetch pricing
+        pricing = await get_pricing_from_room_service(
+            new_room_type_id, new_check_in, new_check_out, new_guest_count
+        )
+
+        booking.total_price = pricing["total_price"]
+        booking.price_per_night = pricing["price_per_night"]
+        booking.currency = pricing["currency"]
+        booking.nightly_breakdown = pricing["nightly_breakdown"]
+
+    # Update booking fields
+    booking.check_in = new_check_in
+    booking.check_out = new_check_out
+    booking.room_type_id = new_room_type_id
+    booking.guest_count = new_guest_count
+
+    # Update guest details if provided
+    if data.guest_first_name is not None:
+        booking.guest_first_name = data.guest_first_name
+    if data.guest_last_name is not None:
+        booking.guest_last_name = data.guest_last_name
+    if data.guest_phone is not None:
+        booking.guest_phone = data.guest_phone
+    if data.guest_address is not None:
+        booking.guest_address = data.guest_address
+    if data.special_requests is not None:
+        booking.special_requests = data.special_requests
+
+    # Publish event if dates/room changed
+    if pricing_changed:
+        try:
+            await publish_booking_event(booking, "booking.modified")
+        except Exception:
+            logger.exception("Failed to publish booking.modified event")
+
+    await db.commit()
+    await db.refresh(booking)
+
+    new_total = Decimal(str(booking.total_price)) if booking.total_price else Decimal("0")
+
+    return {
+        "booking": booking,
+        "old_total": old_total,
+        "new_total": new_total,
+        "price_difference": new_total - old_total,
+    }
+
+
 async def _check_expiry(db: AsyncSession, booking: Booking) -> Booking:
     """On-demand expiry check: cancel PENDING bookings past their expires_at."""
     current_status = booking.status if isinstance(booking.status, str) else booking.status.value

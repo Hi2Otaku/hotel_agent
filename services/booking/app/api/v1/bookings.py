@@ -9,27 +9,49 @@ Plus: GET /{id} and GET /{id}/cancellation-policy.
 
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import get_current_user, get_db
 from app.core.config import settings
 from app.schemas.booking import (
     BookingCreate,
+    BookingListResponse,
+    BookingModifyRequest,
     BookingResponse,
     CancellationPolicyResponse,
     GuestDetailsSubmit,
 )
 from app.schemas.payment import PaymentResponse, PaymentSubmit
 from app.services.booking import (
+    cancel_booking,
     create_booking,
     get_booking,
     get_cancellation_policy,
+    list_bookings,
+    modify_booking,
     process_booking_payment,
     submit_guest_details,
 )
 
 router = APIRouter(prefix="/api/v1/bookings", tags=["bookings"])
+
+
+@router.get("/", response_model=BookingListResponse)
+async def list_bookings_endpoint(
+    status: str | None = None,
+    skip: int = 0,
+    limit: int = Query(default=20, le=100),
+    db: AsyncSession = Depends(get_db),
+    current_user: dict = Depends(get_current_user),
+):
+    """List the authenticated guest's bookings with optional status filter."""
+    user_id = UUID(current_user["sub"])
+    bookings, total = await list_bookings(db, user_id, status_filter=status, skip=skip, limit=limit)
+    return BookingListResponse(
+        items=[BookingResponse.model_validate(b) for b in bookings],
+        total=total,
+    )
 
 
 @router.post("/", response_model=BookingResponse, status_code=201)
@@ -112,3 +134,35 @@ async def get_cancellation_policy_endpoint(
     user_id = UUID(current_user["sub"])
     booking = await get_booking(db, booking_id, user_id)
     return get_cancellation_policy(booking, settings.CANCELLATION_POLICY_DAYS)
+
+
+@router.post("/{booking_id}/cancel", response_model=BookingResponse)
+async def cancel_booking_endpoint(
+    booking_id: UUID,
+    db: AsyncSession = Depends(get_db),
+    current_user: dict = Depends(get_current_user),
+):
+    """Cancel a booking with policy-based cancellation fee."""
+    user_id = UUID(current_user["sub"])
+    booking = await cancel_booking(db, booking_id, user_id)
+    return booking
+
+
+@router.put("/{booking_id}/modify")
+async def modify_booking_endpoint(
+    booking_id: UUID,
+    data: BookingModifyRequest,
+    db: AsyncSession = Depends(get_db),
+    current_user: dict = Depends(get_current_user),
+):
+    """Modify a confirmed booking with availability re-check and price recalculation."""
+    user_id = UUID(current_user["sub"])
+    result = await modify_booking(db, booking_id, user_id, data)
+    booking_resp = BookingResponse.model_validate(result["booking"])
+    return {
+        "booking": booking_resp.model_dump(mode="json"),
+        "old_total": str(result["old_total"]),
+        "new_total": str(result["new_total"]),
+        "price_difference": str(result["price_difference"]),
+        "currency": result["booking"].currency,
+    }

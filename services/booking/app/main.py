@@ -1,17 +1,21 @@
 """HotelBook Booking Service -- 3-step booking flow with payment and events."""
 
+import asyncio
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.bookings import router as bookings_router
+from app.services.expiry import expire_pending_bookings
 
 
 @asynccontextmanager
 async def lifespan(application: FastAPI):
-    """Application lifespan: placeholder for expiry background task (Plan 03)."""
+    """Application lifespan: start background expiry task for PENDING bookings."""
+    task = asyncio.create_task(expire_pending_bookings())
     yield
+    task.cancel()
 
 
 app = FastAPI(
