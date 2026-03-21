@@ -1,8 +1,11 @@
+import { lazy, Suspense, type ReactNode } from 'react';
 import { Routes, Route, Navigate } from 'react-router';
 import { useAuthStore } from '@/stores/authStore';
 import { AppLayout } from '@/components/layout/AppLayout';
+import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import LoginPage from '@/pages/LoginPage';
-import type { ReactNode } from 'react';
+
+const OverviewPage = lazy(() => import('@/pages/OverviewPage'));
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
@@ -32,7 +35,7 @@ export default function App() {
           </ProtectedRoute>
         }
       >
-        <Route index element={<PlaceholderPage name="Overview" />} />
+        <Route index element={<Suspense fallback={<LoadingSpinner />}><OverviewPage /></Suspense>} />
         <Route path="reservations" element={<PlaceholderPage name="Reservations" />} />
         <Route path="check-in-out" element={<PlaceholderPage name="Check-in / Check-out" />} />
         <Route path="room-status" element={<PlaceholderPage name="Room Status" />} />
