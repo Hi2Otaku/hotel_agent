@@ -17,7 +17,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Room Search & Availability
 
 - [ ] **ROOM-01**: Guest can search rooms by check-in/check-out dates and guest count
-- [ ] **ROOM-02**: Guest sees only available rooms for selected dates (real-time availability)
+- [x] **ROOM-02**: Guest sees only available rooms for selected dates (real-time availability)
 - [ ] **ROOM-03**: Guest can view room details (photos, amenities, capacity, per-night price)
 - [ ] **ROOM-04**: Guest can see pricing calendar showing per-night rates and availability
 
@@ -115,7 +115,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | RATE-01 | Phase 2 | Complete |
 | RATE-02 | Phase 2 | Complete |
 | ROOM-01 | Phase 3 | Pending |
-| ROOM-02 | Phase 3 | Pending |
+| ROOM-02 | Phase 3 | Complete |
 | ROOM-03 | Phase 3 | Pending |
 | ROOM-04 | Phase 3 | Pending |
 | BOOK-01 | Phase 4 | Pending |
