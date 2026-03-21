@@ -66,11 +66,12 @@ Plans:
   2. Guest can view room details including photos, amenities, capacity, and per-night price for their selected dates
   3. Guest can see a pricing calendar showing per-night rates and availability across a date range
   4. Availability queries use pessimistic locking (FOR UPDATE) to prevent double-booking at the database level
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: TBD
-- [ ] 03-02: TBD
+- [ ] 03-01-PLAN.md — Reservation projection model, migration, RabbitMQ event consumer, availability query service
+- [ ] 03-02-PLAN.md — Public search/detail/calendar endpoints, Pydantic schemas, integration tests
+- [ ] 03-03-PLAN.md — Gateway BFF search aggregation endpoints, gateway test infrastructure
 
 ### Phase 4: Booking Engine
 **Goal**: Guests can complete the full booking lifecycle -- from room selection through mock payment to confirmation -- and manage existing bookings (view, cancel, modify)
@@ -157,7 +158,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 |-------|----------------|--------|-----------|
 | 1. Foundation & Authentication | 0/3 | Planning complete | - |
 | 2. Room & Rate Management | 3/3 | Complete   | 2026-03-21 |
-| 3. Availability & Search | 0/2 | Not started | - |
+| 3. Availability & Search | 0/3 | Planning complete | - |
 | 4. Booking Engine | 0/3 | Not started | - |
 | 5. Guest Frontend | 0/3 | Not started | - |
 | 6. Staff Dashboard | 0/2 | Not started | - |
