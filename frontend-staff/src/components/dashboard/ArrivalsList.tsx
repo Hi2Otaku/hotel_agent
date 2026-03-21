@@ -1,13 +1,17 @@
+import { useState } from 'react';
 import { Link } from 'react-router';
-import { toast } from 'sonner';
 import type { BookingResponse } from '@/api/types';
 import { EmptyState } from '@/components/common/EmptyState';
+import { CheckInDialog } from '@/components/checkin/CheckInDialog';
 
 interface ArrivalsListProps {
   arrivals: BookingResponse[];
 }
 
 export function ArrivalsList({ arrivals }: ArrivalsListProps) {
+  const [selectedBooking, setSelectedBooking] =
+    useState<BookingResponse | null>(null);
+
   if (arrivals.length === 0) {
     return (
       <div>
@@ -49,7 +53,7 @@ export function ArrivalsList({ arrivals }: ArrivalsListProps) {
               </div>
             </div>
             <button
-              onClick={() => toast('Check-in dialog coming soon')}
+              onClick={() => setSelectedBooking(booking)}
               className="ml-4 shrink-0 rounded-md bg-[#0F766E] px-4 py-2 text-sm text-white transition-colors hover:bg-[#0D9488]"
               style={{ minHeight: 44 }}
             >
@@ -65,6 +69,16 @@ export function ArrivalsList({ arrivals }: ArrivalsListProps) {
         >
           View All
         </Link>
+      )}
+
+      {selectedBooking && (
+        <CheckInDialog
+          booking={selectedBooking}
+          open
+          onOpenChange={(open) => {
+            if (!open) setSelectedBooking(null);
+          }}
+        />
       )}
     </div>
   );

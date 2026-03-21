@@ -1,13 +1,17 @@
+import { useState } from 'react';
 import { Link } from 'react-router';
-import { toast } from 'sonner';
 import type { BookingResponse } from '@/api/types';
 import { EmptyState } from '@/components/common/EmptyState';
+import { CheckOutDialog } from '@/components/checkin/CheckOutDialog';
 
 interface DeparturesListProps {
   departures: BookingResponse[];
 }
 
 export function DeparturesList({ departures }: DeparturesListProps) {
+  const [selectedBooking, setSelectedBooking] =
+    useState<BookingResponse | null>(null);
+
   if (departures.length === 0) {
     return (
       <div>
@@ -42,7 +46,9 @@ export function DeparturesList({ departures }: DeparturesListProps) {
                 {booking.guest_first_name} {booking.guest_last_name}
               </div>
               <div className="mt-1 text-xs text-[#94A3B8]">
-                {booking.room_id ? `Room ${booking.room_id}` : (booking.room_type_name ?? 'Room')}{' '}
+                {booking.room_id
+                  ? `Room ${booking.room_id}`
+                  : (booking.room_type_name ?? 'Room')}{' '}
                 &middot;{' '}
                 <span className="font-mono">
                   {booking.confirmation_number}
@@ -50,7 +56,7 @@ export function DeparturesList({ departures }: DeparturesListProps) {
               </div>
             </div>
             <button
-              onClick={() => toast('Check-out dialog coming soon')}
+              onClick={() => setSelectedBooking(booking)}
               className="ml-4 shrink-0 rounded-md bg-[#0F766E] px-4 py-2 text-sm text-white transition-colors hover:bg-[#0D9488]"
               style={{ minHeight: 44 }}
             >
@@ -66,6 +72,16 @@ export function DeparturesList({ departures }: DeparturesListProps) {
         >
           View All
         </Link>
+      )}
+
+      {selectedBooking && (
+        <CheckOutDialog
+          booking={selectedBooking}
+          open
+          onOpenChange={(open) => {
+            if (!open) setSelectedBooking(null);
+          }}
+        />
       )}
     </div>
   );
