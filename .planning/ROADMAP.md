@@ -134,9 +134,10 @@ Plans:
   1. Staff dashboard shows occupancy rate visualization filterable by date range
   2. Staff dashboard shows revenue summary for selected periods
   3. Staff dashboard shows interactive booking trend charts that respond to user interaction (hover, filter, zoom)
-**Plans**: 3 plans
+**Plans**: 4 plans
 
 Plans:
+- [ ] 07-00-PLAN.md — Wave 0 test stubs: Vitest scaffolds for all report components with Nivo mocks
 - [ ] 07-01-PLAN.md — Backend reporting endpoints (occupancy, revenue, trends, KPIs), gateway BFF orchestration, historical seed data
 - [ ] 07-02-PLAN.md — Frontend reports page with Nivo charts (calendar heatmap, stacked bar, line), date range picker, KPI cards
 - [ ] 07-03-PLAN.md — Drill-down panel, CSV/PDF export, chart click interactivity wiring
