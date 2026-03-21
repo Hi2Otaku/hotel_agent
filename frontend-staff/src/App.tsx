@@ -7,6 +7,9 @@ import LoginPage from '@/pages/LoginPage';
 
 const OverviewPage = lazy(() => import('@/pages/OverviewPage'));
 const ReservationsPage = lazy(() => import('@/pages/ReservationsPage'));
+const CheckInOutPage = lazy(() => import('@/pages/CheckInOutPage'));
+const RoomStatusPage = lazy(() => import('@/pages/RoomStatusPage'));
+const GuestProfilePage = lazy(() => import('@/pages/GuestProfilePage'));
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
@@ -38,9 +41,9 @@ export default function App() {
       >
         <Route index element={<Suspense fallback={<LoadingSpinner />}><OverviewPage /></Suspense>} />
         <Route path="reservations" element={<Suspense fallback={<LoadingSpinner />}><ReservationsPage /></Suspense>} />
-        <Route path="check-in-out" element={<PlaceholderPage name="Check-in / Check-out" />} />
-        <Route path="room-status" element={<PlaceholderPage name="Room Status" />} />
-        <Route path="guests" element={<PlaceholderPage name="Guests" />} />
+        <Route path="check-in-out" element={<Suspense fallback={<LoadingSpinner />}><CheckInOutPage /></Suspense>} />
+        <Route path="room-status" element={<Suspense fallback={<LoadingSpinner />}><RoomStatusPage /></Suspense>} />
+        <Route path="guests" element={<Suspense fallback={<LoadingSpinner />}><GuestProfilePage /></Suspense>} />
         <Route path="reports" element={<PlaceholderPage name="Reports - Coming in Phase 7" />} />
       </Route>
     </Routes>
