@@ -62,7 +62,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Infrastructure
 
-- [ ] **INFR-01**: Responsive design for guest-facing site (mobile-first)
+- [x] **INFR-01**: Responsive design for guest-facing site (mobile-first)
 - [ ] **INFR-02**: Unit and integration tests with CI/CD pipeline (GitHub Actions)
 - [ ] **INFR-03**: Deployed with live demo URL and documentation
 
@@ -126,7 +126,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MGMT-01 | Phase 4 | Complete |
 | MGMT-02 | Phase 4 | Complete |
 | MGMT-03 | Phase 4 | Complete |
-| INFR-01 | Phase 5 | Pending |
+| INFR-01 | Phase 5 | Complete |
 | STAF-01 | Phase 6 | Pending |
 | STAF-02 | Phase 6 | Pending |
 | STAF-03 | Phase 6 | Pending |

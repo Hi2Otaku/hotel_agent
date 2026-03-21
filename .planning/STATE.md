@@ -2,15 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_plan: 3 of 3 (all complete)
 status: unknown
-stopped_at: Phase 5 UI-SPEC approved
-last_updated: "2026-03-21T07:40:11.196Z"
+stopped_at: Completed 05-00-PLAN.md
+last_updated: "2026-03-21T08:19:05.990Z"
 progress:
   total_phases: 8
   completed_phases: 4
-  total_plans: 12
-  completed_plans: 12
+  total_plans: 18
+  completed_plans: 13
 ---
 
 # Project State
@@ -20,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-20)
 
 **Core value:** Guests can seamlessly search, book, and manage room reservations with a polished experience that demonstrates real-world full-stack competency.
-**Current focus:** Phase 04 — Booking Engine
+**Current focus:** Phase 05 — Guest Frontend
 
 ## Current Position
 
-Phase: 04 (Booking Engine) — COMPLETE
-Current Plan: 3 of 3 (all complete)
+Phase: 05 (Guest Frontend) — EXECUTING
+Plan: 2 of 6
 
 ## Performance Metrics
 
@@ -56,6 +55,7 @@ Current Plan: 3 of 3 (all complete)
 | Phase 04 P01 | 5min | 2 tasks | 21 files |
 | Phase 04 P02 | 13min | 2 tasks | 13 files |
 | Phase 04 P03 | 6min | 2 tasks | 10 files |
+| Phase 05 P00 | 1min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -101,6 +101,8 @@ Recent decisions affecting current work:
 - [Phase 04-03]: Modify availability re-check excludes current booking from blocking count (self-exclusion)
 - [Phase 04-03]: BFF booking endpoints gracefully degrade if Room service is unavailable
 - [Phase 04-03]: Late cancellation fee = price_per_night (first night charge)
+- [Phase 05-00]: Vitest with jsdom for React component testing (consistent with Vite toolchain)
+- [Phase 05-00]: Todo stubs (.todo) for tests before components exist -- Plans 01-05 convert to real tests
 
 ### Pending Todos
 
@@ -112,6 +114,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T07:40:11.192Z
-Stopped at: Phase 5 UI-SPEC approved
-Resume file: .planning/phases/05-guest-frontend/05-UI-SPEC.md
+Last session: 2026-03-21T08:19:05.987Z
+Stopped at: Completed 05-00-PLAN.md
+Resume file: None
