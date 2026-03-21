@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it } from 'vitest';
 
 describe('Responsive Layout - INFR-01', () => {
   it.todo('renders Navbar and Footer on all pages');

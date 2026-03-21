@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it } from 'vitest';
 
 describe('Navbar - INFR-01', () => {
   it.todo('displays "HotelBook" logo text');
