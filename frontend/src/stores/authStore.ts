@@ -1,6 +1,14 @@
 import { create } from 'zustand';
 import type { UserResponse } from '@/api/types';
 
+function getStoredToken(): string | null {
+  try {
+    return localStorage.getItem('access_token');
+  } catch {
+    return null;
+  }
+}
+
 interface AuthState {
   token: string | null;
   user: UserResponse | null;
@@ -11,9 +19,9 @@ interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
-  token: localStorage.getItem('access_token'),
+  token: getStoredToken(),
   user: null,
-  isAuthenticated: !!localStorage.getItem('access_token'),
+  isAuthenticated: !!getStoredToken(),
   login: (token: string) => {
     localStorage.setItem('access_token', token);
     set({ token, isAuthenticated: true });
