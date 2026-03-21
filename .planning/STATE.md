@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 03-03-PLAN.md
-last_updated: "2026-03-21T05:41:52.589Z"
+stopped_at: Completed 03-02-PLAN.md
+last_updated: "2026-03-21T05:44:16.566Z"
 progress:
   total_phases: 8
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 9
-  completed_plans: 8
+  completed_plans: 9
 ---
 
 ---
@@ -65,6 +65,7 @@ Plan: 3 of 3
 | Phase 02 P03 | 6min | 2 tasks | 7 files |
 | Phase 03 P01 | 7min | 2 tasks | 9 files |
 | Phase 03 P03 | 3min | 2 tasks | 6 files |
+| Phase 03 P02 | 5min | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -98,6 +99,9 @@ Recent decisions affecting current work:
 - [03-01]: Lazy imports in event consumer tests to handle multi-service app namespace collision
 - [Phase 03]: sys.path manipulation in gateway conftest to isolate app module from room/auth services
 - [Phase 03]: BFF endpoints return raw httpx Response (pass-through) rather than parsing/re-serializing
+- [Phase 03]: Public endpoints use get_db only, no get_current_user dependency
+- [Phase 03]: Calendar batch-loads rates (3 queries) then computes per-day in-memory
+- [Phase 03]: Availability indicator thresholds: green >= 50%, yellow >= 20%, red < 20%
 
 ### Pending Todos
 
@@ -109,6 +113,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T05:41:52.586Z
-Stopped at: Completed 03-03-PLAN.md
+Last session: 2026-03-21T05:44:16.562Z
+Stopped at: Completed 03-02-PLAN.md
 Resume file: None

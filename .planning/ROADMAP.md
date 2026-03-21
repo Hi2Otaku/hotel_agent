@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: Foundation & Authentication** - Project scaffolding, database schema, async setup, JWT auth for guests and staff
 - [x] **Phase 2: Room & Rate Management** - Staff CRUD for room types, individual rooms, rates, and room status (completed 2026-03-21)
-- [ ] **Phase 3: Availability & Search** - Guest-facing room search with real-time availability engine and pricing calendar
+- [x] **Phase 3: Availability & Search** - Guest-facing room search with real-time availability engine and pricing calendar (completed 2026-03-21)
 - [ ] **Phase 4: Booking Engine** - Complete booking lifecycle: creation, mock payment, confirmation, cancellation, modification
 - [ ] **Phase 5: Guest Frontend** - React SPA for guest journey: search, booking wizard, account management, responsive design
 - [ ] **Phase 6: Staff Dashboard** - Staff reservation management, check-in/out workflow, guest profiles
@@ -158,7 +158,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 |-------|----------------|--------|-----------|
 | 1. Foundation & Authentication | 0/3 | Planning complete | - |
 | 2. Room & Rate Management | 3/3 | Complete   | 2026-03-21 |
-| 3. Availability & Search | 0/3 | Planning complete | - |
+| 3. Availability & Search | 3/3 | Complete   | 2026-03-21 |
 | 4. Booking Engine | 0/3 | Not started | - |
 | 5. Guest Frontend | 0/3 | Not started | - |
 | 6. Staff Dashboard | 0/2 | Not started | - |
