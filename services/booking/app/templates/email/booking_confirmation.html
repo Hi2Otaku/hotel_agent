@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+  <h2 style="color: #2c3e50;">Booking Confirmed</h2>
+  <p>Dear {{ guest_name }},</p>
+  <p>Your booking has been confirmed. Here are your reservation details:</p>
+
+  <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+    <tr>
+      <td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Confirmation Number</td>
+      <td style="padding: 8px; border-bottom: 1px solid #eee;">{{ confirmation_number }}</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Room Type</td>
+      <td style="padding: 8px; border-bottom: 1px solid #eee;">{{ room_type_name }}</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Check-in</td>
+      <td style="padding: 8px; border-bottom: 1px solid #eee;">{{ check_in }}</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Check-out</td>
+      <td style="padding: 8px; border-bottom: 1px solid #eee;">{{ check_out }}</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Total</td>
+      <td style="padding: 8px; border-bottom: 1px solid #eee;">{{ total_price }} {{ currency }}</td>
+    </tr>
+  </table>
+
+  <p style="color: #666; font-size: 14px;">{{ cancellation_policy }}</p>
+
+  <p>Thank you for choosing HotelBook.</p>
+  <p>- The HotelBook Team</p>
+</body>
+</html>
