@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 05-04-PLAN.md
-last_updated: "2026-03-21T08:46:34.715Z"
+stopped_at: Completed 05-05-PLAN.md
+last_updated: "2026-03-21T08:53:52.351Z"
 progress:
   total_phases: 8
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 18
-  completed_plans: 17
+  completed_plans: 18
 ---
 
 # Project State
@@ -60,6 +60,7 @@ Plan: 5 of 6
 | Phase 05 P03 | 3min | 2 tasks | 5 files |
 | Phase 05 P02 | 5min | 2 tasks | 12 files |
 | Phase 05 P04 | 6min | 2 tasks | 8 files |
+| Phase 05 P05 | 5min | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -116,6 +117,9 @@ Recent decisions affecting current work:
 - [Phase 05]: Responsive filter pattern: desktop sidebar (w-64) + mobile Sheet trigger
 - [Phase 05]: Lazy-load wizard step components via React.lazy for code splitting
 - [Phase 05]: String-based Zod schema for payment expiry fields to avoid z.coerce incompatibility with react-hook-form
+- [Phase 05]: StatusBadge uses custom className overrides on shadcn Badge for precise color control per status
+- [Phase 05]: StatusTimeline renders cancelled/no_show as all-muted dots with red label instead of partial progress
+- [Phase 05]: ModifyDialog uses modifyBooking response shape (old_total, new_total, price_difference) for price diff toast
 
 ### Pending Todos
 
@@ -127,6 +131,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T08:46:34.711Z
-Stopped at: Completed 05-04-PLAN.md
+Last session: 2026-03-21T08:53:52.347Z
+Stopped at: Completed 05-05-PLAN.md
 Resume file: None
