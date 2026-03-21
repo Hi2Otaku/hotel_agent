@@ -25,13 +25,13 @@ Guests can seamlessly search, book, and manage room reservations with a polished
 - ✓ Email confirmation (mock/simulated) — Phase 4
 - ✓ Mock payment integration (simulated Stripe-like flow) — Phase 4
 - ✓ Responsive design for guest-facing site — Phase 5
+- ✓ Staff booking management (view all, check-in, check-out) — Phase 6
+- ✓ Guest history and profiles (staff view) — Phase 6
+- ✓ Reporting dashboard (occupancy, revenue, booking trends) — Phase 7
 
 ### Active
 
 <!-- Current scope. Building toward these. -->
-- [ ] Staff booking management (view all, check-in, check-out)
-- [ ] Guest history and profiles (staff view)
-- [ ] Reporting dashboard (occupancy, revenue, booking trends)
 - [ ] Tests and CI/CD pipeline
 - [ ] Deployment-ready with documentation
 
@@ -68,4 +68,4 @@ Guests can seamlessly search, book, and manage room reservations with a polished
 | Single property | Keeps data model focused; multi-property adds complexity without portfolio value | — Pending |
 
 ---
-*Last updated: 2026-03-21 after Phase 5 completion*
+*Last updated: 2026-03-21 after Phase 7 completion*
