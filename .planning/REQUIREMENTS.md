@@ -44,15 +44,15 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Room Management
 
-- [ ] **RMGT-01**: Staff can create/edit/delete room types (with photos, amenities, capacity)
-- [ ] **RMGT-02**: Staff can manage individual rooms (number, floor, status)
-- [ ] **RMGT-03**: Staff can view room status board (occupied, vacant, cleaning, maintenance)
-- [ ] **RMGT-04**: Housekeeping status tracking (auto-mark dirty on checkout, clean/inspected toggle)
+- [x] **RMGT-01**: Staff can create/edit/delete room types (with photos, amenities, capacity)
+- [x] **RMGT-02**: Staff can manage individual rooms (number, floor, status)
+- [x] **RMGT-03**: Staff can view room status board (occupied, vacant, cleaning, maintenance)
+- [x] **RMGT-04**: Housekeeping status tracking (auto-mark dirty on checkout, clean/inspected toggle)
 
 ### Rate Management
 
-- [ ] **RATE-01**: Staff can set base rates per room type
-- [ ] **RATE-02**: Staff can create seasonal pricing rules (date-range overrides, weekend surcharges)
+- [x] **RATE-01**: Staff can set base rates per room type
+- [x] **RATE-02**: Staff can create seasonal pricing rules (date-range overrides, weekend surcharges)
 
 ### Reporting
 
@@ -108,12 +108,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUTH-02 | Phase 1 | Complete |
 | AUTH-03 | Phase 1 | Complete |
 | AUTH-04 | Phase 1 | Complete |
-| RMGT-01 | Phase 2 | Pending |
-| RMGT-02 | Phase 2 | Pending |
-| RMGT-03 | Phase 2 | Pending |
-| RMGT-04 | Phase 2 | Pending |
-| RATE-01 | Phase 2 | Pending |
-| RATE-02 | Phase 2 | Pending |
+| RMGT-01 | Phase 2 | Complete |
+| RMGT-02 | Phase 2 | Complete |
+| RMGT-03 | Phase 2 | Complete |
+| RMGT-04 | Phase 2 | Complete |
+| RATE-01 | Phase 2 | Complete |
+| RATE-02 | Phase 2 | Complete |
 | ROOM-01 | Phase 3 | Pending |
 | ROOM-02 | Phase 3 | Pending |
 | ROOM-03 | Phase 3 | Pending |

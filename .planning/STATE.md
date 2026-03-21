@@ -4,12 +4,12 @@ milestone: v1.0
 milestone_name: milestone
 status: unknown
 stopped_at: Phase 2 context gathered
-last_updated: "2026-03-21T02:17:05.474Z"
+last_updated: "2026-03-21T02:41:35.896Z"
 progress:
   total_phases: 8
   completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
+  total_plans: 6
+  completed_plans: 4
 ---
 
 # Project State
@@ -19,26 +19,27 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-20)
 
 **Core value:** Guests can seamlessly search, book, and manage room reservations with a polished experience that demonstrates real-world full-stack competency.
-**Current focus:** Phase 01 COMPLETE — Ready for Phase 02
+**Current focus:** Phase 02 — Room & Rate Management
 
 ## Current Position
 
-Phase: 01 (Foundation & Authentication) — COMPLETE
-Plan: 3 of 3 (ALL COMPLETE)
+Phase: 02 (Room & Rate Management) — EXECUTING
+Plan: 2 of 3
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 3
+- Total plans completed: 4
 - Average duration: 4min
-- Total execution time: 0.22 hours
+- Total execution time: 0.27 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 | 3 | 13min | 4min |
+| 02 | 1 | 3min | 3min |
 
 **Recent Trend:**
 
@@ -65,6 +66,9 @@ Recent decisions affecting current work:
 - [01-03]: Lazy ConnectionConfig via model_construct to bypass pydantic .local domain validation
 - [01-03]: Gateway SERVICE_MAP prefix routing for /api/v1/* to backend services
 - [01-03]: Tests mock email sending to decouple from Mailpit availability
+- [02-01]: Claims-based JWT auth: room service trusts JWT payload without DB user lookup
+- [02-01]: JSONB columns for bed_config, amenities, photo_urls -- flexible schema within PostgreSQL
+- [02-01]: Decimal type enforced in all monetary Pydantic schemas (never float)
 
 ### Pending Todos
 
@@ -76,6 +80,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T02:17:05.472Z
-Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-room-rate-management/02-CONTEXT.md
+Last session: 2026-03-21T02:40:35Z
+Stopped at: Completed 02-01-PLAN.md
+Resume file: .planning/phases/02-room-rate-management/02-01-SUMMARY.md
