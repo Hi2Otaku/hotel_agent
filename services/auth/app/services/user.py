@@ -1,6 +1,6 @@
 """User service layer for CRUD operations and admin seeding."""
 
-from sqlalchemy import func, select
+from sqlalchemy import func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.security import hash_password
@@ -93,4 +93,31 @@ async def get_all_users(
     users = list(result.scalars().all())
     count_result = await db.execute(select(func.count()).select_from(User))
     total = count_result.scalar()
+    return users, total
+
+
+async def search_users(
+    db: AsyncSession, query: str, skip: int = 0, limit: int = 20
+) -> tuple[list[User], int]:
+    """Search users by first name, last name, or email using ILIKE.
+
+    Args:
+        db: The async database session.
+        query: The search term to match against names and email.
+        skip: Pagination offset.
+        limit: Maximum number of records to return.
+
+    Returns:
+        A tuple of (matching users list, total count).
+    """
+    search_term = f"%{query}%"
+    filters = or_(
+        User.first_name.ilike(search_term),
+        User.last_name.ilike(search_term),
+        User.email.ilike(search_term),
+    )
+    count_result = await db.execute(select(func.count()).select_from(User).where(filters))
+    total = count_result.scalar()
+    result = await db.execute(select(User).where(filters).offset(skip).limit(limit))
+    users = list(result.scalars().all())
     return users, total

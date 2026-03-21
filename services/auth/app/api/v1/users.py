@@ -2,13 +2,13 @@
 
 import uuid
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import get_db, require_admin, require_staff
 from app.models.user import User
 from app.schemas.user import UserListResponse, UserResponse
-from app.services.user import get_all_users
+from app.services.user import get_all_users, search_users
 
 router = APIRouter(prefix="/api/v1/users", tags=["users"])
 
@@ -22,6 +22,19 @@ async def list_users(
 ):
     """List all users (admin only)."""
     users, total = await get_all_users(db, skip=skip, limit=limit)
+    return UserListResponse(users=users, total=total)
+
+
+@router.get("/search", response_model=UserListResponse)
+async def search_users_endpoint(
+    q: str = Query(min_length=1),
+    skip: int = 0,
+    limit: int = 20,
+    db: AsyncSession = Depends(get_db),
+    _current_user: User = Depends(require_staff),
+):
+    """Search users by name or email (staff only)."""
+    users, total = await search_users(db, q, skip=skip, limit=limit)
     return UserListResponse(users=users, total=total)
 
 
