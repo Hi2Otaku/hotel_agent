@@ -25,11 +25,13 @@ class RoomStatusChange(Base):
         nullable=False,
     )
     from_status: Mapped[RoomStatus | None] = mapped_column(
-        Enum(RoomStatus, name="room_status", create_constraint=False),
+        Enum(RoomStatus, name="room_status", create_constraint=False,
+             values_callable=lambda x: [e.value for e in x]),
         nullable=True,
     )
     to_status: Mapped[RoomStatus] = mapped_column(
-        Enum(RoomStatus, name="room_status", create_constraint=False),
+        Enum(RoomStatus, name="room_status", create_constraint=False,
+             values_callable=lambda x: [e.value for e in x]),
         nullable=False,
     )
     changed_by: Mapped[uuid.UUID | None] = mapped_column(

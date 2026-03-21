@@ -17,7 +17,7 @@ from typing import Sequence, Union
 
 from alembic import op
 import sqlalchemy as sa
-from sqlalchemy.dialects.postgresql import JSONB, UUID
+from sqlalchemy.dialects.postgresql import ENUM, JSONB, UUID
 
 # revision identifiers, used by Alembic.
 revision: str = "001"
@@ -39,8 +39,8 @@ ROOM_STATUS_VALUES = (
 
 def upgrade() -> None:
     # Create the room_status enum type
-    room_status_enum = sa.Enum(
-        *ROOM_STATUS_VALUES, name="room_status", create_constraint=True
+    room_status_enum = ENUM(
+        *ROOM_STATUS_VALUES, name="room_status", create_type=False
     )
     room_status_enum.create(op.get_bind(), checkfirst=True)
 
@@ -196,4 +196,4 @@ def downgrade() -> None:
     op.drop_table("room_types")
 
     # Drop the enum type
-    sa.Enum(name="room_status").drop(op.get_bind(), checkfirst=True)
+    ENUM(name="room_status").drop(op.get_bind(), checkfirst=True)

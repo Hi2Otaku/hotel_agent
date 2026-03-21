@@ -58,7 +58,8 @@ class StaffInviteToken(Base):
     )
     token_hash: Mapped[str] = mapped_column(String(64), nullable=False, index=True)
     target_role: Mapped[UserRole] = mapped_column(
-        Enum(UserRole, name="user_role", create_constraint=True), nullable=False
+        Enum(UserRole, name="user_role", create_constraint=True,
+             values_callable=lambda x: [e.value for e in x]), nullable=False
     )
     created_by: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), ForeignKey("users.id"), nullable=False

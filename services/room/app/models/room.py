@@ -41,7 +41,8 @@ class Room(Base):
         nullable=False,
     )
     status: Mapped[RoomStatus] = mapped_column(
-        Enum(RoomStatus, name="room_status", create_constraint=True),
+        Enum(RoomStatus, name="room_status", create_constraint=True,
+             values_callable=lambda x: [e.value for e in x]),
         default=RoomStatus.AVAILABLE,
         nullable=False,
     )

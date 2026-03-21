@@ -5,7 +5,7 @@ Revises: None
 """
 
 import sqlalchemy as sa
-from sqlalchemy.dialects.postgresql import JSONB, UUID
+from sqlalchemy.dialects.postgresql import ENUM, JSONB, UUID
 
 from alembic import op
 
@@ -22,8 +22,8 @@ def upgrade() -> None:
     """Create booking_status enum, bookings table, and payment_transactions table."""
 
     # Create the enum type
-    booking_status_enum = sa.Enum(
-        *BOOKING_STATUSES, name="booking_status", create_constraint=True
+    booking_status_enum = ENUM(
+        *BOOKING_STATUSES, name="booking_status", create_type=False
     )
     booking_status_enum.create(op.get_bind(), checkfirst=True)
 
@@ -103,4 +103,4 @@ def downgrade() -> None:
     """Drop payment_transactions, bookings, and booking_status enum."""
     op.drop_table("payment_transactions")
     op.drop_table("bookings")
-    sa.Enum(name="booking_status").drop(op.get_bind(), checkfirst=True)
+    ENUM(name="booking_status").drop(op.get_bind(), checkfirst=True)

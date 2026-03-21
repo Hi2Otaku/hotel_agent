@@ -50,7 +50,8 @@ class User(Base):
     first_name: Mapped[str] = mapped_column(String(100), nullable=False)
     last_name: Mapped[str] = mapped_column(String(100), nullable=False)
     role: Mapped[UserRole] = mapped_column(
-        Enum(UserRole, name="user_role", create_constraint=True),
+        Enum(UserRole, name="user_role", create_constraint=True,
+             values_callable=lambda x: [e.value for e in x]),
         default=UserRole.GUEST,
         nullable=False,
     )

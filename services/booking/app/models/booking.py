@@ -73,7 +73,8 @@ class Booking(Base):
 
     # Status
     status: Mapped[BookingStatus] = mapped_column(
-        Enum(BookingStatus, name="booking_status", create_constraint=True),
+        Enum(BookingStatus, name="booking_status", create_constraint=True,
+             values_callable=lambda x: [e.value for e in x]),
         default=BookingStatus.PENDING,
     )
 
