@@ -118,11 +118,13 @@ Plans:
   2. Staff can check in a guest (assigning a specific room) and check out a guest, with room status updating automatically
   3. Staff can view a guest profile showing their complete booking history
   4. Dashboard is paginated and performs well with realistic data volumes
-**Plans**: TBD
+**Plans**: 4 plans
 
 Plans:
-- [ ] 06-01: TBD
-- [ ] 06-02: TBD
+- [ ] 06-01-PLAN.md — Backend staff booking endpoints, gateway BFF orchestration, auth user search
+- [ ] 06-02-PLAN.md — Frontend-staff scaffolding: Vite project, dark theme, API layer, sidebar layout, login
+- [ ] 06-03-PLAN.md — Overview dashboard with metric cards, reservations list with search/filter/pagination
+- [ ] 06-04-PLAN.md — Check-in/out dialogs with room assignment, room status board, guest profiles
 
 ### Phase 7: Reporting Dashboard
 **Goal**: Staff can view actionable business analytics -- occupancy rates, revenue summaries, and booking trends -- through interactive charts
@@ -164,6 +166,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 3. Availability & Search | 3/3 | Complete   | 2026-03-21 |
 | 4. Booking Engine | 2/3 | In Progress|  |
 | 5. Guest Frontend | 5/6 | In Progress|  |
-| 6. Staff Dashboard | 0/2 | Not started | - |
+| 6. Staff Dashboard | 0/4 | Planning complete | - |
 | 7. Reporting Dashboard | 0/1 | Not started | - |
 | 8. Testing & Deployment | 0/2 | Not started | - |
