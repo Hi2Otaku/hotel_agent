@@ -60,13 +60,13 @@ Exceptions: Touch targets minimum 44px height for all interactive elements. Side
 | Role | Size | Weight | Line Height | Usage |
 |------|------|--------|-------------|-------|
 | Body | 14px | 400 (regular) | 1.5 | Table cells, descriptions, form help text, card content |
-| Label | 12px | 500 (medium) | 1.4 | Form labels, column headers, meta text, badge text, sidebar nav items, stat labels |
+| Label | 12px | 400 (regular) | 1.4 | Form labels, column headers, meta text, badge text, sidebar nav items, stat labels |
 | Heading | 20px | 600 (semibold) | 1.2 | Page titles, section headings, card titles |
-| Display | 32px | 700 (bold) | 1.1 | Metric values on overview cards (today's check-ins count, occupancy %) |
+| Display | 32px | 600 (semibold) | 1.1 | Metric values on overview cards (today's check-ins count, occupancy %) |
 
 Font stack: `"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif`
 
-**Note:** Staff dashboard uses denser typography than guest frontend (14px body vs 16px, 12px labels vs 14px) to fit more operational data on screen. Two weights: 400 (regular) for content, 600 (semibold) for headings and emphasis.
+**Note:** Staff dashboard uses denser typography than guest frontend (14px body vs 16px, 12px labels vs 14px) to fit more operational data on screen. Two weights: 400 (regular) for content and labels, 600 (semibold) for headings, display metrics, and emphasis.
 
 ---
 
@@ -79,7 +79,7 @@ Font stack: `"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif`
 | Dominant (60%) | `#0F172A` (slate-900) | Page background, main content area background |
 | Secondary (30%) | `#1E293B` (slate-800) | Sidebar background, cards, table rows (even), metric cards, dialogs |
 | Accent (10%) | `#0F766E` (teal-700) | See reserved list below |
-| Destructive | `#DC2626` (red-600) | Cancel booking button, error toasts, validation errors |
+| Destructive | `#DC2626` (red-600) | Cancel Booking button, error toasts, validation errors |
 
 **Accent `#0F766E` reserved for:**
 - Primary CTA buttons ("Check In", "Check Out", "Search")
@@ -132,12 +132,13 @@ Font stack: `"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif`
 - Width: 240px expanded, 64px collapsed (icons only), hidden on mobile
 - Background: `#1E293B` (slate-800) with `border-right: 1px solid #334155`
 - Top: Logo "HotelBook" in heading weight (600), teal accent, 16px. Below: "Staff" label in 12px slate-400
-- Nav items: lucide icon (20px) + label (12px medium), 40px height, 8px left padding
+- Nav items: lucide icon (20px) + label (12px regular), 40px height, 8px left padding
 - Active item: Left 3px border in accent color + `rgba(15,118,110,0.15)` background
 - Hover: `#283548` background
 - Nav groups with 12px uppercase slate-400 section headers
 - Mobile: Hamburger icon in top-left triggers Sheet slide-out from left
-- Collapse toggle: Chevron icon at sidebar bottom to collapse/expand on tablet
+- Collapse toggle: Chevron icon at sidebar bottom to collapse/expand on tablet. `aria-label="Collapse sidebar"` when expanded, `aria-label="Expand sidebar"` when collapsed. Tooltip on hover showing the same label.
+- Collapsed sidebar nav items: Each icon-only nav item shows a tooltip on hover with the nav item label (e.g., "Overview", "Reservations"). Each icon has `aria-label` matching the nav item label.
 
 **Navigation items:**
 1. **Overview** (LayoutDashboard icon) - Today's dashboard
@@ -149,7 +150,7 @@ Font stack: `"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif`
 
 **Bottom section:**
 - Staff avatar + name + role badge
-- Logout button (LogOut icon)
+- Logout button (LogOut icon). `aria-label="Log out"`. Tooltip on hover showing "Log out".
 
 ### Top Bar (sticky, right of sidebar)
 
@@ -167,7 +168,7 @@ Font stack: `"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif`
   - "Today's Check-outs" -- count of checked-in bookings with today's check-out date
   - "Occupancy" -- percentage of occupied rooms, circular or bar indicator
   - "Rooms to Clean" -- count of rooms in cleaning status
-- Each metric card: Icon (accent color) top-left, metric value (display 32px bold), label below (12px slate-400)
+- Each metric card: Icon (accent color) top-left, metric value (display 32px semibold), label below (12px slate-400)
 - Card background: `#1E293B`, border: `1px solid #334155`, rounded-lg (8px)
 - Below metrics: Two-column layout on desktop
   - Left: "Today's Arrivals" list (compact card rows with guest name, room type, confirmation #, "Check In" button)
@@ -186,7 +187,7 @@ Font stack: `"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif`
   - Top: Guest name (heading weight) + status badge (right-aligned)
   - Middle: Confirmation # (monospace, slate-400), room type, check-in/out dates
   - Bottom: Quick action buttons (contextual based on status)
-    - Confirmed: "Check In" (accent), "Cancel" (destructive outline)
+    - Confirmed: "Check In" (accent), "Cancel Booking" (destructive outline)
     - Checked In: "Check Out" (accent), "View" (outline)
     - Others: "View" (outline) only
   - Card: `#1E293B` background, `#334155` border, rounded-lg, 16px padding
@@ -326,7 +327,7 @@ Font stack: `"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif`
 | Error state (network) | "Unable to connect to server. Check your connection." (toast) |
 | Error state (check-in no rooms) | "No available rooms of this type. Please assign manually or change room type." (dialog inline) |
 | Error state (auth) | "Session expired. Please log in again." (redirect to login) |
-| Destructive: Cancel booking | Button: "Cancel". Dialog: "Cancel reservation for {Guest Name}? Confirmation #{HB-XXXXXX} will be cancelled. This cannot be undone." with "Yes, Cancel Reservation" (destructive) and "Keep Reservation" (outline) |
+| Destructive: Cancel booking | Button: "Cancel Booking". Dialog: "Cancel reservation for {Guest Name}? Confirmation #{HB-XXXXXX} will be cancelled. This cannot be undone." with "Yes, Cancel Reservation" (destructive) and "Keep Reservation" (outline) |
 | Check-in confirmation | Dialog: "Check in {Guest Name} to Room {number}?" with "Check In to Room {number}" (accent) and "Cancel" (outline) |
 | Check-out confirmation | Dialog: "Check out {Guest Name} from Room {number}?" with summary of stay. "Confirm Check-out" (accent) and "Cancel" (outline) |
 | Check-in success toast | "{Guest Name} checked in to Room {number}" |
@@ -335,6 +336,8 @@ Font stack: `"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif`
 | Login page title | "Staff Login" |
 | Login page subtitle | "Access the hotel management dashboard" |
 | Unauthorized message | "You do not have permission to access this page." |
+| Sidebar collapse toggle tooltip | "Collapse sidebar" (when expanded) / "Expand sidebar" (when collapsed) |
+| Logout button tooltip | "Log out" |
 
 ---
 
@@ -350,6 +353,9 @@ Font stack: `"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif`
 - Metric cards use aria-label describing the metric: "Today's check-ins: {count}"
 - Skip-to-content link at top of page (visually hidden until focused)
 - Room status board cards have aria-label: "Room {number}, {status}, {room type}"
+- Sidebar collapse toggle: `aria-label="Collapse sidebar"` when expanded, `aria-label="Expand sidebar"` when collapsed. Shows tooltip on hover.
+- Logout button: `aria-label="Log out"`. Shows tooltip on hover.
+- Collapsed sidebar nav items: Each icon-only nav item has `aria-label` matching its label text and shows a tooltip on hover displaying the label (e.g., "Overview", "Reservations", "Check-in/out", "Room Status", "Guests", "Reports").
 
 ---
 
