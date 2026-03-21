@@ -5,6 +5,9 @@ import { SearchFilters } from '@/components/reservations/SearchFilters';
 import { ReservationCard } from '@/components/reservations/ReservationCard';
 import { EmptyState } from '@/components/common/EmptyState';
 import { Skeleton } from '@/components/ui/skeleton';
+import { CheckInDialog } from '@/components/checkin/CheckInDialog';
+import { CheckOutDialog } from '@/components/checkin/CheckOutDialog';
+import type { BookingResponse } from '@/api/types';
 import {
   Pagination,
   PaginationContent,
@@ -44,6 +47,24 @@ export default function ReservationsPage() {
   );
 
   const totalPages = data ? Math.ceil(data.total / PAGE_SIZE) : 0;
+
+  const [dialogBooking, setDialogBooking] = useState<BookingResponse | null>(null);
+  const [dialogType, setDialogType] = useState<'check-in' | 'check-out' | null>(null);
+
+  const handleCheckIn = (booking: BookingResponse) => {
+    setDialogBooking(booking);
+    setDialogType('check-in');
+  };
+
+  const handleCheckOut = (booking: BookingResponse) => {
+    setDialogBooking(booking);
+    setDialogType('check-out');
+  };
+
+  const closeDialog = () => {
+    setDialogType(null);
+    setDialogBooking(null);
+  };
 
   const handlePlaceholderAction = (action: string) => {
     toast(`${action} - Feature coming soon.`);
@@ -88,8 +109,8 @@ export default function ReservationsPage() {
               <ReservationCard
                 key={booking.id}
                 booking={booking}
-                onCheckIn={() => handlePlaceholderAction('Check In')}
-                onCheckOut={() => handlePlaceholderAction('Check Out')}
+                onCheckIn={handleCheckIn}
+                onCheckOut={handleCheckOut}
                 onCancel={() => handlePlaceholderAction('Cancel Booking')}
                 onView={() => handlePlaceholderAction('View Booking')}
               />
@@ -140,6 +161,26 @@ export default function ReservationsPage() {
             </Pagination>
           )}
         </>
+      )}
+
+      {dialogBooking && dialogType === 'check-in' && (
+        <CheckInDialog
+          booking={dialogBooking}
+          open
+          onOpenChange={(open) => {
+            if (!open) closeDialog();
+          }}
+        />
+      )}
+
+      {dialogBooking && dialogType === 'check-out' && (
+        <CheckOutDialog
+          booking={dialogBooking}
+          open
+          onOpenChange={(open) => {
+            if (!open) closeDialog();
+          }}
+        />
       )}
     </div>
   );
