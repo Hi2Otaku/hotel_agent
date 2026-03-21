@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 05-01-PLAN.md
-last_updated: "2026-03-21T08:28:10.905Z"
+stopped_at: Completed 05-03-PLAN.md
+last_updated: "2026-03-21T08:33:55.947Z"
 progress:
   total_phases: 8
   completed_phases: 4
   total_plans: 18
-  completed_plans: 14
+  completed_plans: 15
 ---
 
 # Project State
@@ -24,7 +24,7 @@ See: .planning/PROJECT.md (updated 2026-03-20)
 ## Current Position
 
 Phase: 05 (Guest Frontend) — EXECUTING
-Plan: 2 of 6
+Plan: 4 of 6
 
 ## Performance Metrics
 
@@ -57,6 +57,7 @@ Plan: 2 of 6
 | Phase 04 P03 | 6min | 2 tasks | 10 files |
 | Phase 05 P00 | 1min | 2 tasks | 5 files |
 | Phase 05 P01 | 8min | 2 tasks | 48 files |
+| Phase 05 P03 | 3min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -106,6 +107,8 @@ Recent decisions affecting current work:
 - [Phase 05-00]: Todo stubs (.todo) for tests before components exist -- Plans 01-05 convert to real tests
 - [Phase 05-01]: Node 25 localStorage polyfill in test setup for Zustand store compatibility
 - [Phase 05-01]: AppRoutes exported separately from App for test wrapping with MemoryRouter
+- [Phase 05]: AxiosError instanceof check for 409/400 status differentiation in auth error handling
+- [Phase 05-03]: Centered card auth layout pattern: max-w-400px, F8FAFC background, HotelBook logo, accent CTAs
 
 ### Pending Todos
 
@@ -117,6 +120,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T08:28:10.902Z
-Stopped at: Completed 05-01-PLAN.md
+Last session: 2026-03-21T08:33:55.940Z
+Stopped at: Completed 05-03-PLAN.md
 Resume file: None
