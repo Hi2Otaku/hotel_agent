@@ -11,8 +11,6 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from app.services import booking as _booking_service_module
-
 ROOM_TYPE_ID = str(uuid.uuid4())
 OTHER_ROOM_TYPE_ID = str(uuid.uuid4())
 FUTURE_CHECK_IN = (date.today() + timedelta(days=30)).isoformat()
@@ -72,9 +70,8 @@ async def test_modify_dates(client):
         "nightly_breakdown": [],
         "room_type_name": "Deluxe Room",
     }
-    with patch.object(
-        _booking_service_module,
-        "get_pricing_from_room_service",
+    with patch(
+        "app.services.booking.get_pricing_from_room_service",
         new_callable=AsyncMock,
         return_value=new_pricing,
     ):
@@ -100,9 +97,8 @@ async def test_modify_room_type(client):
         "nightly_breakdown": [],
         "room_type_name": "Suite",
     }
-    with patch.object(
-        _booking_service_module,
-        "get_pricing_from_room_service",
+    with patch(
+        "app.services.booking.get_pricing_from_room_service",
         new_callable=AsyncMock,
         return_value=new_pricing,
     ):
@@ -179,9 +175,8 @@ async def test_modify_shows_price_difference(client):
     new_check_in = (date.today() + timedelta(days=40)).isoformat()
     new_check_out = (date.today() + timedelta(days=45)).isoformat()
 
-    with patch.object(
-        _booking_service_module,
-        "get_pricing_from_room_service",
+    with patch(
+        "app.services.booking.get_pricing_from_room_service",
         new_callable=AsyncMock,
         return_value=new_pricing,
     ):
@@ -206,9 +201,8 @@ async def test_modify_no_availability_fails(client):
     new_check_out = (date.today() + timedelta(days=53)).isoformat()
 
     # Mock room count to 0 so availability check fails
-    with patch.object(
-        _booking_service_module,
-        "get_room_count_for_type",
+    with patch(
+        "app.services.booking.get_room_count_for_type",
         new_callable=AsyncMock,
         return_value=0,
     ):

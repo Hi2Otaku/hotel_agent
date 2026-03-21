@@ -4,6 +4,7 @@ import random
 import string
 import uuid
 from datetime import datetime
+from decimal import Decimal
 
 from enum import Enum as PyEnum
 
@@ -77,8 +78,8 @@ class Booking(Base):
     )
 
     # Pricing (Decimal, never float)
-    total_price: Mapped[float | None] = mapped_column(Numeric(10, 2), nullable=True)
-    price_per_night: Mapped[float | None] = mapped_column(Numeric(10, 2), nullable=True)
+    total_price: Mapped[Decimal | None] = mapped_column(Numeric(10, 2), nullable=True)
+    price_per_night: Mapped[Decimal | None] = mapped_column(Numeric(10, 2), nullable=True)
     currency: Mapped[str] = mapped_column(String(3), default="USD")
     nightly_breakdown: Mapped[list | None] = mapped_column(JSONB, nullable=True)
 
@@ -99,7 +100,7 @@ class Booking(Base):
         DateTime(timezone=True), nullable=True
     )
     cancellation_reason: Mapped[str | None] = mapped_column(String(50), nullable=True)
-    cancellation_fee: Mapped[float | None] = mapped_column(
+    cancellation_fee: Mapped[Decimal | None] = mapped_column(
         Numeric(10, 2), nullable=True
     )
 

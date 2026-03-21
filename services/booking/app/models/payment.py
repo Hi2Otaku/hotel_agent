@@ -2,6 +2,7 @@
 
 import uuid
 from datetime import datetime
+from decimal import Decimal
 
 from sqlalchemy import DateTime, Numeric, String, func
 from sqlalchemy.dialects.postgresql import UUID
@@ -24,7 +25,7 @@ class PaymentTransaction(Base):
     transaction_id: Mapped[str] = mapped_column(
         String(50), unique=True, nullable=False
     )
-    amount: Mapped[float] = mapped_column(Numeric(10, 2), nullable=False)
+    amount: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=False)
     currency: Mapped[str] = mapped_column(String(3), default="USD")
     card_last_four: Mapped[str] = mapped_column(String(4), nullable=False)
     card_brand: Mapped[str] = mapped_column(String(20), nullable=False)
