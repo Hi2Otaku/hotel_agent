@@ -70,8 +70,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **DEPLOY-01**: EC2 server provisioned with Docker, swap, and reproducible setup script
 - [x] **DEPLOY-02**: Production secrets (JWT keys, DB passwords) managed via GitHub Secrets, never in repo
-- [ ] **DEPLOY-03**: Extended demo data: guest accounts and historical bookings seeded on startup
-- [ ] **DEPLOY-04**: Full stack accessible at EC2 public IP over HTTP with automated health checks
+- [x] **DEPLOY-03**: Extended demo data: guest accounts and historical bookings seeded on startup
+- [x] **DEPLOY-04**: Full stack accessible at EC2 public IP over HTTP with automated health checks
 
 ## v2 Requirements
 
