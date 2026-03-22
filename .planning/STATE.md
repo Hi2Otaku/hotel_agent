@@ -2,15 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_plan: 3 of 3
 status: unknown
-stopped_at: Completed 08-03-PLAN.md
-last_updated: "2026-03-21T17:50:23.897Z"
+stopped_at: Completed 09-02-PLAN.md
+last_updated: "2026-03-22T15:53:15.150Z"
 progress:
-  total_phases: 8
+  total_phases: 10
   completed_phases: 8
-  total_plans: 29
-  completed_plans: 29
+  total_plans: 32
+  completed_plans: 31
 ---
 
 # Project State
@@ -20,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-20)
 
 **Core value:** Guests can seamlessly search, book, and manage room reservations with a polished experience that demonstrates real-world full-stack competency.
-**Current focus:** Phase 08 — testing-deployment
+**Current focus:** Phase 09 — ui-polish
 
 ## Current Position
 
-Phase: 08 (testing-deployment) — COMPLETE
-Current Plan: 3 of 3
+Phase: 09 (ui-polish) — EXECUTING
+Plan: 3 of 3
 
 ## Performance Metrics
 
@@ -73,8 +72,14 @@ Current Plan: 3 of 3
 | Phase 08 P02 | 4min | 2 tasks | 18 files |
 | Phase 08 P01 | 20min | 3 tasks | 18 files |
 | Phase 08 P03 | 2min | 2 tasks | 2 files |
+| Phase 09 P02 | 5min | 4 tasks | 8 files |
 
 ## Accumulated Context
+
+### Roadmap Evolution
+
+- Phase 9 added: UI Polish — fix all UI audit findings across guest frontend, staff dashboard, and reporting dashboard
+- Phase 10 added: Deploy to online test server
 
 ### Decisions
 
@@ -161,6 +166,8 @@ Recent decisions affecting current work:
 - [Phase 08]: Idempotent test fixtures handle 409 conflict by fallback to login
 - [Phase 08]: Docker Compose in CI over GHA service containers for production parity
 - [Phase 08]: 6-job pipeline: lint -> backend-tests + frontend-tests -> e2e-tests -> build -> deploy
+- [Phase 09]: 500ms setTimeout before 401 redirect to ensure session-expired toast renders
+- [Phase 09]: BFF staff bookings endpoint enriches both room_number and room_type_name in single pass
 
 ### Pending Todos
 
@@ -172,6 +179,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T17:46:15.736Z
-Stopped at: Completed 08-03-PLAN.md
+Last session: 2026-03-22T15:53:15.145Z
+Stopped at: Completed 09-02-PLAN.md
 Resume file: None

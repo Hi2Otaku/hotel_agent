@@ -20,6 +20,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 6: Staff Dashboard** - Staff reservation management, check-in/out workflow, guest profiles
 - [x] **Phase 7: Reporting Dashboard** - Occupancy, revenue, and booking trend analytics for staff (completed 2026-03-21)
 - [ ] **Phase 8: Testing & Deployment** - Test suite, CI/CD pipeline, production deployment with live demo URL
+- [ ] **Phase 9: UI Polish** - Fix all UI audit findings across guest frontend, staff dashboard, and reporting dashboard
 
 ## Phase Details
 
@@ -158,18 +159,46 @@ Plans:
 - [ ] 08-02-PLAN.md — Production deployment infrastructure (Docker Compose override, Nginx, frontend Dockerfiles)
 - [ ] 08-03-PLAN.md — GitHub Actions CI/CD pipeline and developer README documentation
 
+### Phase 9: UI Polish
+**Goal**: All UI audit findings resolved — design token consistency, missing interactions, accessibility gaps, and data display bugs fixed across all three frontend phases
+**Depends on**: Phase 8
+**Requirements**: Derived from UI-REVIEW.md audits of Phases 5, 6, and 7
+**Success Criteria** (what must be TRUE):
+  1. Zero hardcoded hex colors in guest frontend components (all use semantic token classes)
+  2. Cancel Booking on staff dashboard opens a proper destructive confirmation dialog
+  3. Chart error states display distinct error messages (not "No data for this period")
+  4. Revenue chart displays room type names, not UUID substrings
+  5. All three frontends build successfully with no regressions
+**Plans**: 3 plans
+
+Plans:
+- [ ] 09-01-PLAN.md — Guest frontend: design token cleanup, font scale, copy fixes, accessibility
+- [ ] 09-02-PLAN.md — Staff dashboard: room number enrichment, cancel dialog, logout label, session toast
+- [ ] 09-03-PLAN.md — Reporting dashboard: error states, heatmap adaptive display, date labels, reduced motion, revenue labels
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Authentication | 0/3 | Planning complete | - |
+| 1. Foundation & Authentication | 3/3 | Complete   | 2026-03-21 |
 | 2. Room & Rate Management | 3/3 | Complete   | 2026-03-21 |
 | 3. Availability & Search | 3/3 | Complete   | 2026-03-21 |
-| 4. Booking Engine | 2/3 | In Progress|  |
-| 5. Guest Frontend | 5/6 | In Progress|  |
-| 6. Staff Dashboard | 3/4 | In Progress|  |
+| 4. Booking Engine | 3/3 | Complete   | 2026-03-21 |
+| 5. Guest Frontend | 6/6 | Complete   | 2026-03-21 |
+| 6. Staff Dashboard | 4/4 | Complete   | 2026-03-21 |
 | 7. Reporting Dashboard | 4/4 | Complete   | 2026-03-21 |
-| 8. Testing & Deployment | 1/3 | In Progress|  |
+| 8. Testing & Deployment | 3/3 | Complete   | 2026-03-21 |
+| 9. UI Polish | 0/3 | Ready      |  |
+
+### Phase 10: Deploy to online test server
+
+**Goal:** [To be planned]
+**Requirements**: TBD
+**Depends on:** Phase 9
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd:plan-phase 10 to break down)
