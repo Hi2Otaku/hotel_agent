@@ -78,7 +78,7 @@ export function CancelDialog({
             Keep Booking
           </Button>
           <Button
-            className="bg-[#DC2626] text-white hover:bg-[#B91C1C]"
+            className="bg-destructive text-white hover:bg-destructive-hover"
             onClick={handleCancel}
             disabled={cancelMutation.isPending}
           >

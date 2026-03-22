@@ -45,11 +45,11 @@ export default function PasswordReset() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px-200px)] flex items-center justify-center bg-[#F8FAFC] px-4">
+    <div className="min-h-[calc(100vh-64px-200px)] flex items-center justify-center bg-surface px-4">
       <Card className="w-full max-w-[400px] bg-white shadow-md">
         <CardContent className="pt-8 pb-8">
           <div className="text-center mb-6">
-            <span className="text-[24px] font-semibold text-[#0F766E]">
+            <span className="text-[24px] font-semibold text-accent">
               HotelBook
             </span>
           </div>
@@ -60,7 +60,7 @@ export default function PasswordReset() {
 
           {submitted ? (
             <div className="text-center">
-              <p className="text-[#16A34A] text-sm mb-4">
+              <p className="text-success text-sm mb-4">
                 If an account exists with that email, you&apos;ll receive a
                 reset link.
               </p>
@@ -68,7 +68,7 @@ export default function PasswordReset() {
                 Back to{' '}
                 <Link
                   to="/login"
-                  className="text-[#0F766E] hover:underline font-medium"
+                  className="text-accent hover:underline font-medium"
                 >
                   Log In
                 </Link>
@@ -76,7 +76,7 @@ export default function PasswordReset() {
             </div>
           ) : (
             <>
-              <p className="text-[16px] text-[#64748B] text-center mb-6">
+              <p className="text-base text-muted text-center mb-6">
                 Enter your email and we&apos;ll send you a reset link.
               </p>
 
@@ -100,7 +100,7 @@ export default function PasswordReset() {
                             {...field}
                           />
                         </FormControl>
-                        <FormMessage className="text-[#DC2626] text-sm" />
+                        <FormMessage className="text-destructive text-sm" />
                       </FormItem>
                     )}
                   />
@@ -108,7 +108,7 @@ export default function PasswordReset() {
                   <Button
                     type="submit"
                     disabled={resetMutation.isPending}
-                    className="w-full min-h-[44px] bg-[#0F766E] hover:bg-[#0D6660] text-white"
+                    className="w-full min-h-[44px] bg-accent hover:bg-accent-hover text-white"
                   >
                     {resetMutation.isPending ? (
                       <Loader2 className="animate-spin" />
@@ -123,7 +123,7 @@ export default function PasswordReset() {
                 Back to{' '}
                 <Link
                   to="/login"
-                  className="text-[#0F766E] hover:underline font-medium"
+                  className="text-accent hover:underline font-medium"
                 >
                   Log In
                 </Link>

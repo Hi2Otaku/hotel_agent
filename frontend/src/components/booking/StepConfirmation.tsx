@@ -15,7 +15,7 @@ export default function StepConfirmation() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <Loader2 className="size-6 animate-spin text-[#0F766E]" />
+        <Loader2 className="size-6 animate-spin text-accent" />
         <span className="ml-2 text-slate-500">Loading...</span>
       </div>
     );
@@ -31,13 +31,13 @@ export default function StepConfirmation() {
 
   return (
     <div className="space-y-6 text-center">
-      <CheckCircle2 className="mx-auto text-[#16A34A]" style={{ width: 64, height: 64 }} />
+      <CheckCircle2 className="mx-auto text-success" style={{ width: 64, height: 64 }} />
 
       <h2 className="text-2xl font-semibold text-slate-900">
         Your booking is confirmed!
       </h2>
 
-      <p className="text-[36px] font-semibold text-[#0F766E]">
+      <p className="text-[36px] font-semibold text-accent">
         {booking.confirmation_number}
       </p>
 
@@ -55,7 +55,7 @@ export default function StepConfirmation() {
             {booking.guest_count} guest{booking.guest_count !== 1 ? 's' : ''}
           </p>
           {booking.total_price && (
-            <p className="text-lg font-semibold text-[#0F766E]">
+            <p className="text-lg font-semibold text-accent">
               Total: {formatCurrency(booking.total_price)}
             </p>
           )}
@@ -64,7 +64,7 @@ export default function StepConfirmation() {
 
       <Button
         asChild
-        className="w-full min-h-[44px] bg-[#0F766E] hover:bg-[#0D6660] text-white"
+        className="w-full min-h-[44px] bg-accent hover:bg-accent-hover text-white"
       >
         <Link to="/my-bookings">View My Bookings</Link>
       </Button>
@@ -72,7 +72,7 @@ export default function StepConfirmation() {
       <Link
         to="/"
         onClick={reset}
-        className="block text-sm text-[#64748B] hover:text-[#0F766E] hover:underline"
+        className="block text-sm text-muted hover:text-accent hover:underline"
       >
         Book Another Room
       </Link>

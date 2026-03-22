@@ -42,9 +42,9 @@ export function RoomCard({ room, checkIn, checkOut, guests }: RoomCardProps) {
       <div className="flex flex-col gap-3 p-4">
         <h3 className="text-2xl font-semibold leading-tight">{room.name}</h3>
 
-        <p className="text-lg font-semibold text-[#0F766E]">
+        <p className="text-lg font-semibold text-accent">
           {formatCurrency(room.price_per_night)}{' '}
-          <span className="text-sm font-normal text-[#64748B]">/ night</span>
+          <span className="text-sm font-normal text-muted">/ night</span>
         </p>
 
         {/* Amenity badges */}
@@ -57,7 +57,7 @@ export function RoomCard({ room, checkIn, checkOut, guests }: RoomCardProps) {
         </div>
 
         {/* Availability */}
-        <p className="text-sm text-[#64748B]">
+        <p className="text-sm text-muted">
           {room.available_count} {room.available_count === 1 ? 'room' : 'rooms'}{' '}
           left
         </p>
@@ -65,7 +65,7 @@ export function RoomCard({ room, checkIn, checkOut, guests }: RoomCardProps) {
         {/* Book Now */}
         <Button
           onClick={handleBookNow}
-          className="min-h-[44px] w-full bg-[#0F766E] text-white hover:bg-[#0D6660]"
+          className="min-h-[44px] w-full bg-accent text-white hover:bg-accent-hover"
         >
           Book Now
         </Button>

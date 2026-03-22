@@ -101,7 +101,7 @@ export default function SearchResults() {
         <div className="flex-1">
           {/* Mobile filter button row */}
           <div className="mb-4 flex items-center justify-between lg:hidden">
-            <p className="text-sm text-[#64748B]">
+            <p className="text-sm text-muted">
               {data?.total ?? 0} results
             </p>
           </div>

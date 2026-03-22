@@ -59,7 +59,7 @@ export default function BookingDetail() {
     return (
       <div className="flex flex-col items-center justify-center py-24">
         <p className="text-lg text-slate-600">Booking not found.</p>
-        <Link to="/my-bookings" className="mt-4 text-sm text-[#64748B] hover:underline">
+        <Link to="/my-bookings" className="mt-4 text-sm text-muted hover:underline">
           Back to My Bookings
         </Link>
       </div>
@@ -94,7 +94,7 @@ export default function BookingDetail() {
             <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm">
               {(booking.guest_first_name || booking.guest_last_name) && (
                 <>
-                  <dt className="text-[#64748B]">Name</dt>
+                  <dt className="text-muted">Name</dt>
                   <dd>
                     {[booking.guest_first_name, booking.guest_last_name]
                       .filter(Boolean)
@@ -104,19 +104,19 @@ export default function BookingDetail() {
               )}
               {booking.guest_email && (
                 <>
-                  <dt className="text-[#64748B]">Email</dt>
+                  <dt className="text-muted">Email</dt>
                   <dd>{booking.guest_email}</dd>
                 </>
               )}
               {booking.guest_phone && (
                 <>
-                  <dt className="text-[#64748B]">Phone</dt>
+                  <dt className="text-muted">Phone</dt>
                   <dd>{booking.guest_phone}</dd>
                 </>
               )}
               {booking.special_requests && (
                 <>
-                  <dt className="text-[#64748B]">Special Requests</dt>
+                  <dt className="text-muted">Special Requests</dt>
                   <dd>{booking.special_requests}</dd>
                 </>
               )}
@@ -129,15 +129,15 @@ export default function BookingDetail() {
           <div>
             <h2 className="mb-3 text-lg font-semibold">Stay Details</h2>
             <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm">
-              <dt className="text-[#64748B]">Dates</dt>
+              <dt className="text-muted">Dates</dt>
               <dd>{formatDateRange(booking.check_in, booking.check_out)}</dd>
-              <dt className="text-[#64748B]">Nights</dt>
+              <dt className="text-muted">Nights</dt>
               <dd>{nights}</dd>
-              <dt className="text-[#64748B]">Guests</dt>
+              <dt className="text-muted">Guests</dt>
               <dd>{booking.guest_count}</dd>
               {booking.room_type_name && (
                 <>
-                  <dt className="text-[#64748B]">Room Type</dt>
+                  <dt className="text-muted">Room Type</dt>
                   <dd>{booking.room_type_name}</dd>
                 </>
               )}
@@ -152,7 +152,7 @@ export default function BookingDetail() {
             {booking.nightly_breakdown && booking.nightly_breakdown.length > 0 ? (
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b text-left text-[#64748B]">
+                  <tr className="border-b text-left text-muted">
                     <th className="pb-2 font-medium">Date</th>
                     <th className="pb-2 text-right font-medium">Rate</th>
                   </tr>
@@ -169,7 +169,7 @@ export default function BookingDetail() {
                 </tbody>
               </table>
             ) : (
-              <p className="text-sm text-[#64748B]">
+              <p className="text-sm text-muted">
                 {booking.price_per_night
                   ? `${formatCurrency(booking.price_per_night)} per night`
                   : 'Price details unavailable'}
@@ -177,7 +177,7 @@ export default function BookingDetail() {
             )}
 
             {booking.total_price && (
-              <p className="mt-3 text-xl font-semibold text-[#0F766E]">
+              <p className="mt-3 text-xl font-semibold text-accent">
                 Total: {formatCurrency(booking.total_price)}
               </p>
             )}
@@ -224,7 +224,7 @@ export default function BookingDetail() {
         {canManage && (
           <>
             <Button
-              className="min-h-[44px] bg-[#DC2626] text-white hover:bg-[#B91C1C]"
+              className="min-h-[44px] bg-destructive text-white hover:bg-destructive-hover"
               onClick={() => setCancelOpen(true)}
             >
               Cancel Booking
@@ -240,7 +240,7 @@ export default function BookingDetail() {
         )}
         <Link
           to="/my-bookings"
-          className="text-sm text-[#64748B] hover:underline"
+          className="text-sm text-muted hover:underline"
         >
           Back to My Bookings
         </Link>

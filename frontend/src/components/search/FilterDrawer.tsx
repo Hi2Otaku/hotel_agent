@@ -75,7 +75,7 @@ function FilterControls({
             }
             className="w-full"
           />
-          <span className="text-sm text-[#64748B]">to</span>
+          <span className="text-sm text-muted">to</span>
           <Input
             type="number"
             placeholder="Max"
@@ -133,7 +133,7 @@ function FilterControls({
       <div className="flex gap-2">
         <Button
           onClick={onApply}
-          className="flex-1 bg-[#0F766E] text-white hover:bg-[#0D6660]"
+          className="flex-1 bg-accent text-white hover:bg-accent-hover"
         >
           Apply
         </Button>

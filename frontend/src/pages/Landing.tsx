@@ -20,7 +20,7 @@ export default function Landing() {
             <h1 className="mb-2 text-4xl font-semibold leading-tight">
               Find Your Perfect Stay
             </h1>
-            <p className="mb-8 text-base text-[#64748B]">
+            <p className="mb-8 text-base text-muted">
               Search available rooms and book your beach getaway
             </p>
             <SearchForm />

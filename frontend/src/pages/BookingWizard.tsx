@@ -79,7 +79,7 @@ export default function BookingWizard() {
   if (bookingLoading && bookingId) {
     return (
       <div className="flex items-center justify-center py-24">
-        <Loader2 className="size-6 animate-spin text-[#0F766E]" />
+        <Loader2 className="size-6 animate-spin text-accent" />
         <span className="ml-2 text-slate-500">Loading...</span>
       </div>
     );
@@ -87,7 +87,7 @@ export default function BookingWizard() {
 
   const stepFallback = (
     <div className="flex items-center justify-center py-12">
-      <Loader2 className="size-5 animate-spin text-[#0F766E]" />
+      <Loader2 className="size-5 animate-spin text-accent" />
     </div>
   );
 
@@ -128,7 +128,7 @@ export default function BookingWizard() {
         </main>
 
         {/* Desktop summary sidebar (xl only) */}
-        <aside className="hidden xl:block p-6 border-l border-[#E2E8F0] bg-[#F8FAFC]">
+        <aside className="hidden xl:block p-6 border-l border-border bg-surface">
           <BookingSummaryPanel
             room={selectedRoom}
             checkIn={checkIn}

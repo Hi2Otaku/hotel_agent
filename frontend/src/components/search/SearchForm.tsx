@@ -132,7 +132,7 @@ export function SearchForm() {
         {/* Submit */}
         <Button
           type="submit"
-          className="min-h-[44px] w-full bg-[#0F766E] text-white hover:bg-[#0D6660]"
+          className="min-h-[44px] w-full bg-accent text-white hover:bg-accent-hover"
         >
           Search Rooms
         </Button>

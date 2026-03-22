@@ -41,10 +41,10 @@ export function StatusTimeline({ status }: StatusTimelineProps) {
                 <div
                   className={cn(
                     'flex h-3 w-3 items-center justify-center rounded-full',
-                    isCompleted && 'bg-[#0F766E]',
-                    isCurrent && 'bg-[#0F766E]',
-                    isFuture && 'border-2 border-[#E2E8F0] bg-white',
-                    isCancelled && 'border-2 border-[#E2E8F0] bg-white'
+                    isCompleted && 'bg-accent',
+                    isCurrent && 'bg-accent',
+                    isFuture && 'border-2 border-border bg-white',
+                    isCancelled && 'border-2 border-border bg-white'
                   )}
                 >
                   {isCompleted && <Check className="h-2 w-2 text-white" />}
@@ -53,9 +53,9 @@ export function StatusTimeline({ status }: StatusTimelineProps) {
                   className={cn(
                     'mt-1.5 text-[14px]',
                     isCurrent && 'font-semibold text-slate-900',
-                    isCompleted && 'text-[#0F766E]',
-                    isFuture && 'text-[#64748B]',
-                    isCancelled && 'text-[#64748B]'
+                    isCompleted && 'text-accent',
+                    isFuture && 'text-muted',
+                    isCancelled && 'text-muted'
                   )}
                 >
                   <span className="hidden sm:inline">{step.label}</span>
@@ -69,7 +69,7 @@ export function StatusTimeline({ status }: StatusTimelineProps) {
                   className={cn(
                     'mx-1 h-0.5 flex-1 sm:mx-2',
                     !isCancelled && index < currentStep
-                      ? 'bg-[#0F766E]'
+                      ? 'bg-accent'
                       : 'bg-slate-200'
                   )}
                 />

@@ -93,7 +93,7 @@ export default function StepGuestDetails() {
                   <FormControl>
                     <Input placeholder="John" {...field} />
                   </FormControl>
-                  <FormMessage className="text-[#DC2626] text-sm" />
+                  <FormMessage className="text-destructive text-sm" />
                 </FormItem>
               )}
             />
@@ -108,7 +108,7 @@ export default function StepGuestDetails() {
                   <FormControl>
                     <Input placeholder="Doe" {...field} />
                   </FormControl>
-                  <FormMessage className="text-[#DC2626] text-sm" />
+                  <FormMessage className="text-destructive text-sm" />
                 </FormItem>
               )}
             />
@@ -126,7 +126,7 @@ export default function StepGuestDetails() {
                   <FormControl>
                     <Input type="email" placeholder="john@example.com" {...field} />
                   </FormControl>
-                  <FormMessage className="text-[#DC2626] text-sm" />
+                  <FormMessage className="text-destructive text-sm" />
                 </FormItem>
               )}
             />
@@ -141,7 +141,7 @@ export default function StepGuestDetails() {
                   <FormControl>
                     <Input type="tel" placeholder="+1 (555) 000-0000" {...field} />
                   </FormControl>
-                  <FormMessage className="text-[#DC2626] text-sm" />
+                  <FormMessage className="text-destructive text-sm" />
                 </FormItem>
               )}
             />
@@ -154,7 +154,7 @@ export default function StepGuestDetails() {
               <FormItem>
                 <FormLabel className="text-[14px] font-normal">
                   Special Requests{' '}
-                  <span className="text-[#64748B]">(optional)</span>
+                  <span className="text-muted">(optional)</span>
                 </FormLabel>
                 <FormControl>
                   <textarea
@@ -163,7 +163,7 @@ export default function StepGuestDetails() {
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-[#DC2626] text-sm" />
+                <FormMessage className="text-destructive text-sm" />
               </FormItem>
             )}
           />
@@ -180,7 +180,7 @@ export default function StepGuestDetails() {
             <Button
               type="submit"
               disabled={submitGuestDetails.isPending}
-              className="min-h-[44px] bg-[#0F766E] hover:bg-[#0D6660] text-white"
+              className="min-h-[44px] bg-accent hover:bg-accent-hover text-white"
             >
               {submitGuestDetails.isPending ? (
                 <Loader2 className="animate-spin" />

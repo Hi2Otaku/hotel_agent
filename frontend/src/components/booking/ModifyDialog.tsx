@@ -193,7 +193,7 @@ export function ModifyDialog({
             Cancel
           </Button>
           <Button
-            className="bg-[#0F766E] text-white hover:bg-[#0D6660]"
+            className="bg-accent text-white hover:bg-accent-hover"
             onClick={handleSubmit}
             disabled={modifyMutation.isPending}
           >

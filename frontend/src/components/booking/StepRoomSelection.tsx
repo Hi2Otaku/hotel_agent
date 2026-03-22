@@ -35,7 +35,7 @@ export default function StepRoomSelection() {
         <p className="text-slate-600 mb-4">Please search for a room first</p>
         <Link
           to="/search"
-          className="text-[#0F766E] hover:underline font-medium"
+          className="text-accent hover:underline font-medium"
         >
           Search Rooms
         </Link>
@@ -87,7 +87,7 @@ export default function StepRoomSelection() {
             <p>{guests} guest{guests !== 1 ? 's' : ''}</p>
           </div>
           <div className="mt-3 flex items-baseline gap-2">
-            <span className="text-lg font-semibold text-[#0F766E]">
+            <span className="text-lg font-semibold text-accent">
               {formatCurrency(selectedRoom.price_per_night)}
             </span>
             <span className="text-sm text-slate-500">/ night</span>
@@ -98,7 +98,7 @@ export default function StepRoomSelection() {
         </CardContent>
       </Card>
 
-      <p className="text-sm text-[#64748B]">
+      <p className="text-sm text-muted">
         Free cancellation up to 24 hours before check-in. Late cancellations are
         subject to a one-night charge.
       </p>
@@ -106,7 +106,7 @@ export default function StepRoomSelection() {
       <Button
         onClick={handleContinue}
         disabled={createBooking.isPending}
-        className="w-full min-h-[44px] bg-[#0F766E] hover:bg-[#0D6660] text-white"
+        className="w-full min-h-[44px] bg-accent hover:bg-accent-hover text-white"
       >
         {createBooking.isPending ? (
           <Loader2 className="animate-spin" />
@@ -130,7 +130,7 @@ export default function StepRoomSelection() {
                 setConflictOpen(false);
                 navigate('/search');
               }}
-              className="bg-[#0F766E] hover:bg-[#0D6660] text-white"
+              className="bg-accent hover:bg-accent-hover text-white"
             >
               Search Again
             </Button>

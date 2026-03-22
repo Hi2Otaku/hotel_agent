@@ -7,7 +7,7 @@ interface StatusBadgeProps {
 
 const statusConfig: Record<string, { className: string; label: string }> = {
   confirmed: {
-    className: 'bg-[#0F766E]/10 text-[#0F766E] border-[#0F766E]/20',
+    className: 'bg-accent/10 text-accent border-accent/20',
     label: 'Confirmed',
   },
   pending: {

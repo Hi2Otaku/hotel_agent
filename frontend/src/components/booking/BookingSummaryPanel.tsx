@@ -58,7 +58,7 @@ export default function BookingSummaryPanel({
         </div>
       )}
       {totalPrice && (
-        <div className="text-xl font-semibold text-[#0F766E]">
+        <div className="text-xl font-semibold text-accent">
           {formatCurrency(totalPrice)}
         </div>
       )}
@@ -76,7 +76,7 @@ export default function BookingSummaryPanel({
       </Card>
 
       {/* Mobile collapsible */}
-      <div className="md:hidden border-b border-[#E2E8F0] bg-white">
+      <div className="md:hidden border-b border-border bg-white">
         <Button
           variant="ghost"
           className="w-full flex items-center justify-between px-4 py-3 h-auto"
@@ -85,7 +85,7 @@ export default function BookingSummaryPanel({
           <span className="text-sm font-medium text-slate-500">Booking Summary</span>
           <div className="flex items-center gap-2">
             {totalPrice && (
-              <span className="text-sm font-semibold text-[#0F766E]">
+              <span className="text-sm font-semibold text-accent">
                 {formatCurrency(totalPrice)}
               </span>
             )}

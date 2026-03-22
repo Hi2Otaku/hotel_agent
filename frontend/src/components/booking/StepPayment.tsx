@@ -113,7 +113,7 @@ export default function StepPayment() {
                 <FormControl>
                   <Input placeholder="John Doe" {...field} />
                 </FormControl>
-                <FormMessage className="text-[#DC2626] text-sm" />
+                <FormMessage className="text-destructive text-sm" />
               </FormItem>
             )}
           />
@@ -129,7 +129,7 @@ export default function StepPayment() {
                 <FormControl>
                   <Input placeholder="4242 4242 4242 4242" {...field} />
                 </FormControl>
-                <FormMessage className="text-[#DC2626] text-sm" />
+                <FormMessage className="text-destructive text-sm" />
               </FormItem>
             )}
           />
@@ -161,7 +161,7 @@ export default function StepPayment() {
                       ))}
                     </select>
                   </FormControl>
-                  <FormMessage className="text-[#DC2626] text-sm" />
+                  <FormMessage className="text-destructive text-sm" />
                 </FormItem>
               )}
             />
@@ -191,7 +191,7 @@ export default function StepPayment() {
                       ))}
                     </select>
                   </FormControl>
-                  <FormMessage className="text-[#DC2626] text-sm" />
+                  <FormMessage className="text-destructive text-sm" />
                 </FormItem>
               )}
             />
@@ -211,7 +211,7 @@ export default function StepPayment() {
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage className="text-[#DC2626] text-sm" />
+                  <FormMessage className="text-destructive text-sm" />
                 </FormItem>
               )}
             />
@@ -229,7 +229,7 @@ export default function StepPayment() {
             <Button
               type="submit"
               disabled={submitPayment.isPending}
-              className="min-h-[44px] bg-[#0F766E] hover:bg-[#0D6660] text-white"
+              className="min-h-[44px] bg-accent hover:bg-accent-hover text-white"
             >
               {submitPayment.isPending ? (
                 <>

@@ -99,7 +99,7 @@ export default function MyBookings() {
                   </div>
                   <div className="flex flex-col items-start gap-1 sm:items-end">
                     <StatusBadge status={booking.status} />
-                    <p className="text-xs text-[#64748B]">
+                    <p className="text-xs text-muted">
                       {booking.confirmation_number}
                     </p>
                     {booking.total_price && (
@@ -129,7 +129,7 @@ export default function MyBookings() {
                     </Button>
                     <Button
                       variant="outline"
-                      className="min-h-[44px] border-[#DC2626]/30 text-[#DC2626] hover:bg-red-50"
+                      className="min-h-[44px] border-destructive/30 text-destructive hover:bg-red-50"
                       onClick={() => setCancelBookingId(booking.id)}
                     >
                       Cancel

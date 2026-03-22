@@ -30,7 +30,7 @@ export default function WizardSidebar({
     <>
       {/* Desktop sidebar */}
       <nav
-        className="hidden md:flex flex-col gap-4 w-[240px] bg-[#F8FAFC] p-6 border-r border-[#E2E8F0] min-h-full"
+        className="hidden md:flex flex-col gap-4 w-[240px] bg-surface p-6 border-r border-border min-h-full"
         aria-label="Booking steps"
       >
         {STEPS.map((step) => {
@@ -53,9 +53,9 @@ export default function WizardSidebar({
               <span
                 className={cn(
                   'flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium shrink-0 transition-colors',
-                  isActive && 'bg-[#0F766E] text-white',
-                  isCompleted && !isActive && 'bg-[#0F766E] text-white',
-                  !isActive && !isCompleted && 'border border-[#E2E8F0] bg-white text-[#64748B]',
+                  isActive && 'bg-accent text-white',
+                  isCompleted && !isActive && 'bg-accent text-white',
+                  !isActive && !isCompleted && 'border border-border bg-white text-muted',
                 )}
               >
                 {isCompleted && !isActive ? (
@@ -69,7 +69,7 @@ export default function WizardSidebar({
                   'text-sm',
                   isActive && 'font-semibold text-slate-900',
                   isCompleted && !isActive && 'text-slate-700',
-                  !isActive && !isCompleted && 'text-[#64748B]',
+                  !isActive && !isCompleted && 'text-muted',
                 )}
               >
                 {step.number}. {step.label}
@@ -81,7 +81,7 @@ export default function WizardSidebar({
 
       {/* Mobile horizontal steps */}
       <nav
-        className="flex md:hidden items-center justify-center gap-2 px-4 py-3 bg-[#F8FAFC] border-b border-[#E2E8F0]"
+        className="flex md:hidden items-center justify-center gap-2 px-4 py-3 bg-surface border-b border-border"
         aria-label="Booking steps"
       >
         {STEPS.map((step, index) => {
@@ -97,9 +97,9 @@ export default function WizardSidebar({
                 disabled={!clickable}
                 className={cn(
                   'flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium shrink-0 transition-colors',
-                  isActive && 'bg-[#0F766E] text-white',
-                  isCompleted && !isActive && 'bg-[#0F766E] text-white',
-                  !isActive && !isCompleted && 'border border-[#E2E8F0] bg-white text-[#64748B]',
+                  isActive && 'bg-accent text-white',
+                  isCompleted && !isActive && 'bg-accent text-white',
+                  !isActive && !isCompleted && 'border border-border bg-white text-muted',
                   clickable ? 'cursor-pointer' : 'cursor-default',
                 )}
                 aria-current={isActive ? 'step' : undefined}
@@ -115,7 +115,7 @@ export default function WizardSidebar({
                 <div
                   className={cn(
                     'w-6 h-px mx-1',
-                    step.number < currentStep ? 'bg-[#0F766E]' : 'bg-[#E2E8F0]',
+                    step.number < currentStep ? 'bg-accent' : 'bg-border',
                   )}
                 />
               )}

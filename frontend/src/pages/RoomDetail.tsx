@@ -67,11 +67,11 @@ function PriceCard({
   }
 
   return (
-    <div className="rounded-lg border border-[#E2E8F0] bg-white p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08)]">
-      <p className="text-2xl font-semibold text-[#0F766E]">
+    <div className="rounded-lg border border-border bg-white p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08)]">
+      <p className="text-2xl font-semibold text-accent">
         {formatCurrency(room.total_price)}
       </p>
-      <p className="mb-4 text-sm text-[#64748B]">
+      <p className="mb-4 text-sm text-muted">
         {nights} {nights === 1 ? 'night' : 'nights'} at{' '}
         {formatCurrency(room.price_per_night)}/night
       </p>
@@ -82,7 +82,7 @@ function PriceCard({
           <h4 className="mb-2 text-sm font-semibold">Rate Breakdown</h4>
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b text-left text-[#64748B]">
+              <tr className="border-b text-left text-muted">
                 <th className="pb-1">Date</th>
                 <th className="pb-1 text-right">Rate</th>
               </tr>
@@ -103,7 +103,7 @@ function PriceCard({
 
       <Button
         onClick={handleBookNow}
-        className="min-h-[44px] w-full bg-[#0F766E] text-white hover:bg-[#0D6660]"
+        className="min-h-[44px] w-full bg-accent text-white hover:bg-accent-hover"
       >
         Book Now
       </Button>
@@ -144,7 +144,7 @@ export default function RoomDetail() {
           <p className="text-base text-slate-700">{room.description}</p>
 
           {/* Capacity */}
-          <p className="text-sm text-[#64748B]">
+          <p className="text-sm text-muted">
             Up to {room.max_adults} adults, {room.max_children} children
           </p>
 
@@ -192,13 +192,13 @@ export default function RoomDetail() {
       </div>
 
       {/* Mobile sticky Book Now footer */}
-      <div className="fixed inset-x-0 bottom-0 border-t border-[#E2E8F0] bg-white p-4 shadow-lg lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 border-t border-border bg-white p-4 shadow-lg lg:hidden">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-lg font-semibold text-[#0F766E]">
+            <p className="text-lg font-semibold text-accent">
               {formatCurrency(room.total_price)}
             </p>
-            <p className="text-xs text-[#64748B]">
+            <p className="text-xs text-muted">
               {calculateNights(checkIn, checkOut)} nights
             </p>
           </div>
@@ -225,7 +225,7 @@ export default function RoomDetail() {
               setSearchParamsStore(checkIn, checkOut, guests);
               window.location.href = `/book?roomTypeId=${room.id}&checkIn=${checkIn}&checkOut=${checkOut}&guests=${guests}`;
             }}
-            className="min-h-[44px] bg-[#0F766E] text-white hover:bg-[#0D6660]"
+            className="min-h-[44px] bg-accent text-white hover:bg-accent-hover"
           >
             Book Now
           </Button>

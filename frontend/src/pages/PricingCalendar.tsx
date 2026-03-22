@@ -78,7 +78,7 @@ export default function PricingCalendar() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 md:px-8">
       <h1 className="mb-2 text-2xl font-semibold">Pricing Calendar</h1>
-      <p className="mb-6 text-base text-[#64748B]">
+      <p className="mb-6 text-base text-muted">
         View rates and availability. Click a date to search.
       </p>
 
@@ -95,7 +95,7 @@ export default function PricingCalendar() {
                 {WEEKDAYS.map((wd) => (
                   <div
                     key={wd}
-                    className="py-1 text-center text-xs font-medium text-[#64748B]"
+                    className="py-1 text-center text-xs font-medium text-muted"
                   >
                     {wd}
                   </div>
@@ -133,18 +133,18 @@ export default function PricingCalendar() {
           ))}
 
           {/* Legend */}
-          <div className="flex flex-wrap items-center gap-4 border-t border-[#E2E8F0] pt-4">
+          <div className="flex flex-wrap items-center gap-4 border-t border-border pt-4">
             <div className="flex items-center gap-1.5">
               <span className="inline-block size-3 rounded-full bg-green-400" />
-              <span className="text-sm text-[#64748B]">Available</span>
+              <span className="text-sm text-muted">Available</span>
             </div>
             <div className="flex items-center gap-1.5">
               <span className="inline-block size-3 rounded-full bg-amber-400" />
-              <span className="text-sm text-[#64748B]">Limited</span>
+              <span className="text-sm text-muted">Limited</span>
             </div>
             <div className="flex items-center gap-1.5">
               <span className="inline-block size-3 rounded-full bg-red-400" />
-              <span className="text-sm text-[#64748B]">Almost Full</span>
+              <span className="text-sm text-muted">Almost Full</span>
             </div>
           </div>
         </div>

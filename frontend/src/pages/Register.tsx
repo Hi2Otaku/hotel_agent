@@ -55,17 +55,17 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px-200px)] flex items-center justify-center bg-[#F8FAFC] px-4">
+    <div className="min-h-[calc(100vh-64px-200px)] flex items-center justify-center bg-surface px-4">
       <Card className="w-full max-w-[400px] bg-white shadow-md">
         <CardContent className="pt-8 pb-8">
           <div className="text-center mb-6">
-            <span className="text-[24px] font-semibold text-[#0F766E]">
+            <span className="text-[24px] font-semibold text-accent">
               HotelBook
             </span>
           </div>
 
           {duplicateEmail && (
-            <p className="text-[#DC2626] text-sm text-center mb-4">
+            <p className="text-destructive text-sm text-center mb-4">
               An account with this email already exists.
             </p>
           )}
@@ -83,7 +83,7 @@ export default function Register() {
                     <FormControl>
                       <Input placeholder="John" {...field} />
                     </FormControl>
-                    <FormMessage className="text-[#DC2626] text-sm" />
+                    <FormMessage className="text-destructive text-sm" />
                   </FormItem>
                 )}
               />
@@ -99,7 +99,7 @@ export default function Register() {
                     <FormControl>
                       <Input placeholder="Doe" {...field} />
                     </FormControl>
-                    <FormMessage className="text-[#DC2626] text-sm" />
+                    <FormMessage className="text-destructive text-sm" />
                   </FormItem>
                 )}
               />
@@ -119,7 +119,7 @@ export default function Register() {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage className="text-[#DC2626] text-sm" />
+                    <FormMessage className="text-destructive text-sm" />
                   </FormItem>
                 )}
               />
@@ -135,7 +135,7 @@ export default function Register() {
                     <FormControl>
                       <Input type="password" {...field} />
                     </FormControl>
-                    <FormMessage className="text-[#DC2626] text-sm" />
+                    <FormMessage className="text-destructive text-sm" />
                   </FormItem>
                 )}
               />
@@ -143,7 +143,7 @@ export default function Register() {
               <Button
                 type="submit"
                 disabled={registerMutation.isPending}
-                className="w-full min-h-[44px] bg-[#0F766E] hover:bg-[#0D6660] text-white"
+                className="w-full min-h-[44px] bg-accent hover:bg-accent-hover text-white"
               >
                 {registerMutation.isPending ? (
                   <Loader2 className="animate-spin" />
@@ -158,7 +158,7 @@ export default function Register() {
             Already have an account?{' '}
             <Link
               to="/login"
-              className="text-[#0F766E] hover:underline font-medium"
+              className="text-accent hover:underline font-medium"
             >
               Log In
             </Link>
