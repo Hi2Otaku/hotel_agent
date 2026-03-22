@@ -11,6 +11,7 @@ const CheckInOutPage = lazy(() => import('@/pages/CheckInOutPage'));
 const RoomStatusPage = lazy(() => import('@/pages/RoomStatusPage'));
 const GuestProfilePage = lazy(() => import('@/pages/GuestProfilePage'));
 const ReportsPage = lazy(() => import('@/pages/ReportsPage'));
+const ChatPage = lazy(() => import('@/features/chat/ChatPage'));
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="room-status" element={<Suspense fallback={<LoadingSpinner />}><RoomStatusPage /></Suspense>} />
         <Route path="guests" element={<Suspense fallback={<LoadingSpinner />}><GuestProfilePage /></Suspense>} />
         <Route path="reports" element={<Suspense fallback={<LoadingSpinner />}><ReportsPage /></Suspense>} />
+        <Route path="chat" element={<Suspense fallback={<LoadingSpinner />}><ChatPage /></Suspense>} />
       </Route>
     </Routes>
   );

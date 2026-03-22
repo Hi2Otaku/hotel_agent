@@ -9,6 +9,7 @@ const pageTitles: Record<string, string> = {
   '/room-status': 'Room Status',
   '/guests': 'Guests',
   '/reports': 'Reports',
+  '/chat': 'Chat',
 };
 
 export function AppLayout() {

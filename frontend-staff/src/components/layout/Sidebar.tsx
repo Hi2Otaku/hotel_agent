@@ -6,6 +6,7 @@ import {
   BedDouble,
   Users,
   BarChart3,
+  MessageSquare,
   LogOut,
   ChevronLeft,
   ChevronRight,
@@ -37,6 +38,7 @@ const navItems: NavItem[] = [
   { label: 'Room Status', icon: BedDouble, path: '/room-status' },
   { label: 'Guests', icon: Users, path: '/guests' },
   { label: 'Reports', icon: BarChart3, path: '/reports' },
+  { label: 'Chat', icon: MessageSquare, path: '/chat' },
 ];
 
 function NavItemContent({
