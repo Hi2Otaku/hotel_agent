@@ -211,12 +211,32 @@ Plans:
 - [ ] 10-02-PLAN.md — Demo guest account seeding, production compose hardening with env-var secrets
 - [ ] 10-03-PLAN.md — Nginx cleanup, post-deploy health check, deployment verification checkpoint
 
-### Phase 11: New phase, for implementing a chatbot agent for user, staff
+### Phase 11: Chatbot Agent for User & Staff
+
+**Goal:** Both guests and staff have an AI-powered conversational assistant -- guests can search rooms, make bookings, manage reservations, and ask FAQs through a chat interface; staff can perform check-in/out, room status updates, guest lookups, and view reports conversationally
+**Depends on:** Phase 10
+**Requirements**: CHAT-INFRA, CHAT-LLM, CHAT-API, CHAT-TOOLS, CHAT-ENGINE, CHAT-MCP, CHAT-GATEWAY, CHAT-UI-GUEST, CHAT-UI-STAFF
+**Success Criteria** (what must be TRUE):
+  1. Chat service runs as a new microservice with its own PostgreSQL database and pluggable LLM provider (Anthropic + OpenAI)
+  2. Guest can chat at /chat with streaming responses, tool-use for room search/booking, and confirmation prompts for write actions
+  3. Staff can chat at /chat with dark-themed UI, operations-focused tools (check-in/out, room status, reports), and RBAC-based tool access
+  4. MCP server exposes read-only hotel tools for external AI clients
+  5. Conversations persist across sessions with history, rename, and delete
+**Plans**: 5 plans
+
+Plans:
+- [ ] 11-01-PLAN.md -- Chat service scaffolding, Docker infra, DB models, LLM provider abstraction
+- [ ] 11-02-PLAN.md -- Chat engine, tool registry/executor, SSE endpoints, conversation CRUD, rate limiter
+- [ ] 11-03-PLAN.md -- MCP server with read-only tools, gateway chat routing, Nginx SSE config
+- [ ] 11-04-PLAN.md -- Guest frontend chat UI (ChatGPT-style layout, streaming, room cards, confirmation flow)
+- [ ] 11-05-PLAN.md -- Staff frontend chat UI (dark theme, operations tools, check-in/out confirmations)
+
+### Phase 12: Migrate from pip to uv and set up per-service virtual environments
 
 **Goal:** [To be planned]
 **Requirements**: TBD
-**Depends on:** Phase 10
-**Plans:** 4/4 plans complete
+**Depends on:** Phase 11
+**Plans:** 0 plans
 
 Plans:
-- [ ] TBD (run /gsd:plan-phase 11 to break down)
+- [ ] TBD (run /gsd:plan-phase 12 to break down)
