@@ -86,12 +86,31 @@ async def staff_reports(request: Request):
                 logger.warning("Failed to fetch KPI report")
             return {"total_revenue": "0.00", "total_bookings": 0, "avg_daily_rate": "0.00"}
 
-        occupancy, revenue, trends, kpis = await asyncio.gather(
+        async def fetch_room_types() -> list[dict]:
+            """Fetch room types to map UUIDs to human-readable names."""
+            try:
+                url = f"{settings.ROOM_SERVICE_URL}/api/v1/rooms/types"
+                resp = await client.get(url, headers=headers)
+                if resp.status_code == 200:
+                    return resp.json()
+            except httpx.HTTPError:
+                logger.warning("Failed to fetch room types for name mapping")
+            return []
+
+        occupancy, revenue, trends, kpis, room_types = await asyncio.gather(
             fetch_occupancy(),
             fetch_revenue(),
             fetch_trends(),
             fetch_kpis(),
+            fetch_room_types(),
         )
+
+    # Enrich revenue rows with room type names
+    if revenue.get("data") and room_types:
+        rt_map = {str(rt.get("id", "")): rt.get("name", "") for rt in room_types}
+        for row in revenue["data"]:
+            rid = row.get("room_type_id", "")
+            row["room_type_name"] = rt_map.get(rid, rid[:8])
 
     result = {
         "occupancy": occupancy,

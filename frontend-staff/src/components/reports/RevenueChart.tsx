@@ -15,7 +15,7 @@ export function RevenueChart({ data, groupBy: _groupBy, onBarClick }: RevenueCha
     const roomTypes = new Set<string>();
 
     for (const row of data) {
-      const displayName = row.room_type_id.substring(0, 8);
+      const displayName = row.room_type_name || row.room_type_id.substring(0, 8);
       roomTypes.add(displayName);
 
       if (!periodMap.has(row.period)) {

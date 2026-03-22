@@ -139,6 +139,7 @@ export interface OccupancyData {
 
 export interface RevenueRow {
   room_type_id: string;
+  room_type_name?: string;
   period: string;       // "YYYY-MM-DD"
   revenue: string;      // Decimal as string
   count: number;
