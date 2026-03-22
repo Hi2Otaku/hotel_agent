@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: unknown
-stopped_at: Completed 09-02-PLAN.md
-last_updated: "2026-03-22T15:53:15.150Z"
+status: phase-complete
+stopped_at: Completed 09-03-PLAN.md
+last_updated: "2026-03-22T15:52:00.000Z"
 progress:
   total_phases: 10
-  completed_phases: 8
+  completed_phases: 9
   total_plans: 32
-  completed_plans: 31
+  completed_plans: 32
 ---
 
 # Project State
@@ -23,8 +23,8 @@ See: .planning/PROJECT.md (updated 2026-03-20)
 
 ## Current Position
 
-Phase: 09 (ui-polish) — EXECUTING
-Plan: 3 of 3
+Phase: 09 (ui-polish) — COMPLETE
+Plan: 3 of 3 (all complete)
 
 ## Performance Metrics
 
@@ -73,6 +73,7 @@ Plan: 3 of 3
 | Phase 08 P01 | 20min | 3 tasks | 18 files |
 | Phase 08 P03 | 2min | 2 tasks | 2 files |
 | Phase 09 P02 | 5min | 4 tasks | 8 files |
+| Phase 09 P03 | 5min | 7 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -168,6 +169,9 @@ Recent decisions affecting current work:
 - [Phase 08]: 6-job pipeline: lint -> backend-tests + frontend-tests -> e2e-tests -> build -> deploy
 - [Phase 09]: 500ms setTimeout before 401 redirect to ensure session-expired toast renders
 - [Phase 09]: BFF staff bookings endpoint enriches both room_number and room_type_name in single pass
+- [Phase 09]: Gateway BFF enriches revenue rows with room type names from room service API
+- [Phase 09]: chartAnimate flag exported from chartTheme for consistent reduced-motion handling
+- [Phase 09]: Vertical direction for 15-90 day heatmap range (Nivo monthly calendar layout)
 
 ### Pending Todos
 
@@ -179,6 +183,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-22T15:53:15.145Z
-Stopped at: Completed 09-02-PLAN.md
+Last session: 2026-03-22T15:52:00.000Z
+Stopped at: Completed 09-03-PLAN.md
 Resume file: None
