@@ -47,7 +47,7 @@ Declared values (must be multiples of 4):
 | xl | 32px | Page-level gutters |
 | 2xl | 48px | Welcome message vertical spacing |
 
-Exceptions: Message input area touch target minimum 44px height. Starter prompt chips minimum 36px height with 12px horizontal padding.
+Exceptions: Message input area touch target minimum 44px height. Starter prompt chips minimum 36px height with 16px horizontal padding.
 
 ---
 
@@ -189,13 +189,13 @@ Font stack: `"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif`
 - Read actions (search, status check): green-tinted card with spinner then checkmark icon
 - Copy pattern: "Searching rooms for Mar 25-28..." then updates to "Found 3 rooms" with results below
 - Write actions (book, cancel, modify): amber-tinted card with confirmation prompt
-- Confirmation prompt: action description + "Confirm" (accent) and "Cancel" (outline) buttons
+- Confirmation prompt: action description + "Confirm" (accent) and dismiss (outline) buttons (see Copywriting Contract for exact labels)
 - After confirmation: card updates to green-tinted success or red-tinted failure
 
 ### Starter Prompt Chips
 
 - Displayed below welcome message in a centered flex-wrap container
-- Each chip: rounded-full, border accent, text accent, 14px label, 12px horizontal padding, 36px height
+- Each chip: rounded-full, border accent, text accent, 14px label, 16px horizontal padding (px-4), 36px height
 - Hover: accent background with white text
 - Guest chips: "Search rooms", "Check my booking", "Hotel info", "Cancellation policy"
 - Staff chips: "Today's check-ins", "Room status", "Find guest", "Occupancy report"
@@ -260,11 +260,11 @@ Font stack: `"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif`
 - Hover: accent background, white text, scale 1.02
 - Active: scale 0.98
 
-### Inline Action Buttons ("Book this", "Confirm", "Cancel")
+### Inline Action Buttons ("Book this", "Confirm", dismiss labels)
 - Follow existing button component interaction states
 - "Book this": accent variant, small size
 - "Confirm": accent variant, small size
-- "Cancel": outline variant, small size
+- Dismiss buttons (e.g. "Keep Shopping", "Keep Original Dates"): outline variant, small size
 
 ### Scroll-to-Bottom Button
 - Floating circle (40px), bottom-right of messages area, 16px from edge
@@ -319,13 +319,13 @@ Font stack: `"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif`
 | Tool action: cancel | "Cancelling booking {HB-XXXXXX}..." then "Booking cancelled" |
 | Tool action: check-in | "Checking in {guest name}..." then "Check-in complete for room {number}" |
 | Tool action: status | "Checking booking status..." then "Booking {HB-XXXXXX}: {status}" |
-| Confirmation prompt (book) | "Create a booking for {room type}, {dates}, {N} nights at {price}/night? Total: {total}" with "Confirm Booking" and "Cancel" buttons |
+| Confirmation prompt (book) | "Create a booking for {room type}, {dates}, {N} nights at {price}/night? Total: {total}" with "Confirm Booking" and "Keep Shopping" buttons |
 | Confirmation prompt (cancel) | "Cancel booking {HB-XXXXXX}? This action cannot be undone." with "Yes, Cancel" (destructive) and "Keep Booking" buttons |
-| Confirmation prompt (modify) | "Modify booking {HB-XXXXXX} to {new dates}? New total: {price}" with "Confirm Changes" and "Cancel" buttons |
-| Confirmation prompt (check-in) | "Check in {guest name} to room {number}?" with "Confirm Check-in" and "Cancel" buttons |
-| Confirmation prompt (check-out) | "Check out {guest name} from room {number}?" with "Confirm Check-out" and "Cancel" buttons |
+| Confirmation prompt (modify) | "Modify booking {HB-XXXXXX} to {new dates}? New total: {price}" with "Confirm Changes" and "Keep Original Dates" buttons |
+| Confirmation prompt (check-in) | "Check in {guest name} to room {number}?" with "Confirm Check-in" and "Don't Check In" buttons |
+| Confirmation prompt (check-out) | "Check out {guest name} from room {number}?" with "Confirm Check-out" and "Don't Check Out" buttons |
 | Conversation limit notice | "This conversation is getting long. Consider starting a new chat for best results." |
-| Destructive: Delete conversation | Button: "Delete". Confirmation: "Delete this conversation? Chat history will be permanently removed." with "Delete" (destructive) and "Cancel" (outline) |
+| Destructive: Delete conversation | Button: "Delete". Confirmation: "Delete this conversation? Chat history will be permanently removed." with "Delete" (destructive) and "Keep Conversation" (outline) |
 | Rename conversation | Inline edit field replacing conversation title, save on Enter, cancel on Escape |
 | Input placeholder (guest) | "Ask about rooms, bookings, or hotel info..." |
 | Input placeholder (staff) | "Ask about reservations, guests, or operations..." |
@@ -342,7 +342,7 @@ Font stack: `"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif`
 - Message list uses role="log" with aria-live="polite" for new messages
 - Bot typing indicator uses aria-live="polite" with sr-only text "Assistant is typing"
 - Starter prompt chips are focusable buttons with descriptive labels
-- Inline action buttons ("Book this", "Confirm", "Cancel") are accessible buttons
+- Inline action buttons ("Book this", "Confirm", dismiss labels) are accessible buttons
 - Conversation sidebar list uses role="listbox" with aria-label "Conversations"
 - Active conversation uses aria-selected="true"
 - Delete confirmation dialog traps focus and is dismissible with Escape
