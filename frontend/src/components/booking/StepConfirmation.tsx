@@ -31,7 +31,7 @@ export default function StepConfirmation() {
 
   return (
     <div className="space-y-6 text-center">
-      <CheckCircle2 className="mx-auto text-success" style={{ width: 64, height: 64 }} />
+      <CheckCircle2 className="mx-auto text-success size-16" />
 
       <h2 className="text-2xl font-semibold text-slate-900">
         Your booking is confirmed!
