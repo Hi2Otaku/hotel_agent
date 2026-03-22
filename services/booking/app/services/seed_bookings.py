@@ -120,6 +120,28 @@ async def _fetch_room_types() -> list[dict] | None:
     return None
 
 
+async def _fetch_demo_guest_ids() -> list[dict]:
+    """Fetch demo guest info from auth service by querying @demo.hotelbook.com emails.
+
+    Returns list of dicts with id, email, first_name, last_name.
+    Falls back to empty list if auth service is unavailable.
+    """
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            resp = await client.get(
+                f"{settings.AUTH_SERVICE_URL}/api/v1/users/demo-guests"
+            )
+            if resp.status_code == 200:
+                data = resp.json()
+                ids = [u for u in data if u.get("id")]
+                if ids:
+                    logger.info("Fetched %d demo guest IDs from auth service.", len(ids))
+                    return ids
+    except httpx.HTTPError as e:
+        logger.warning("Could not fetch demo guest IDs: %s", e)
+    return []
+
+
 async def _fetch_rooms() -> list[dict]:
     """Fetch rooms from room service API."""
     try:
@@ -164,6 +186,15 @@ async def seed_historical_bookings(db: AsyncSession) -> None:
     if not rt_lookup:
         logger.warning("No matching room types found -- cannot seed bookings.")
         return
+
+    # Fetch demo guest IDs from auth service
+    demo_guests_full = await _fetch_demo_guest_ids()
+    demo_guest_lookup = {g["id"]: g for g in demo_guests_full} if demo_guests_full else {}
+    demo_guest_id_list = list(demo_guest_lookup.keys()) if demo_guest_lookup else []
+    if demo_guest_id_list:
+        logger.info("Using %d demo guest accounts for booking seed.", len(demo_guest_id_list))
+    else:
+        logger.info("No demo guests available, using random UUIDs for booking seed.")
 
     # Build weighted room type list for random selection
     weighted_types: list[str] = []
@@ -212,10 +243,19 @@ async def seed_historical_bookings(db: AsyncSession) -> None:
                 Decimal(n["final_amount"]) for n in breakdown
             )
 
-            # Guest data
-            first_name = random.choice(FIRST_NAMES)
-            last_name = random.choice(LAST_NAMES)
-            email = f"{first_name.lower()}.{last_name.lower()}@example.com"
+            # Guest data -- use real demo guest IDs when available
+            if demo_guest_id_list:
+                selected_id = random.choice(demo_guest_id_list)
+                guest_user_id = uuid.UUID(selected_id)
+                guest_info = demo_guest_lookup[selected_id]
+                first_name = guest_info["first_name"]
+                last_name = guest_info["last_name"]
+                email = guest_info["email"]
+            else:
+                guest_user_id = uuid.uuid4()
+                first_name = random.choice(FIRST_NAMES)
+                last_name = random.choice(LAST_NAMES)
+                email = f"{first_name.lower()}.{last_name.lower()}@example.com"
             phone = f"+1-555-{random.randint(100, 999)}-{random.randint(1000, 9999)}"
 
             # Status based on timing
@@ -271,7 +311,7 @@ async def seed_historical_bookings(db: AsyncSession) -> None:
             booking = Booking(
                 id=uuid.uuid4(),
                 confirmation_number=generate_confirmation_number(),
-                user_id=uuid.uuid4(),
+                user_id=guest_user_id,
                 room_type_id=uuid.UUID(rt_info["id"]),
                 room_id=room_id,
                 check_in=check_in,

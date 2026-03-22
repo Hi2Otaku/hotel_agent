@@ -17,6 +17,7 @@ class Settings(BaseSettings):
 
     # Inter-service communication
     ROOM_SERVICE_URL: str = "http://room:8000"
+    AUTH_SERVICE_URL: str = "http://auth:8000"
 
     # Mail (Mailpit)
     MAIL_SERVER: str = "mailpit"

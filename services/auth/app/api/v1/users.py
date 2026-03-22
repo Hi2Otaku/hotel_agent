@@ -38,6 +38,29 @@ async def search_users_endpoint(
     return UserListResponse(users=users, total=total)
 
 
+@router.get("/demo-guests")
+async def list_demo_guests(db: AsyncSession = Depends(get_db)):
+    """Internal endpoint: return demo guest IDs for booking seed cross-reference.
+
+    No auth required -- only returns demo account IDs, not sensitive data.
+    """
+    from sqlalchemy import select as sa_select
+    result = await db.execute(
+        sa_select(User.id, User.email, User.first_name, User.last_name)
+        .where(User.email.like("%@demo.hotelbook.com"))
+    )
+    guests = [
+        {
+            "id": str(row.id),
+            "email": row.email,
+            "first_name": row.first_name,
+            "last_name": row.last_name,
+        }
+        for row in result.all()
+    ]
+    return guests
+
+
 @router.get("/{user_id}", response_model=UserResponse)
 async def get_user(
     user_id: uuid.UUID,

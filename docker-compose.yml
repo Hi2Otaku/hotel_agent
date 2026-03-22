@@ -151,6 +151,7 @@ services:
       MAIL_SERVER: mailpit
       MAIL_PORT: 1025
       ROOM_SERVICE_URL: http://room:8000
+      AUTH_SERVICE_URL: http://auth:8000
     depends_on:
       booking_db:
         condition: service_healthy
