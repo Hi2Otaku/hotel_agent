@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     AUTH_SERVICE_URL: str = "http://auth:8000"
     ROOM_SERVICE_URL: str = "http://room:8000"
     BOOKING_SERVICE_URL: str = "http://booking:8000"
+    CHAT_SERVICE_URL: str = "http://chat:8000"
     JWT_PUBLIC_KEY_PATH: str = "/run/secrets/jwt_public_key"
 
     model_config = {"env_file": ".env"}

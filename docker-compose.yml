@@ -226,6 +226,7 @@ services:
       AUTH_SERVICE_URL: http://auth:8000
       ROOM_SERVICE_URL: http://room:8000
       BOOKING_SERVICE_URL: http://booking:8000
+      CHAT_SERVICE_URL: http://chat:8000
       JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
     depends_on:
       - auth
