@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { Menu, X, User, LogOut, BookOpen } from 'lucide-react';
+import { Menu, X, User, LogOut, BookOpen, MessageSquare } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
 import { Button } from '@/components/ui/button';
 import {
@@ -29,6 +29,7 @@ export function Navbar() {
   const navLinks = [
     { to: '/search', label: 'Search' },
     { to: '/pricing', label: 'Pricing' },
+    { to: '/chat', label: 'Chat', icon: MessageSquare },
   ];
 
   return (
