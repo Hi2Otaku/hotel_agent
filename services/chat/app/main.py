@@ -5,11 +5,16 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.v1.chat import router as chat_router
+from app.api.v1.conversations import router as conversations_router
+from app.core.database import engine
+
 
 @asynccontextmanager
 async def lifespan(application: FastAPI):
-    """Application lifespan: initialize DB engine on startup."""
+    """Application lifespan: initialize DB engine on startup, dispose on shutdown."""
     yield
+    await engine.dispose()
 
 
 app = FastAPI(
@@ -25,6 +30,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(chat_router)
+app.include_router(conversations_router)
 
 
 @app.get("/health")

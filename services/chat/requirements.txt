@@ -7,6 +7,7 @@ pydantic-settings>=2.0
 anthropic>=0.86.0
 openai>=2.29.0
 httpx
+sse-starlette>=3.0.0
 aio-pika>=9.6.0
 PyJWT[crypto]>=2.12.0
 pytest>=8.0
