@@ -45,6 +45,7 @@ export interface BookingResponse {
   room_type_description?: string;
   room_type_photos?: string[];
   room_type_amenities?: string[];
+  room_number?: string;
 }
 
 export interface BookingListResponse {

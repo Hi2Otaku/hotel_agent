@@ -29,9 +29,11 @@ export function CheckOutDialog({
   const checkOut = useCheckOut();
 
   const guestName = `${booking.guest_first_name} ${booking.guest_last_name}`;
-  const roomLabel = booking.room_id
-    ? `Room ${booking.room_id}`
-    : null;
+  const roomLabel = booking.room_number
+    ? `Room ${booking.room_number}`
+    : booking.room_id
+      ? `Room ${booking.room_id}`
+      : null;
 
   const checkInDate = parseISO(booking.check_in);
   const checkOutDate = parseISO(booking.check_out);
@@ -40,7 +42,7 @@ export function CheckOutDialog({
   const handleConfirm = async () => {
     try {
       await checkOut.mutateAsync(booking.id);
-      const roomMsg = roomLabel ? ` Room ${booking.room_id} marked for cleaning.` : '';
+      const roomMsg = roomLabel ? ` ${roomLabel} marked for cleaning.` : '';
       toast.success(`${guestName} checked out.${roomMsg}`);
       onOpenChange(false);
       onSuccess?.();

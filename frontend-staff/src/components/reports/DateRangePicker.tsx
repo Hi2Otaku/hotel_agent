@@ -23,9 +23,9 @@ interface Preset {
 const today = () => new Date();
 
 const presets: Preset[] = [
-  { key: '7d', label: '7d', getRange: () => ({ from: subDays(today(), 7), to: today() }) },
-  { key: '30d', label: '30d', getRange: () => ({ from: subDays(today(), 30), to: today() }) },
-  { key: '90d', label: '90d', getRange: () => ({ from: subDays(today(), 90), to: today() }) },
+  { key: '7d', label: '7 days', getRange: () => ({ from: subDays(today(), 7), to: today() }) },
+  { key: '30d', label: '30 days', getRange: () => ({ from: subDays(today(), 30), to: today() }) },
+  { key: '90d', label: '90 days', getRange: () => ({ from: subDays(today(), 90), to: today() }) },
   { key: 'month', label: 'This Month', getRange: () => ({ from: startOfMonth(today()), to: today() }) },
   { key: 'year', label: 'This Year', getRange: () => ({ from: startOfYear(today()), to: today() }) },
 ];

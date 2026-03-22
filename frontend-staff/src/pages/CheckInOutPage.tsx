@@ -140,9 +140,11 @@ export default function CheckInOutPage() {
                       {booking.guest_first_name} {booking.guest_last_name}
                     </div>
                     <div className="mt-1 text-xs text-[#94A3B8]">
-                      {booking.room_id
-                        ? `Room ${booking.room_id}`
-                        : (booking.room_type_name ?? 'Room')}{' '}
+                      {booking.room_number
+                        ? `Room ${booking.room_number}`
+                        : booking.room_id
+                          ? `Room ${booking.room_id}`
+                          : (booking.room_type_name ?? 'Room')}{' '}
                       &middot;{' '}
                       <span className="font-mono">
                         {booking.confirmation_number}
