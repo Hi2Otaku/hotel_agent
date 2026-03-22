@@ -1,17 +1,40 @@
 services:
+  auth_db:
+    environment:
+      POSTGRES_PASSWORD: ${AUTH_DB_PASSWORD:-auth_pass}
+
+  room_db:
+    environment:
+      POSTGRES_PASSWORD: ${ROOM_DB_PASSWORD:-room_pass}
+
+  booking_db:
+    environment:
+      POSTGRES_PASSWORD: ${BOOKING_DB_PASSWORD:-booking_pass}
+
+  rabbitmq:
+    environment:
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS:-hotel_pass}
+
   auth:
     restart: always
     environment:
+      DATABASE_URL: postgresql+asyncpg://auth_user:${AUTH_DB_PASSWORD:-auth_pass}@auth_db:5432/auth
       FIRST_ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@hotel.local}
       FIRST_ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
+      RABBITMQ_URL: amqp://hotel:${RABBITMQ_PASS:-hotel_pass}@rabbitmq:5672/
 
   room:
     restart: always
     environment:
+      DATABASE_URL: postgresql+asyncpg://room_user:${ROOM_DB_PASSWORD:-room_pass}@room_db:5432/rooms
       SEED_ON_STARTUP: "true"
+      RABBITMQ_URL: amqp://hotel:${RABBITMQ_PASS:-hotel_pass}@rabbitmq:5672/
 
   booking:
     restart: always
+    environment:
+      DATABASE_URL: postgresql+asyncpg://booking_user:${BOOKING_DB_PASSWORD:-booking_pass}@booking_db:5432/bookings
+      RABBITMQ_URL: amqp://hotel:${RABBITMQ_PASS:-hotel_pass}@rabbitmq:5672/
 
   gateway:
     restart: always
@@ -33,15 +56,10 @@ services:
     image: nginx:stable-alpine
     ports:
       - "80:80"
-      - "443:443"
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
-      - letsencrypt_data:/etc/letsencrypt:ro
     depends_on:
       - gateway
       - frontend-guest
       - frontend-staff
     restart: always
-
-volumes:
-  letsencrypt_data:
