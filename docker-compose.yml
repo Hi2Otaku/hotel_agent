@@ -204,6 +204,20 @@ services:
       - ./keys:/run/secrets:ro
       - ./shared:/app/shared:ro
 
+  mcp-server:
+    build:
+      context: .
+      dockerfile: services/mcp-server/Dockerfile
+    environment:
+      ROOM_SERVICE_URL: http://room:8000
+      BOOKING_SERVICE_URL: http://booking:8000
+      AUTH_SERVICE_URL: http://auth:8000
+    depends_on:
+      - room
+      - booking
+    ports:
+      - "8011:8000"
+
   gateway:
     build:
       context: .
