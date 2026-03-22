@@ -65,7 +65,7 @@ export function TopBar({ title }: TopBarProps) {
               onClick={logout}
               className="text-[#F1F5F9] focus:bg-[#283548] focus:text-[#F1F5F9] cursor-pointer"
             >
-              Sign Out
+              Log out
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
