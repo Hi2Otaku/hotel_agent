@@ -3,6 +3,7 @@ import { toast } from 'sonner';
 import { useStaffBookings } from '@/hooks/queries/useStaffBookings';
 import { SearchFilters } from '@/components/reservations/SearchFilters';
 import { ReservationCard } from '@/components/reservations/ReservationCard';
+import { CancelBookingDialog } from '@/components/reservations/CancelBookingDialog';
 import { EmptyState } from '@/components/common/EmptyState';
 import { Skeleton } from '@/components/ui/skeleton';
 import { CheckInDialog } from '@/components/checkin/CheckInDialog';
@@ -66,6 +67,12 @@ export default function ReservationsPage() {
     setDialogBooking(null);
   };
 
+  const [cancelBooking, setCancelBooking] = useState<BookingResponse | null>(null);
+
+  const handleCancel = (booking: BookingResponse) => {
+    setCancelBooking(booking);
+  };
+
   const handlePlaceholderAction = (action: string) => {
     toast(`${action} - Feature coming soon.`);
   };
@@ -111,7 +118,7 @@ export default function ReservationsPage() {
                 booking={booking}
                 onCheckIn={handleCheckIn}
                 onCheckOut={handleCheckOut}
-                onCancel={() => handlePlaceholderAction('Cancel Booking')}
+                onCancel={() => handleCancel(booking)}
                 onView={() => handlePlaceholderAction('View Booking')}
               />
             ))}
@@ -179,6 +186,16 @@ export default function ReservationsPage() {
           open
           onOpenChange={(open) => {
             if (!open) closeDialog();
+          }}
+        />
+      )}
+
+      {cancelBooking && (
+        <CancelBookingDialog
+          booking={cancelBooking}
+          open
+          onOpenChange={(open) => {
+            if (!open) setCancelBooking(null);
           }}
         />
       )}
