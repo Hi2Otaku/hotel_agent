@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'sonner';
 
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '',
@@ -18,7 +19,10 @@ apiClient.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('staff_access_token');
-      window.location.href = '/login';
+      toast.error('Session expired. Please log in again.');
+      setTimeout(() => {
+        window.location.href = '/login';
+      }, 500);
     }
     return Promise.reject(error);
   },
