@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 10-03-PLAN.md
-last_updated: "2026-03-22T16:58:26.203Z"
+stopped_at: Phase 11 planned
+last_updated: "2026-03-22T17:16:11.207Z"
 progress:
-  total_phases: 11
+  total_phases: 12
   completed_phases: 10
-  total_plans: 37
+  total_plans: 41
   completed_plans: 36
 ---
 
@@ -85,6 +85,7 @@ Plan: 3 of 3 (all plans complete)
 
 - Phase 9 added: UI Polish — fix all UI audit findings across guest frontend, staff dashboard, and reporting dashboard
 - Phase 10 added: Deploy to online test server
+- Phase 12 added: Migrate from pip to uv and set up per-service virtual environments
 - Phase 11 added: New phase, for implementing a chatbot agent for user, staff
 
 ### Decisions
@@ -193,6 +194,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-22T16:58:26.189Z
-Stopped at: Completed 10-03-PLAN.md
-Resume file: None
+Last session: 2026-03-22T17:16:11.199Z
+Stopped at: Phase 11 planned
+Resume file: .planning/phases/11-new-phase-for-implementing-a-chatbot-agent-for-user-staff/11-01-PLAN.md
