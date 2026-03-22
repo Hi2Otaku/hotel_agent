@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { ResponsiveBar } from '@nivo/bar';
-import { nivoTheme, CHART_COLORS } from '@/lib/chartTheme';
+import { nivoTheme, CHART_COLORS, chartAnimate } from '@/lib/chartTheme';
 import type { RevenueRow } from '@/api/types';
 
 interface RevenueChartProps {
@@ -46,6 +46,7 @@ export function RevenueChart({ data, groupBy: _groupBy, onBarClick }: RevenueCha
         padding={0.3}
         borderRadius={2}
         colors={CHART_COLORS}
+        animate={chartAnimate}
         theme={nivoTheme}
         axisLeft={{
           format: (v) => '$' + (Number(v) / 1000).toFixed(0) + 'k',

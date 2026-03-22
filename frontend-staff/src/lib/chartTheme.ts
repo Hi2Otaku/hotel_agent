@@ -47,3 +47,10 @@ export const CHART_COLORS = ['#0F766E', '#2DB87E', '#D98C2E', '#A855F7', '#E0337
 export const HEATMAP_EMPTY = '#1E293B';
 
 export const HEATMAP_COLORS = ['#134E4A', '#0F766E', '#14B8A6', '#5EEAD4'];
+
+/** Respect user's reduced-motion preference for chart animations. */
+const prefersReducedMotion =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+export const chartAnimate = !prefersReducedMotion;

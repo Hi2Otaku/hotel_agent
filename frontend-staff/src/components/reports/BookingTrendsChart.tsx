@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import { nivoTheme } from '@/lib/chartTheme';
+import { nivoTheme, chartAnimate } from '@/lib/chartTheme';
 import type { TrendDay } from '@/api/types';
 
 interface BookingTrendsChartProps {
@@ -36,6 +36,7 @@ export function BookingTrendsChart({ data, onPointClick }: BookingTrendsChartPro
         enableCrosshair={true}
         crosshairType="x"
         useMesh={true}
+        animate={chartAnimate}
         theme={nivoTheme}
         axisBottom={{
           format: '%b %d',
