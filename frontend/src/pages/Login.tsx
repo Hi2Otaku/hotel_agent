@@ -56,11 +56,13 @@ export default function Login() {
             </span>
           </div>
 
-          {loginMutation.isError && (
-            <p className="text-destructive text-sm text-center mb-4">
-              Invalid email or password. Please try again.
-            </p>
-          )}
+          <div aria-live="polite">
+            {loginMutation.isError && (
+              <p className="text-destructive text-sm text-center mb-4">
+                Invalid email or password. Please try again.
+              </p>
+            )}
+          </div>
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

@@ -59,7 +59,7 @@ export default function PasswordReset() {
           </h1>
 
           {submitted ? (
-            <div className="text-center">
+            <div className="text-center" aria-live="polite">
               <p className="text-success text-sm mb-4">
                 If an account exists with that email, you&apos;ll receive a
                 reset link.

@@ -64,11 +64,13 @@ export default function Register() {
             </span>
           </div>
 
-          {duplicateEmail && (
-            <p className="text-destructive text-sm text-center mb-4">
-              An account with this email already exists.
-            </p>
-          )}
+          <div aria-live="polite">
+            {duplicateEmail && (
+              <p className="text-destructive text-sm text-center mb-4">
+                An account with this email already exists.
+              </p>
+            )}
+          </div>
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

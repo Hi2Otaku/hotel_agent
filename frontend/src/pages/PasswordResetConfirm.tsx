@@ -56,7 +56,7 @@ export default function PasswordResetConfirm() {
     return (
       <div className="min-h-[calc(100vh-64px-200px)] flex items-center justify-center bg-surface px-4">
         <Card className="w-full max-w-[400px] bg-white shadow-md">
-          <CardContent className="pt-8 pb-8 text-center">
+          <CardContent className="pt-8 pb-8 text-center" aria-live="polite">
             <p className="text-destructive text-sm mb-4">
               Invalid or missing reset token.
             </p>
@@ -104,7 +104,7 @@ export default function PasswordResetConfirm() {
           </h1>
 
           {success ? (
-            <div className="text-center">
+            <div className="text-center" aria-live="polite">
               <p className="text-success text-sm mb-2">
                 Password reset successfully.
               </p>
@@ -115,7 +115,7 @@ export default function PasswordResetConfirm() {
           ) : (
             <>
               {expiredError && (
-                <div className="text-center mb-4">
+                <div className="text-center mb-4" aria-live="polite">
                   <p className="text-destructive text-sm mb-1">
                     Reset link has expired. Please request a new one.
                   </p>
