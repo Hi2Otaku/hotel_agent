@@ -43,7 +43,7 @@ describe('RevenueChart', () => {
       <RevenueChart data={mockData} groupBy="week" onBarClick={vi.fn()} />,
     );
     const barProps = mockResponsiveBar.mock.calls[0][0];
-    expect(barProps.keys.length).toBeGreaterThan(0);
+    expect(barProps.keys?.length).toBeGreaterThan(0);
   });
 
   it('has aria-label for accessibility', () => {
