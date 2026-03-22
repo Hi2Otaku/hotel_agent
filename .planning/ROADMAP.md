@@ -233,10 +233,17 @@ Plans:
 
 ### Phase 12: Migrate from pip to uv and set up per-service virtual environments
 
-**Goal:** [To be planned]
-**Requirements**: TBD
+**Goal:** All 5 backend services (auth, room, booking, gateway, chat) use uv with per-service pyproject.toml and uv.lock for reproducible dependency management, with updated Dockerfiles, CI pipeline, and developer Makefile
 **Depends on:** Phase 11
-**Plans:** 2/5 plans executed
+**Requirements**: UV-01, UV-02, UV-03, UV-04, UV-05, UV-06, UV-07
+**Success Criteria** (what must be TRUE):
+  1. Each service has its own pyproject.toml with dependencies and uv.lock for reproducible installs
+  2. Tests relocated into per-service directories and runnable via `cd services/{svc} && uv run pytest tests/`
+  3. Dockerfiles use `COPY --from=ghcr.io/astral-sh/uv` with `uv sync --frozen` -- no pip commands remain
+  4. CI pipeline uses `astral-sh/setup-uv@v7` with caching for lint and test jobs
+  5. Makefile provides `make setup`, `make sync-all`, `make test`, `make lint` for developer workflow
+**Plans**: 2 plans
 
 Plans:
-- [ ] TBD (run /gsd:plan-phase 12 to break down)
+- [ ] 12-01-PLAN.md -- Per-service pyproject.toml + uv.lock, test relocation, requirements.txt deprecation
+- [ ] 12-02-PLAN.md -- Dockerfiles with uv, CI pipeline migration, Makefile for developer workflow

@@ -73,6 +73,16 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **DEPLOY-03**: Extended demo data: guest accounts and historical bookings seeded on startup
 - [x] **DEPLOY-04**: Full stack accessible at EC2 public IP over HTTP with automated health checks
 
+### Dependency Management (Phase 12)
+
+- [ ] **UV-01**: Each backend service has its own pyproject.toml with uv.lock for reproducible installs
+- [ ] **UV-02**: Shared package referenced as path dependency in all services
+- [ ] **UV-03**: Tests relocated into per-service directories and runnable via `uv run pytest`
+- [ ] **UV-04**: Old requirements.txt files deprecated with migration comment
+- [ ] **UV-05**: Dockerfiles use uv (COPY --from=ghcr.io/astral-sh/uv) with no pip commands
+- [ ] **UV-06**: CI pipeline uses astral-sh/setup-uv with caching for all Python jobs
+- [ ] **UV-07**: Root Makefile provides setup, sync, test, and lint targets for developer workflow
+
 ## v2 Requirements
 
 Deferred to future release. Tracked but not in current roadmap.
@@ -147,13 +157,21 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DEPLOY-02 | Phase 10 | Planned |
 | DEPLOY-03 | Phase 10 | Planned |
 | DEPLOY-04 | Phase 10 | Planned |
+| UV-01 | Phase 12 | Planned |
+| UV-02 | Phase 12 | Planned |
+| UV-03 | Phase 12 | Planned |
+| UV-04 | Phase 12 | Planned |
+| UV-05 | Phase 12 | Planned |
+| UV-06 | Phase 12 | Planned |
+| UV-07 | Phase 12 | Planned |
 
 **Coverage:**
 - v1 requirements: 32 total (complete)
 - Phase 10 requirements: 4 total (planned)
-- Mapped to phases: 36
+- Phase 12 requirements: 7 total (planned)
+- Mapped to phases: 43
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-20*
-*Last updated: 2026-03-22 after Phase 10 planning*
+*Last updated: 2026-03-23 after Phase 12 planning*
