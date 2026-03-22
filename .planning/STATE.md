@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Phase 11 planned
-last_updated: "2026-03-22T17:16:11.207Z"
+stopped_at: Phase 12 context gathered
+last_updated: "2026-03-22T17:16:11.764Z"
 progress:
   total_phases: 12
   completed_phases: 10
@@ -194,6 +194,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-22T17:16:11.199Z
-Stopped at: Phase 11 planned
-Resume file: .planning/phases/11-new-phase-for-implementing-a-chatbot-agent-for-user-staff/11-01-PLAN.md
+Last session: 2026-03-22T17:16:11.760Z
+Stopped at: Phase 12 context gathered
+Resume file: .planning/phases/12-migrate-from-pip-to-uv-and-set-up-per-service-virtual-environments/12-CONTEXT.md
