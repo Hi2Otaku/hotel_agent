@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Download } from 'lucide-react';
+import { Download, RefreshCw } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -8,6 +8,8 @@ interface ChartContainerProps {
   title: string;
   loading: boolean;
   empty: boolean;
+  error?: boolean;
+  onRetry?: () => void;
   children: ReactNode;
   onExportCSV?: () => void;
   chartHeight?: string;
@@ -17,6 +19,8 @@ export function ChartContainer({
   title,
   loading,
   empty,
+  error,
+  onRetry,
   children,
   onExportCSV,
   chartHeight,
@@ -34,7 +38,7 @@ export function ChartContainer({
             variant="ghost"
             size="sm"
             onClick={onExportCSV}
-            disabled={loading || empty}
+            disabled={loading || empty || error}
             className="text-[#94A3B8] hover:text-[#F1F5F9]"
           >
             <Download className="mr-1 h-4 w-4" />
@@ -46,10 +50,28 @@ export function ChartContainer({
       <div className={heightClass}>
         {loading ? (
           <Skeleton className="h-full w-full bg-[#0F172A]" />
+        ) : error ? (
+          <div className="flex h-full flex-col items-center justify-center">
+            <p className="text-sm text-[#F87171]">Failed to load chart data.</p>
+            <p className="mt-1 text-xs text-[#94A3B8]">
+              Check your connection and try again.
+            </p>
+            {onRetry && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onRetry}
+                className="mt-3 text-[#94A3B8] hover:text-[#F1F5F9]"
+              >
+                <RefreshCw className="mr-1 h-4 w-4" />
+                Retry
+              </Button>
+            )}
+          </div>
         ) : empty ? (
           <div className="flex h-full flex-col items-center justify-center">
             <p className="text-sm text-[#94A3B8]">No data for this period</p>
-            <p className="mt-1 text-xs text-[#64748B]">
+            <p className="mt-1 text-xs text-[#94A3B8]">
               Try selecting a different date range to view reporting data.
             </p>
           </div>

@@ -32,7 +32,11 @@ export default function ReportsPage() {
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
   const dashboardRef = useRef<HTMLDivElement>(null);
 
-  const { data, isLoading } = useReportData(dateRange);
+  const { data, isLoading, isError, refetch } = useReportData(dateRange);
+
+  const handleRetry = useCallback(() => {
+    refetch();
+  }, [refetch]);
 
   const handleDayClick = useCallback((day: string) => {
     setSelectedDay(day);
@@ -60,7 +64,7 @@ export default function ReportsPage() {
         <Button
           variant="ghost"
           onClick={handleExportPDF}
-          disabled={isLoading || !data}
+          disabled={isLoading || isError || !data}
           className="text-[#94A3B8] hover:text-[#F1F5F9]"
         >
           <Download className="mr-1 h-4 w-4" />
@@ -103,6 +107,8 @@ export default function ReportsPage() {
           <ChartContainer
             title="Occupancy Rate"
             loading={isLoading}
+            error={isError}
+            onRetry={handleRetry}
             empty={!data || data.occupancy.daily.length === 0}
             onExportCSV={() =>
               data &&
@@ -125,6 +131,8 @@ export default function ReportsPage() {
           <ChartContainer
             title="Revenue by Room Type"
             loading={isLoading}
+            error={isError}
+            onRetry={handleRetry}
             empty={!data || data.revenue.data.length === 0}
             onExportCSV={() =>
               data &&
@@ -151,6 +159,8 @@ export default function ReportsPage() {
           <ChartContainer
             title="Booking Trends"
             loading={isLoading}
+            error={isError}
+            onRetry={handleRetry}
             empty={!data || data.trends.data.length === 0}
             onExportCSV={() =>
               data &&
