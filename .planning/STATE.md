@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 11-03-PLAN.md
-last_updated: "2026-03-22T17:34:02.735Z"
+stopped_at: Completed 11-02-PLAN.md
+last_updated: "2026-03-22T17:38:58.035Z"
 progress:
   total_phases: 12
   completed_phases: 10
-  total_plans: 42
-  completed_plans: 38
+  total_plans: 43
+  completed_plans: 39
 ---
 
 # Project State
@@ -24,7 +24,7 @@ See: .planning/PROJECT.md (updated 2026-03-20)
 ## Current Position
 
 Phase: 11 (new-phase-for-implementing-a-chatbot-agent-for-user-staff) — EXECUTING
-Plan: 4 of 5
+Plan: 3 of 5
 
 ## Performance Metrics
 
@@ -80,6 +80,7 @@ Plan: 4 of 5
 | Phase 10 P03 | 3min | 2 tasks | 1 files |
 | Phase 11 P01 | 5min | 2 tasks | 30 files |
 | Phase 11 P03 | 2min | 2 tasks | 13 files |
+| Phase 11 P02 | 6min | 2 tasks | 18 files |
 
 ## Accumulated Context
 
@@ -191,6 +192,9 @@ Recent decisions affecting current work:
 - [Phase 11]: MCP tool registration pattern: register_*_tools(mcp) factory functions for modular tool grouping
 - [Phase 11]: SSE streaming proxy: httpx stream=True with StreamingResponse for text/event-stream passthrough
 - [Phase 11]: Gateway CHAT_SERVICE_URL added to docker-compose environment for runtime configuration
+- [Phase 11]: Tool registry stores provider-agnostic format; each LLM provider converts internally
+- [Phase 11]: ChatEngine max 5 tool-use loop iterations, soft limit 50 messages for new conversation suggestion
+- [Phase 11]: Rate limiter queries DB for rolling 1-minute window (20 msg/min per user)
 
 ### Pending Todos
 
@@ -202,6 +206,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-22T17:34:02.727Z
-Stopped at: Completed 11-03-PLAN.md
+Last session: 2026-03-22T17:38:58.027Z
+Stopped at: Completed 11-02-PLAN.md
 Resume file: None
