@@ -8,6 +8,7 @@ import { OccupancyHeatmap } from '@/components/reports/OccupancyHeatmap';
 import { RevenueChart } from '@/components/reports/RevenueChart';
 import { BookingTrendsChart } from '@/components/reports/BookingTrendsChart';
 import { DrillDownPanel } from '@/components/reports/DrillDownPanel';
+import { ChartErrorBoundary } from '@/components/reports/ChartErrorBoundary';
 import { MetricCard } from '@/components/dashboard/MetricCard';
 import { Button } from '@/components/ui/button';
 import { downloadCSV, exportDashboardPDF } from '@/lib/export';
@@ -103,6 +104,7 @@ export default function ReportsPage() {
         </div>
 
         {/* Charts */}
+        <ChartErrorBoundary>
         <div className="mt-8 space-y-8">
           <ChartContainer
             title="Occupancy Rate"
@@ -178,6 +180,7 @@ export default function ReportsPage() {
             )}
           </ChartContainer>
         </div>
+        </ChartErrorBoundary>
       </div>
 
       {/* Drill-down panel (renders via portal) */}
