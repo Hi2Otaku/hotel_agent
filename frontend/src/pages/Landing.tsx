@@ -8,7 +8,7 @@ export default function Landing() {
         <div className="relative h-64 lg:hidden">
           <img
             src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200"
-            alt="Beach resort"
+            alt="Oceanfront resort with palm trees and pool"
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
@@ -31,7 +31,7 @@ export default function Landing() {
         <div className="relative hidden lg:block">
           <img
             src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200"
-            alt="Beach resort"
+            alt="Oceanfront resort with palm trees and pool"
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />

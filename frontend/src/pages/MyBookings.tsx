@@ -132,7 +132,7 @@ export default function MyBookings() {
                       className="min-h-[44px] border-destructive/30 text-destructive hover:bg-red-50"
                       onClick={() => setCancelBookingId(booking.id)}
                     >
-                      Cancel
+                      Cancel Booking
                     </Button>
                   </>
                 )}
