@@ -22,12 +22,15 @@ export function OccupancyHeatmap({ data, from, to, onDayClick }: OccupancyHeatma
 
   const calendarConfig = useMemo(() => {
     if (dayCount <= 14) {
-      return { direction: 'horizontal' as const };
+      // Daily grid: horizontal layout, default cell size
+      return { direction: 'horizontal' as const, cellSize: undefined };
     }
     if (dayCount > 90) {
-      return { direction: 'horizontal' as const };
+      // Compact mode: horizontal layout, reduced cell size
+      return { direction: 'horizontal' as const, cellSize: 11 };
     }
-    return { direction: 'horizontal' as const };
+    // Monthly calendar (15-90 days): vertical Nivo default layout
+    return { direction: 'vertical' as const, cellSize: undefined };
   }, [dayCount]);
 
   return (
@@ -44,6 +47,7 @@ export function OccupancyHeatmap({ data, from, to, onDayClick }: OccupancyHeatma
         dayBorderWidth={2}
         dayBorderColor="#0F172A"
         direction={calendarConfig.direction}
+        {...(calendarConfig.cellSize ? { daySpacing: 1, monthSpacing: 12 } : {})}
         theme={nivoTheme}
         onClick={(datum) => onDayClick(datum.day)}
         tooltip={({ day, value }) => (
