@@ -178,12 +178,41 @@ jobs:
     steps:
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1
+        env:
+          AUTH_DB_PASSWORD: ${{ secrets.AUTH_DB_PASSWORD }}
+          ROOM_DB_PASSWORD: ${{ secrets.ROOM_DB_PASSWORD }}
+          BOOKING_DB_PASSWORD: ${{ secrets.BOOKING_DB_PASSWORD }}
+          RABBITMQ_PASS: ${{ secrets.RABBITMQ_PASS }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          JWT_PRIVATE_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
+          JWT_PUBLIC_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          envs: AUTH_DB_PASSWORD,ROOM_DB_PASSWORD,BOOKING_DB_PASSWORD,RABBITMQ_PASS,ADMIN_EMAIL,ADMIN_PASSWORD,JWT_PRIVATE_KEY,JWT_PUBLIC_KEY
           script: |
             cd /opt/hotelbook
             git pull origin main
+
+            # Write production .env from GitHub Secrets
+            cat > .env << ENVEOF
+            AUTH_DB_PASSWORD=${AUTH_DB_PASSWORD}
+            ROOM_DB_PASSWORD=${ROOM_DB_PASSWORD}
+            BOOKING_DB_PASSWORD=${BOOKING_DB_PASSWORD}
+            RABBITMQ_PASS=${RABBITMQ_PASS}
+            ADMIN_EMAIL=${ADMIN_EMAIL}
+            ADMIN_PASSWORD=${ADMIN_PASSWORD}
+            ENVEOF
+
+            # Write JWT keys from GitHub Secrets
+            mkdir -p keys
+            printf '%s\n' "$JWT_PRIVATE_KEY" > keys/jwt_private_key
+            printf '%s\n' "$JWT_PUBLIC_KEY" > keys/jwt_public_key
+            chmod 600 keys/jwt_private_key
+            chmod 644 keys/jwt_public_key
+
+            # Deploy with production overlay
             docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build --remove-orphans
             docker system prune -f
