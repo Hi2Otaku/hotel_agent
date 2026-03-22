@@ -94,12 +94,12 @@ export default function PasswordResetConfirm() {
       <Card className="w-full max-w-[400px] bg-white shadow-md">
         <CardContent className="pt-8 pb-8">
           <div className="text-center mb-6">
-            <span className="text-[24px] font-semibold text-accent">
+            <span className="text-2xl font-semibold text-accent">
               HotelBook
             </span>
           </div>
 
-          <h1 className="text-[24px] font-semibold text-center mb-6">
+          <h1 className="text-2xl font-semibold text-center mb-6">
             Set New Password
           </h1>
 
@@ -138,7 +138,7 @@ export default function PasswordResetConfirm() {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[14px] font-normal">
+                        <FormLabel className="text-sm font-normal">
                           New Password
                         </FormLabel>
                         <FormControl>
@@ -154,7 +154,7 @@ export default function PasswordResetConfirm() {
                     name="confirmPassword"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[14px] font-normal">
+                        <FormLabel className="text-sm font-normal">
                           Confirm Password
                         </FormLabel>
                         <FormControl>

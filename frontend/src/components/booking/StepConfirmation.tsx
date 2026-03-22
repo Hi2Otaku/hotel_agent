@@ -37,7 +37,7 @@ export default function StepConfirmation() {
         Your booking is confirmed!
       </h2>
 
-      <p className="text-[36px] font-semibold text-accent">
+      <p className="text-4xl font-semibold text-accent">
         {booking.confirmation_number}
       </p>
 

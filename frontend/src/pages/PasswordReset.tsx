@@ -49,12 +49,12 @@ export default function PasswordReset() {
       <Card className="w-full max-w-[400px] bg-white shadow-md">
         <CardContent className="pt-8 pb-8">
           <div className="text-center mb-6">
-            <span className="text-[24px] font-semibold text-accent">
+            <span className="text-2xl font-semibold text-accent">
               HotelBook
             </span>
           </div>
 
-          <h1 className="text-[24px] font-semibold text-center mb-2">
+          <h1 className="text-2xl font-semibold text-center mb-2">
             Reset Password
           </h1>
 
@@ -90,7 +90,7 @@ export default function PasswordReset() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[14px] font-normal">
+                        <FormLabel className="text-sm font-normal">
                           Email
                         </FormLabel>
                         <FormControl>

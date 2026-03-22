@@ -51,7 +51,7 @@ export function StatusTimeline({ status }: StatusTimelineProps) {
                 </div>
                 <span
                   className={cn(
-                    'mt-1.5 text-[14px]',
+                    'mt-1.5 text-sm',
                     isCurrent && 'font-semibold text-slate-900',
                     isCompleted && 'text-accent',
                     isFuture && 'text-muted',

@@ -59,7 +59,7 @@ export default function Register() {
       <Card className="w-full max-w-[400px] bg-white shadow-md">
         <CardContent className="pt-8 pb-8">
           <div className="text-center mb-6">
-            <span className="text-[24px] font-semibold text-accent">
+            <span className="text-2xl font-semibold text-accent">
               HotelBook
             </span>
           </div>
@@ -77,7 +77,7 @@ export default function Register() {
                 name="first_name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-[14px] font-normal">
+                    <FormLabel className="text-sm font-normal">
                       First Name
                     </FormLabel>
                     <FormControl>
@@ -93,7 +93,7 @@ export default function Register() {
                 name="last_name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-[14px] font-normal">
+                    <FormLabel className="text-sm font-normal">
                       Last Name
                     </FormLabel>
                     <FormControl>
@@ -109,7 +109,7 @@ export default function Register() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-[14px] font-normal">
+                    <FormLabel className="text-sm font-normal">
                       Email
                     </FormLabel>
                     <FormControl>
@@ -129,7 +129,7 @@ export default function Register() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-[14px] font-normal">
+                    <FormLabel className="text-sm font-normal">
                       Password
                     </FormLabel>
                     <FormControl>

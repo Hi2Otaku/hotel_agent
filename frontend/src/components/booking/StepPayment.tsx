@@ -107,7 +107,7 @@ export default function StepPayment() {
             name="cardholder_name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-[14px] font-normal">
+                <FormLabel className="text-sm font-normal">
                   Cardholder Name
                 </FormLabel>
                 <FormControl>
@@ -123,7 +123,7 @@ export default function StepPayment() {
             name="card_number"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-[14px] font-normal">
+                <FormLabel className="text-sm font-normal">
                   Card Number
                 </FormLabel>
                 <FormControl>
@@ -140,7 +140,7 @@ export default function StepPayment() {
               name="expiry_month"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[14px] font-normal">
+                  <FormLabel className="text-sm font-normal">
                     Month
                   </FormLabel>
                   <FormControl>
@@ -170,7 +170,7 @@ export default function StepPayment() {
               name="expiry_year"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[14px] font-normal">
+                  <FormLabel className="text-sm font-normal">
                     Year
                   </FormLabel>
                   <FormControl>
@@ -200,7 +200,7 @@ export default function StepPayment() {
               name="cvc"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[14px] font-normal">
+                  <FormLabel className="text-sm font-normal">
                     CVC
                   </FormLabel>
                   <FormControl>

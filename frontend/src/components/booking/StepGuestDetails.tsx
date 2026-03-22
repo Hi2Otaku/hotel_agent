@@ -87,7 +87,7 @@ export default function StepGuestDetails() {
               name="guest_first_name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[14px] font-normal">
+                  <FormLabel className="text-sm font-normal">
                     First Name
                   </FormLabel>
                   <FormControl>
@@ -102,7 +102,7 @@ export default function StepGuestDetails() {
               name="guest_last_name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[14px] font-normal">
+                  <FormLabel className="text-sm font-normal">
                     Last Name
                   </FormLabel>
                   <FormControl>
@@ -120,7 +120,7 @@ export default function StepGuestDetails() {
               name="guest_email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[14px] font-normal">
+                  <FormLabel className="text-sm font-normal">
                     Email
                   </FormLabel>
                   <FormControl>
@@ -135,7 +135,7 @@ export default function StepGuestDetails() {
               name="guest_phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[14px] font-normal">
+                  <FormLabel className="text-sm font-normal">
                     Phone
                   </FormLabel>
                   <FormControl>
@@ -152,7 +152,7 @@ export default function StepGuestDetails() {
             name="special_requests"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-[14px] font-normal">
+                <FormLabel className="text-sm font-normal">
                   Special Requests{' '}
                   <span className="text-muted">(optional)</span>
                 </FormLabel>
