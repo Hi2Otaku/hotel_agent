@@ -82,6 +82,7 @@ Plan: 5 of 5
 | Phase 11 P03 | 2min | 2 tasks | 13 files |
 | Phase 11 P02 | 6min | 2 tasks | 18 files |
 | Phase 11 P04 | 5min | 2 tasks | 28 files |
+| Phase 11 P05 | 6min | 2 tasks | 27 files |
 
 ## Accumulated Context
 
@@ -199,6 +200,8 @@ Recent decisions affecting current work:
 - [Phase 11]: ChatPage uses own layout (Navbar + no Footer) via separate Route in App.tsx
 - [Phase 11]: SSE streaming uses native fetch + eventsource-parser (not axios) for ReadableStream support
 - [Phase 11]: Chat feature organized in features/chat/ directory with types, api, stores, hooks, components
+- [Phase 11]: Staff chat dark theme uses hsl(217.2,32.6%,17.5%) bot bubbles and hsl(217.2,32.6%,29.4%) borders per UI-SPEC
+- [Phase 11]: Staff chat bot_type="staff" for backend RBAC tool filtering
 
 ### Pending Todos
 
