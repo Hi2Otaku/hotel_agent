@@ -66,6 +66,13 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **INFR-02**: Unit and integration tests with CI/CD pipeline (GitHub Actions)
 - [x] **INFR-03**: Deployed with live demo URL and documentation
 
+### Deployment (Phase 10)
+
+- [ ] **DEPLOY-01**: EC2 server provisioned with Docker, swap, and reproducible setup script
+- [ ] **DEPLOY-02**: Production secrets (JWT keys, DB passwords) managed via GitHub Secrets, never in repo
+- [ ] **DEPLOY-03**: Extended demo data: guest accounts and historical bookings seeded on startup
+- [ ] **DEPLOY-04**: Full stack accessible at EC2 public IP over HTTP with automated health checks
+
 ## v2 Requirements
 
 Deferred to future release. Tracked but not in current roadmap.
@@ -136,12 +143,17 @@ Which phases cover which requirements. Updated during roadmap creation.
 | REPT-03 | Phase 7 | Complete |
 | INFR-02 | Phase 8 | Complete |
 | INFR-03 | Phase 8 | Complete |
+| DEPLOY-01 | Phase 10 | Planned |
+| DEPLOY-02 | Phase 10 | Planned |
+| DEPLOY-03 | Phase 10 | Planned |
+| DEPLOY-04 | Phase 10 | Planned |
 
 **Coverage:**
-- v1 requirements: 32 total
-- Mapped to phases: 32
+- v1 requirements: 32 total (complete)
+- Phase 10 requirements: 4 total (planned)
+- Mapped to phases: 36
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-20*
-*Last updated: 2026-03-20 after roadmap creation*
+*Last updated: 2026-03-22 after Phase 10 planning*

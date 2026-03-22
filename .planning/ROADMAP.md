@@ -179,7 +179,7 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -195,10 +195,28 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9
 
 ### Phase 10: Deploy to online test server
 
-**Goal:** [To be planned]
-**Requirements**: TBD
+**Goal:** HotelBook is running on a publicly accessible EC2 instance with production secrets, extended demo data, and automated CI/CD deployment
 **Depends on:** Phase 9
-**Plans:** 3/3 plans complete
+**Requirements**: DEPLOY-01, DEPLOY-02, DEPLOY-03, DEPLOY-04
+**Success Criteria** (what must be TRUE):
+  1. EC2 server is provisioned with Docker, swap, and the repo cloned to /opt/hotelbook
+  2. CI/CD deploy job writes production .env and JWT keys from GitHub Secrets before docker compose up
+  3. Auth service seeds 8 demo guest accounts on startup for staff dashboard demo
+  4. Production compose uses env-var secrets for all DB/RabbitMQ passwords (no hardcoded prod credentials)
+  5. Full stack accessible at EC2_IP:80 -- guest frontend, staff dashboard, and API all responding
+**Plans**: 3 plans
 
 Plans:
-- [ ] TBD (run /gsd:plan-phase 10 to break down)
+- [ ] 10-01-PLAN.md — Server setup script, CI/CD deploy job with secrets injection, production env template
+- [ ] 10-02-PLAN.md — Demo guest account seeding, production compose hardening with env-var secrets
+- [ ] 10-03-PLAN.md — Nginx cleanup, post-deploy health check, deployment verification checkpoint
+
+### Phase 11: New phase, for implementing a chatbot agent for user, staff
+
+**Goal:** [To be planned]
+**Requirements**: TBD
+**Depends on:** Phase 10
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd:plan-phase 11 to break down)
