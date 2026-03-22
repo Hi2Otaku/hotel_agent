@@ -48,6 +48,22 @@ services:
       timeout: 3s
       retries: 5
 
+  chat_db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: chat
+      POSTGRES_USER: chat_user
+      POSTGRES_PASSWORD: chat_pass
+    volumes:
+      - chat_db_data:/var/lib/postgresql/data
+    ports:
+      - "5436:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chat_user -d chat"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
   # --- Message Queue ---
   rabbitmq:
     image: rabbitmq:3-management-alpine
@@ -163,6 +179,31 @@ services:
       - ./keys:/run/secrets:ro
       - ./shared:/app/shared:ro
 
+  chat:
+    build:
+      context: .
+      dockerfile: services/chat/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+asyncpg://chat_user:chat_pass@chat_db:5432/chat
+      JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
+      RABBITMQ_URL: amqp://hotel:hotel_pass@rabbitmq:5672/
+      CHAT_LLM_PROVIDER: anthropic
+      CHAT_LLM_MODEL: claude-sonnet-4-6-20250514
+      CHAT_LLM_API_KEY: sk-placeholder
+      AUTH_SERVICE_URL: http://auth:8000
+      ROOM_SERVICE_URL: http://room:8000
+      BOOKING_SERVICE_URL: http://booking:8000
+    depends_on:
+      chat_db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    ports:
+      - "8010:8000"
+    volumes:
+      - ./keys:/run/secrets:ro
+      - ./shared:/app/shared:ro
+
   gateway:
     build:
       context: .
@@ -184,4 +225,5 @@ volumes:
   auth_db_data:
   room_db_data:
   booking_db_data:
+  chat_db_data:
   minio_data:
