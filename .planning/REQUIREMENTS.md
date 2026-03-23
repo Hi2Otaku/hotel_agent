@@ -79,9 +79,9 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **UV-02**: Shared package referenced as path dependency in all services
 - [x] **UV-03**: Tests relocated into per-service directories and runnable via `uv run pytest`
 - [x] **UV-04**: Old requirements.txt files deprecated with migration comment
-- [ ] **UV-05**: Dockerfiles use uv (COPY --from=ghcr.io/astral-sh/uv) with no pip commands
-- [ ] **UV-06**: CI pipeline uses astral-sh/setup-uv with caching for all Python jobs
-- [ ] **UV-07**: Root Makefile provides setup, sync, test, and lint targets for developer workflow
+- [x] **UV-05**: Dockerfiles use uv (COPY --from=ghcr.io/astral-sh/uv) with no pip commands
+- [x] **UV-06**: CI pipeline uses astral-sh/setup-uv with caching for all Python jobs
+- [x] **UV-07**: Root Makefile provides setup, sync, test, and lint targets for developer workflow
 
 ## v2 Requirements
 

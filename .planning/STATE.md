@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 12-01-PLAN.md
-last_updated: "2026-03-23T02:20:32.669Z"
+stopped_at: Completed 12-02-PLAN.md
+last_updated: "2026-03-23T02:24:17.126Z"
 progress:
   total_phases: 13
-  completed_phases: 11
+  completed_phases: 12
   total_plans: 43
-  completed_plans: 42
+  completed_plans: 43
 ---
 
 # Project State
@@ -84,6 +84,7 @@ Plan: 2 of 2
 | Phase 11 P04 | 5min | 2 tasks | 28 files |
 | Phase 11 P05 | 6min | 2 tasks | 27 files |
 | Phase 12 P01 | 8min | 3 tasks | 56 files |
+| Phase 12 P02 | 2min | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -206,6 +207,8 @@ Recent decisions affecting current work:
 - [Phase 11]: Staff chat bot_type="staff" for backend RBAC tool filtering
 - [Phase 12]: Per-service pyproject.toml with [tool.uv.sources] path dependency on shared package
 - [Phase 12]: Per-service test isolation: cd services/{svc} && uv run pytest tests/ -x
+- [Phase 12]: uv pinned to 0.10.9 in Dockerfiles and CI for reproducibility
+- [Phase 12]: Two-phase uv sync in Dockerfiles for Docker layer cache optimization
 
 ### Pending Todos
 
@@ -217,6 +220,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-23T02:20:32.659Z
-Stopped at: Completed 12-01-PLAN.md
+Last session: 2026-03-23T02:24:17.122Z
+Stopped at: Completed 12-02-PLAN.md
 Resume file: None
