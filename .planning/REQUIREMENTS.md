@@ -83,6 +83,14 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **UV-06**: CI pipeline uses astral-sh/setup-uv with caching for all Python jobs
 - [x] **UV-07**: Root Makefile provides setup, sync, test, and lint targets for developer workflow
 
+### Kubernetes Deployment (Phase 13)
+
+- [ ] **K8S-CHART**: Helm umbrella chart with templates for all services, values files for dev/prod separation
+- [ ] **K8S-DB**: Consolidated Postgres StatefulSet with 4 databases, RabbitMQ and MinIO StatefulSets with PVCs
+- [ ] **K8S-DEPLOY**: All application services deployed as k8s Deployments with health probes and resource limits
+- [ ] **K8S-INGRESS**: Traefik IngressRoute with path-based routing replacing nginx reverse proxy
+- [ ] **K8S-CICD**: CI/CD pipeline builds images to GHCR and deploys via helm upgrade to k3s
+
 ## v2 Requirements
 
 Deferred to future release. Tracked but not in current roadmap.
@@ -164,14 +172,20 @@ Which phases cover which requirements. Updated during roadmap creation.
 | UV-05 | Phase 12 | Planned |
 | UV-06 | Phase 12 | Planned |
 | UV-07 | Phase 12 | Planned |
+| K8S-CHART | Phase 13 | Planned |
+| K8S-DB | Phase 13 | Planned |
+| K8S-DEPLOY | Phase 13 | Planned |
+| K8S-INGRESS | Phase 13 | Planned |
+| K8S-CICD | Phase 13 | Planned |
 
 **Coverage:**
 - v1 requirements: 32 total (complete)
 - Phase 10 requirements: 4 total (planned)
 - Phase 12 requirements: 7 total (planned)
-- Mapped to phases: 43
+- Phase 13 requirements: 5 total (planned)
+- Mapped to phases: 48
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-20*
-*Last updated: 2026-03-23 after Phase 12 planning*
+*Last updated: 2026-03-23 after Phase 13 planning*

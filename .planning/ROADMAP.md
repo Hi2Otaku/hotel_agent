@@ -248,12 +248,20 @@ Plans:
 - [ ] 12-01-PLAN.md -- Per-service pyproject.toml + uv.lock, test relocation, requirements.txt deprecation
 - [ ] 12-02-PLAN.md -- Dockerfiles with uv, CI pipeline migration, Makefile for developer workflow
 
-### Phase 13: k8s deployment
+### Phase 13: k8s Deployment
 
-**Goal:** [To be planned]
-**Requirements**: TBD
+**Goal:** HotelBook production deployment migrated from Docker Compose to Kubernetes (k3s) on the same EC2 instance, with Helm charts for all services, Traefik IngressRoute routing, GHCR container images, and CI/CD deploying via helm upgrade
 **Depends on:** Phase 12
-**Plans:** 2/2 plans complete
+**Requirements**: K8S-CHART, K8S-DB, K8S-DEPLOY, K8S-INGRESS, K8S-CICD
+**Success Criteria** (what must be TRUE):
+  1. Helm umbrella chart renders valid YAML for all services with dev/prod values separation
+  2. Consolidated Postgres StatefulSet runs 4 databases, RabbitMQ and MinIO have PVC-backed StatefulSets
+  3. All application services deployed as k8s Deployments with health probes and resource limits within 4GB budget
+  4. Traefik IngressRoute routes /, /staff/, /api/ correctly with SSE support for chat streaming
+  5. CI/CD builds 8 Docker images to GHCR and deploys via helm upgrade to k3s
+**Plans**: 3 plans
 
 Plans:
-- [ ] TBD (run /gsd:plan-phase 13 to break down)
+- [ ] 13-01-PLAN.md -- Helm chart scaffolding, values files, stateful infrastructure (Postgres, RabbitMQ, MinIO)
+- [ ] 13-02-PLAN.md -- Application Deployments, Services, Traefik IngressRoute, staff frontend base path fix
+- [ ] 13-03-PLAN.md -- CI/CD pipeline: GHCR image build/push, k8s secrets, helm deploy
