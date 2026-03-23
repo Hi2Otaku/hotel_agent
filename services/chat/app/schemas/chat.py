@@ -34,8 +34,8 @@ class MessageResponse(BaseModel):
     id: UUID
     role: str
     content: str | None
-    tool_calls: dict | None
-    tool_results: dict | None
+    tool_calls: list | dict | None
+    tool_results: list | dict | None
     pending_confirmation: dict | None
     created_at: datetime
 
