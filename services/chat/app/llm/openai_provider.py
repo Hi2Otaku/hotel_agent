@@ -63,8 +63,35 @@ class OpenAIProvider(LLMProvider):
         Yields:
             StreamChunk objects for text deltas, tool use events, and done.
         """
-        # Prepend system message
-        openai_messages = [{"role": "system", "content": system}] + messages
+        # Convert provider-agnostic messages to OpenAI format
+        openai_messages = [{"role": "system", "content": system}]
+        for msg in messages:
+            if msg.get("role") == "tool_result":
+                # Convert tool_result -> tool with tool_call_id
+                openai_messages.append({
+                    "role": "tool",
+                    "tool_call_id": msg.get("tool_id", ""),
+                    "content": msg.get("content", ""),
+                })
+            elif msg.get("role") == "assistant" and msg.get("tool_calls"):
+                # Ensure tool_calls have type: "function" and proper structure
+                converted_calls = []
+                for tc in msg["tool_calls"]:
+                    converted_calls.append({
+                        "id": tc.get("id", ""),
+                        "type": "function",
+                        "function": {
+                            "name": tc.get("name", ""),
+                            "arguments": json.dumps(tc.get("input", {})) if isinstance(tc.get("input"), dict) else tc.get("arguments", "{}"),
+                        },
+                    })
+                openai_messages.append({
+                    "role": "assistant",
+                    "content": msg.get("content") or None,
+                    "tool_calls": converted_calls,
+                })
+            else:
+                openai_messages.append(msg)
 
         kwargs = {
             "model": self.model,
