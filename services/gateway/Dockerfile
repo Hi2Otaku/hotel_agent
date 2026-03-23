@@ -28,7 +28,8 @@ COPY services/gateway/ .
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev
 
-# Activate the virtual environment
-ENV PATH="/build/services/gateway/.venv/bin:$PATH"
+# Activate the virtual environment and set PYTHONPATH
+ENV PATH="/build/services/gateway/.venv/bin:$PATH" \
+    PYTHONPATH="/build/services/gateway"
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

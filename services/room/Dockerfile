@@ -28,8 +28,9 @@ COPY services/room/ .
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev
 
-# Activate the virtual environment
-ENV PATH="/build/services/room/.venv/bin:$PATH"
+# Activate the virtual environment and set PYTHONPATH for alembic
+ENV PATH="/build/services/room/.venv/bin:$PATH" \
+    PYTHONPATH="/build/services/room"
 
 # Make entrypoint executable
 RUN chmod +x entrypoint.sh
