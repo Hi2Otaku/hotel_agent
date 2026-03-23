@@ -139,19 +139,6 @@ export function useChat() {
         created_at: new Date().toISOString(),
       };
       addMessage(userMsg);
-
-      const assistantMsgRef = { id: crypto.randomUUID() };
-      const assistantMsg: ChatMessage = {
-        id: assistantMsgRef.id,
-        role: 'assistant',
-        content: '',
-        tool_calls: null,
-        tool_results: null,
-        pending_confirmation: null,
-        created_at: new Date().toISOString(),
-        isStreaming: true,
-      };
-      addMessage(assistantMsg);
       setStreaming(true);
 
       const { response, abort } = sendMessageStream(
@@ -169,6 +156,20 @@ export function useChat() {
         if (convId && !currentConversationId) {
           setCurrentConversation(convId);
         }
+
+        // Add empty assistant message only after response starts
+        const assistantMsgRef = { id: crypto.randomUUID() };
+        const assistantMsg: ChatMessage = {
+          id: assistantMsgRef.id,
+          role: 'assistant',
+          content: '',
+          tool_calls: null,
+          tool_results: null,
+          pending_confirmation: null,
+          created_at: new Date().toISOString(),
+          isStreaming: true,
+        };
+        addMessage(assistantMsg);
 
         await handleStream(res, assistantMsgRef);
       } catch (err) {
@@ -193,19 +194,6 @@ export function useChat() {
       if (isStreaming) return;
       setError(null);
       setPendingConfirmation(null);
-
-      const assistantMsgRef = { id: crypto.randomUUID() };
-      const assistantMsg: ChatMessage = {
-        id: assistantMsgRef.id,
-        role: 'assistant',
-        content: '',
-        tool_calls: null,
-        tool_results: null,
-        pending_confirmation: null,
-        created_at: new Date().toISOString(),
-        isStreaming: true,
-      };
-      addMessage(assistantMsg);
       setStreaming(true);
 
       const { response, abort } = sendMessageStream(
@@ -218,6 +206,20 @@ export function useChat() {
 
       try {
         const res = await response;
+
+        const assistantMsgRef = { id: crypto.randomUUID() };
+        const assistantMsg: ChatMessage = {
+          id: assistantMsgRef.id,
+          role: 'assistant',
+          content: '',
+          tool_calls: null,
+          tool_results: null,
+          pending_confirmation: null,
+          created_at: new Date().toISOString(),
+          isStreaming: true,
+        };
+        addMessage(assistantMsg);
+
         await handleStream(res, assistantMsgRef);
       } catch (err) {
         if ((err as Error).name !== 'AbortError') {

@@ -109,18 +109,6 @@ export function useChat() {
         created_at: new Date().toISOString(),
       });
 
-      // Add empty assistant message for streaming
-      addMessage({
-        id: crypto.randomUUID(),
-        role: 'assistant',
-        content: '',
-        tool_calls: null,
-        tool_results: null,
-        pending_confirmation: null,
-        created_at: new Date().toISOString(),
-        isStreaming: true,
-      });
-
       setStreaming(true);
 
       const { response, abort } = sendMessageStream(
@@ -138,6 +126,19 @@ export function useChat() {
           setStreaming(false);
           return;
         }
+
+        // Add empty assistant message only after response starts
+        addMessage({
+          id: crypto.randomUUID(),
+          role: 'assistant',
+          content: '',
+          tool_calls: null,
+          tool_results: null,
+          pending_confirmation: null,
+          created_at: new Date().toISOString(),
+          isStreaming: true,
+        });
+
         await processStream(res);
       } catch (err) {
         if ((err as Error).name !== 'AbortError') {
@@ -152,18 +153,6 @@ export function useChat() {
   const confirmAction = useCallback(
     async (messageId: string) => {
       if (isStreaming) return;
-
-      // Add empty assistant message for streaming response
-      addMessage({
-        id: crypto.randomUUID(),
-        role: 'assistant',
-        content: '',
-        tool_calls: null,
-        tool_results: null,
-        pending_confirmation: null,
-        created_at: new Date().toISOString(),
-        isStreaming: true,
-      });
 
       setStreaming(true);
       setPendingConfirmation(null);
@@ -183,6 +172,18 @@ export function useChat() {
           setStreaming(false);
           return;
         }
+
+        addMessage({
+          id: crypto.randomUUID(),
+          role: 'assistant',
+          content: '',
+          tool_calls: null,
+          tool_results: null,
+          pending_confirmation: null,
+          created_at: new Date().toISOString(),
+          isStreaming: true,
+        });
+
         await processStream(res);
       } catch (err) {
         if ((err as Error).name !== 'AbortError') {
