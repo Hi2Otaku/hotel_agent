@@ -6,7 +6,10 @@ keys/jwt_*
 *.pyc
 __pycache__/
 *.egg-info/
+build/
+dist/
 .venv/
+services/*/.venv/
 .pytest_cache/
 
 # Environment

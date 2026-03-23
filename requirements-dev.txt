@@ -1,3 +1,10 @@
+# DEPRECATED: This file is kept for reference during the uv migration.
+# Dev dependencies are now managed via [dependency-groups] dev in each service's pyproject.toml.
+# This file will be removed in a future cleanup.
+#
+# To install dev dependencies, use: uv sync --group dev
+# See services/*/pyproject.toml for the current dependency lists.
+
 pytest>=8.3.0
 pytest-asyncio>=0.23.0
 httpx
