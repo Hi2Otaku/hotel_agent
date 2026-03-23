@@ -15,6 +15,7 @@ export function useChat() {
     setStreaming,
     addToolStatus,
     updateToolStatus,
+    clearToolStatuses,
     setPendingConfirmation,
     setCurrentConversation,
   } = useChatStore();
@@ -48,6 +49,7 @@ export function useChat() {
           });
           break;
         case 'done':
+          clearToolStatuses();
           setStreaming(false);
           break;
         case 'error':

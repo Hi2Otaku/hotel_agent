@@ -19,6 +19,7 @@ export function useChat() {
     setStreaming,
     addToolStatus,
     updateToolStatus,
+    clearToolStatuses,
     setPendingConfirmation,
     setCurrentConversation,
   } = useChatStore();
@@ -53,6 +54,7 @@ export function useChat() {
           break;
         case 'done':
           assistantMsgRef.id = event.message_id;
+          clearToolStatuses();
           setStreaming(false);
           queryClient.invalidateQueries({ queryKey: ['conversations'] });
           break;
@@ -67,6 +69,7 @@ export function useChat() {
       appendToLastMessage,
       addToolStatus,
       updateToolStatus,
+      clearToolStatuses,
       setPendingConfirmation,
       setStreaming,
       queryClient,

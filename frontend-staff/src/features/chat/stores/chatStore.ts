@@ -15,6 +15,7 @@ interface ChatState {
   setStreaming: (streaming: boolean) => void;
   addToolStatus: (status: ToolStatusState) => void;
   updateToolStatus: (toolId: string, update: Partial<ToolStatusState>) => void;
+  clearToolStatuses: () => void;
   setPendingConfirmation: (confirmation: PendingConfirmation | null) => void;
   clearChat: () => void;
 }
@@ -57,6 +58,8 @@ export const useChatStore = create<ChatState>((set) => ({
         s.tool_id === toolId ? { ...s, ...update } : s,
       ),
     })),
+
+  clearToolStatuses: () => set({ toolStatuses: [] }),
 
   setPendingConfirmation: (confirmation) =>
     set({ pendingConfirmation: confirmation }),

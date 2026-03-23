@@ -36,13 +36,15 @@ export function MessageList({
         aria-live="polite"
         className="h-full overflow-y-auto py-4"
       >
-        {messages.map((msg) => (
+        {messages.map((msg, idx) => (
           <MessageBubble
             key={msg.id}
             message={msg}
             toolStatuses={
-              msg.role === 'assistant'
-                ? toolStatuses.filter(() => true)
+              msg.role === 'assistant' &&
+              msg.isStreaming &&
+              idx === messages.length - 1
+                ? toolStatuses
                 : []
             }
             onConfirm={onConfirm}
@@ -50,7 +52,9 @@ export function MessageList({
             onSend={onSend}
           />
         ))}
-        {isStreaming && <TypingIndicator />}
+        {isStreaming && messages[messages.length - 1]?.content === '' && (
+          <TypingIndicator />
+        )}
       </div>
       <ScrollToBottom visible={!isAtBottom} onClick={scrollToBottom} />
     </div>
