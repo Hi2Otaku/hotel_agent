@@ -21,6 +21,15 @@ export async function getMessages(
     `/api/v1/chat/conversations/${conversationId}/messages`,
     { params },
   );
+
+  // Sort messages chronologically, user before assistant for same timestamp
+  const roleOrder: Record<string, number> = { system: 0, user: 1, assistant: 2 };
+  data.sort((a, b) => {
+    const timeA = new Date(a.created_at).getTime();
+    const timeB = new Date(b.created_at).getTime();
+    if (timeA !== timeB) return timeA - timeB;
+    return (roleOrder[a.role] ?? 3) - (roleOrder[b.role] ?? 3);
+  });
   return data;
 }
 

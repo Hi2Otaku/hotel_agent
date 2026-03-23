@@ -8,7 +8,7 @@ import json
 import uuid
 
 from fastapi import APIRouter, Depends, HTTPException, Query
-from sqlalchemy import select
+from sqlalchemy import case, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.responses import StreamingResponse
 
@@ -104,10 +104,16 @@ async def get_conversation_messages(
     if conv_result.scalar_one_or_none() is None:
         raise HTTPException(status_code=404, detail="Conversation not found")
 
+    # Role ordering tiebreaker: user(0) before assistant(1) for same timestamp
+    role_order = case(
+        (Message.role == "user", 0),
+        (Message.role == "assistant", 1),
+        else_=2,
+    )
     query = (
         select(Message)
         .where(Message.conversation_id == conversation_id)
-        .order_by(Message.created_at.desc())
+        .order_by(Message.created_at.desc(), role_order.desc())
         .limit(limit)
     )
 
