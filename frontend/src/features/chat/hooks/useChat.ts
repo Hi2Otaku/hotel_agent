@@ -19,6 +19,7 @@ export function useChat() {
     setStreaming,
     addToolStatus,
     updateToolStatus,
+    appendToolResult,
     clearToolStatuses,
     setPendingConfirmation,
     setCurrentConversation,
@@ -43,6 +44,7 @@ export function useChat() {
             status: event.success ? 'success' : 'error',
             data: event.data,
           });
+          appendToolResult(event.tool_id, '', event.data, event.success);
           break;
         case 'confirmation_required':
           setPendingConfirmation({
@@ -72,6 +74,7 @@ export function useChat() {
       appendToLastMessage,
       addToolStatus,
       updateToolStatus,
+      appendToolResult,
       clearToolStatuses,
       setPendingConfirmation,
       setStreaming,

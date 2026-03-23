@@ -22,6 +22,7 @@ interface ChatState {
     toolId: string,
     update: Partial<ToolStatusState>,
   ) => void;
+  appendToolResult: (toolId: string, toolName: string, data: Record<string, unknown>, success: boolean) => void;
   clearToolStatuses: () => void;
   setPendingConfirmation: (
     confirmation: PendingConfirmation | null,
@@ -69,6 +70,23 @@ export const useChatStore = create<ChatState>((set) => ({
         ts.tool_id === toolId ? { ...ts, ...update } : ts,
       ),
     })),
+
+  appendToolResult: (toolId, toolName, data, success) =>
+    set((state) => {
+      const messages = [...state.messages];
+      const last = messages[messages.length - 1];
+      if (last && last.role === 'assistant') {
+        const existing = Array.isArray(last.tool_results) ? last.tool_results : [];
+        messages[messages.length - 1] = {
+          ...last,
+          tool_results: [
+            ...existing,
+            { tool_id: toolId, tool_name: toolName, result: { data, success } },
+          ] as unknown as Record<string, unknown>,
+        };
+      }
+      return { messages };
+    }),
 
   clearToolStatuses: () => set({ toolStatuses: [] }),
 
