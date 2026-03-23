@@ -321,12 +321,15 @@ class ChatEngine:
                             "result": result,
                         })
 
+                        raw_data = result.get("data") or result.get("error") or {}
+                        event_data = raw_data if isinstance(raw_data, dict) else {"message": str(raw_data)}
+
                         yield {
                             "event": "tool_result",
                             "data": ToolResultEvent(
                                 tool_id=tool_id,
                                 success=result["success"],
-                                data=result.get("data", result.get("error", {})),
+                                data=event_data,
                             ).model_dump_json(),
                         }
 
@@ -459,12 +462,15 @@ class ChatEngine:
         pending_msg.tool_results = [{"tool_id": tool_id, "result": result}]
         await self.db.flush()
 
+        raw_confirm_data = result.get("data") or result.get("error") or {}
+        confirm_event_data = raw_confirm_data if isinstance(raw_confirm_data, dict) else {"message": str(raw_confirm_data)}
+
         yield {
             "event": "tool_result",
             "data": ToolResultEvent(
                 tool_id=tool_id,
                 success=result["success"],
-                data=result.get("data", result.get("error", {})),
+                data=confirm_event_data,
             ).model_dump_json(),
         }
 
