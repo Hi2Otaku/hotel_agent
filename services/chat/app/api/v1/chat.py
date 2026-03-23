@@ -4,12 +4,13 @@ Provides the POST /send endpoint for sending messages with SSE streaming
 responses, and GET /conversations/{id}/messages for message history.
 """
 
+import json
 import uuid
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sse_starlette.sse import EventSourceResponse, ServerSentEvent
+from starlette.responses import StreamingResponse
 
 from app.api.deps import get_current_user, get_db, rate_limiter
 from app.core.config import settings
@@ -30,12 +31,11 @@ _prompt_builder = PromptBuilder()
 
 
 async def _sse_generator(engine: ChatEngine, request: SendMessageRequest):
-    """Wrap ChatEngine output as ServerSentEvent objects for SSE streaming."""
+    """Yield SSE-formatted text lines from ChatEngine events."""
     async for event_dict in engine.process_message(request):
-        yield ServerSentEvent(
-            data=event_dict["data"],
-            event=event_dict["event"],
-        )
+        event_type = event_dict["event"]
+        data = event_dict["data"]
+        yield f"event: {event_type}\ndata: {data}\n\n"
 
 
 @router.post("/send")
@@ -67,7 +67,15 @@ async def send_message(
         prompt_builder=_prompt_builder,
     )
 
-    return EventSourceResponse(_sse_generator(engine, request))
+    return StreamingResponse(
+        _sse_generator(engine, request),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
+        },
+    )
 
 
 @router.get(
