@@ -85,13 +85,19 @@ class OpenAIProvider(LLMProvider):
                             "arguments": json.dumps(tc.get("input", {})) if isinstance(tc.get("input"), dict) else tc.get("arguments", "{}"),
                         },
                     })
-                openai_messages.append({
+                entry: dict = {
                     "role": "assistant",
-                    "content": msg.get("content") or None,
                     "tool_calls": converted_calls,
-                })
+                }
+                if msg.get("content"):
+                    entry["content"] = msg["content"]
+                openai_messages.append(entry)
             else:
-                openai_messages.append(msg)
+                # Ensure content is never null for OpenAI
+                cleaned = {**msg}
+                if cleaned.get("content") is None:
+                    cleaned["content"] = ""
+                openai_messages.append(cleaned)
 
         kwargs = {
             "model": self.model,
