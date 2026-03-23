@@ -43,6 +43,7 @@ class DoneEvent(BaseModel):
 
     type: str = "done"
     message_id: str
+    conversation_id: str
     input_tokens: int
     output_tokens: int
 

@@ -397,6 +397,7 @@ class ChatEngine:
             "event": "done",
             "data": DoneEvent(
                 message_id=str(assistant_message_id),
+                conversation_id=str(conversation.id),
                 input_tokens=input_tokens,
                 output_tokens=output_tokens,
             ).model_dump_json(),
@@ -540,6 +541,7 @@ class ChatEngine:
             "event": "done",
             "data": DoneEvent(
                 message_id=str(assistant_message_id),
+                conversation_id=str(conversation.id),
                 input_tokens=input_tokens,
                 output_tokens=output_tokens,
             ).model_dump_json(),

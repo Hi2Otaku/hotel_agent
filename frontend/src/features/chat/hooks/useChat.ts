@@ -54,6 +54,9 @@ export function useChat() {
           break;
         case 'done':
           assistantMsgRef.id = event.message_id;
+          if (event.conversation_id) {
+            setCurrentConversation(event.conversation_id);
+          }
           clearToolStatuses();
           setStreaming(false);
           queryClient.invalidateQueries({ queryKey: ['conversations'] });
@@ -153,12 +156,6 @@ export function useChat() {
 
       try {
         const res = await response;
-
-        // Extract conversation_id from response header if new conversation
-        const convId = res.headers.get('x-conversation-id');
-        if (convId && !currentConversationId) {
-          setCurrentConversation(convId);
-        }
 
         // Add empty assistant message only after response starts
         const assistantMsgRef = { id: crypto.randomUUID() };
