@@ -556,17 +556,42 @@ class ChatEngine:
         return messages
 
     def _build_llm_messages_from_history(self, history: list[Message]) -> list[dict]:
-        """Build LLM message list from DB message history."""
+        """Build LLM message list from DB message history.
+
+        Tool calls and results are stored together on the assistant message
+        in JSONB fields. This method expands them into the separate messages
+        the LLM API expects: assistant message with tool_calls, followed by
+        individual tool_result messages for each call.
+        """
         messages = []
         for msg in history:
-            if msg.role in ("user", "assistant"):
-                entry = {"role": msg.role, "content": msg.content}
+            if msg.role == "user":
+                messages.append({"role": "user", "content": msg.content})
+            elif msg.role == "assistant":
+                entry: dict = {"role": "assistant", "content": msg.content}
                 if msg.tool_calls:
                     entry["tool_calls"] = msg.tool_calls
                 messages.append(entry)
+
+                # Expand tool results into separate messages after the assistant
+                if msg.tool_calls and msg.tool_results:
+                    results_by_id = {}
+                    for tr in msg.tool_results:
+                        if isinstance(tr, dict) and "tool_id" in tr:
+                            results_by_id[tr["tool_id"]] = tr.get("result", {})
+
+                    for tc in msg.tool_calls:
+                        tc_id = tc.get("id", "")
+                        result = results_by_id.get(tc_id, {})
+                        messages.append({
+                            "role": "tool_result",
+                            "tool_id": tc_id,
+                            "content": json.dumps(result) if isinstance(result, dict) else str(result),
+                        })
             elif msg.role == "tool_result":
                 messages.append({
                     "role": "tool_result",
+                    "tool_id": getattr(msg, "tool_id", ""),
                     "content": msg.content,
                 })
         return messages
