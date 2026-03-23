@@ -569,12 +569,16 @@ class ChatEngine:
                 messages.append({"role": "user", "content": msg.content})
             elif msg.role == "assistant":
                 entry: dict = {"role": "assistant", "content": msg.content}
-                if msg.tool_calls:
+                # Only include tool_calls if we also have tool_results
+                # (incomplete tool calls from crashed/interrupted sessions
+                # would break the LLM API which requires matching responses)
+                has_complete_tools = msg.tool_calls and msg.tool_results
+                if has_complete_tools:
                     entry["tool_calls"] = msg.tool_calls
                 messages.append(entry)
 
                 # Expand tool results into separate messages after the assistant
-                if msg.tool_calls and msg.tool_results:
+                if has_complete_tools:
                     results_by_id = {}
                     for tr in msg.tool_results:
                         if isinstance(tr, dict) and "tool_id" in tr:
