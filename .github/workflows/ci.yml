@@ -15,20 +15,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v7
         with:
-          python-version: "3.12"
-          cache: pip
-          cache-dependency-path: services/*/requirements.txt
+          version: "0.10.9"
+          enable-cache: true
+
+      - name: Lint backend
+        run: uvx ruff check services/ shared/
 
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-
-      - name: Lint backend
-        run: |
-          pip install ruff
-          ruff check services/ tests/
 
       - name: Lint guest frontend
         run: cd frontend && npm ci && npm run lint
@@ -64,20 +61,17 @@ jobs:
           done
           sleep 5
 
-      - uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v7
         with:
-          python-version: "3.12"
-          cache: pip
-          cache-dependency-path: services/*/requirements.txt
+          version: "0.10.9"
+          enable-cache: true
 
-      - name: Install dependencies
+      - name: Install service dependencies
         run: |
-          pip install -r services/auth/requirements.txt
-          pip install -r services/room/requirements.txt
-          pip install -r services/booking/requirements.txt
-          pip install -r services/gateway/requirements.txt
-          pip install pytest pytest-asyncio httpx
-          pip install shared/
+          for svc in auth room booking gateway chat; do
+            echo "Syncing $svc..."
+            cd services/$svc && uv sync --frozen && cd ../..
+          done
 
       - name: Generate RSA keys for JWT
         run: |
@@ -101,7 +95,11 @@ jobs:
           MINIO_BUCKET: hotelbook
           MINIO_SECURE: "false"
           ROOM_SERVICE_URL: http://localhost:8002
-        run: pytest tests/ -x --tb=short
+        run: |
+          for svc in auth room booking gateway chat; do
+            echo "Testing $svc..."
+            cd services/$svc && uv run pytest tests/ -x --tb=short && cd ../..
+          done
 
       - name: Teardown
         if: always()
