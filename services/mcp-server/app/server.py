@@ -12,5 +12,9 @@ register_search_tools(mcp)
 register_booking_tools(mcp)
 register_report_tools(mcp)
 
+# Expose the Starlette/ASGI app for uvicorn
+app = mcp.streamable_http_app()
+
 if __name__ == "__main__":
-    mcp.run(transport="streamable-http", host="0.0.0.0", port=8000)
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -17,7 +17,7 @@ from app.schemas.chat import ConversationRenameRequest, ConversationResponse
 router = APIRouter(prefix="/api/v1/chat/conversations", tags=["conversations"])
 
 
-@router.get("/", response_model=list[ConversationResponse])
+@router.get("", response_model=list[ConversationResponse])
 async def list_conversations(
     user: dict = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
