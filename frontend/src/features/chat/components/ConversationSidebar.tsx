@@ -37,7 +37,7 @@ export function ConversationSidebar() {
 
   return (
     <div className="flex h-full w-[280px] flex-col border-r bg-[#F8FAFC]">
-      <div className="p-3">
+      <div className="shrink-0 p-3">
         <Button
           variant="outline"
           className="w-full border-[#0F766E] text-[#0F766E] hover:bg-[#0F766E]/5"
@@ -47,7 +47,7 @@ export function ConversationSidebar() {
           New Chat
         </Button>
       </div>
-      <ScrollArea className="flex-1">
+      <div className="min-h-0 flex-1 overflow-y-auto">
         <ConversationList
           conversations={conversations}
           activeId={currentConversationId}
@@ -55,7 +55,7 @@ export function ConversationSidebar() {
           onRename={handleRename}
           onDelete={handleDelete}
         />
-      </ScrollArea>
+      </div>
     </div>
   );
 }

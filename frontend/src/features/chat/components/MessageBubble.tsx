@@ -5,7 +5,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { ToolStatusCard } from './ToolStatusCard';
 import { ConfirmationCard } from './ConfirmationCard';
 import { RoomCard } from './RoomCard';
-import type { ChatMessage, ToolStatusState, RoomCardData } from '../types/chat';
+import type { ChatMessage, ToolStatusState } from '../types/chat';
 
 interface MessageBubbleProps {
   message: ChatMessage;
@@ -15,17 +15,33 @@ interface MessageBubbleProps {
   onSend?: (text: string) => void;
 }
 
+interface RoomResult {
+  name: string;
+  photo_url?: string;
+  price_per_night: string;
+  total_price?: string;
+  description?: string;
+  available_count?: number;
+  max_adults?: number;
+  bed_config?: Array<{ type: string; count: number }>;
+  amenity_highlights?: string[];
+}
+
 function extractRoomCards(
-  toolResults: Record<string, unknown> | null,
-): RoomCardData[] {
+  toolResults: unknown,
+): RoomResult[] {
   if (!toolResults) return [];
-  const rooms: RoomCardData[] = [];
-  // tool_results may contain room search data in various formats
-  const data = toolResults.data ?? toolResults;
-  if (Array.isArray(data)) {
-    for (const item of data) {
-      if (item && typeof item === 'object' && 'name' in item) {
-        rooms.push(item as RoomCardData);
+  const rooms: RoomResult[] = [];
+
+  // tool_results is stored as an array of {tool_id, result: {data: {...}, success}}
+  const results = Array.isArray(toolResults) ? toolResults : [toolResults];
+  for (const entry of results) {
+    const data = entry?.result?.data;
+    if (data && Array.isArray(data.results)) {
+      for (const room of data.results) {
+        if (room && typeof room === 'object' && 'name' in room) {
+          rooms.push(room as RoomResult);
+        }
       }
     }
   }

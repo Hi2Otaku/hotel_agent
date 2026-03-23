@@ -14,7 +14,7 @@ export function ChatLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex h-full">
+    <div className="flex h-[calc(100vh-64px)]">
       {/* Desktop sidebar */}
       <div className="hidden md:block">
         <ConversationSidebar />
