@@ -247,3 +247,13 @@ Plans:
 Plans:
 - [ ] 12-01-PLAN.md -- Per-service pyproject.toml + uv.lock, test relocation, requirements.txt deprecation
 - [ ] 12-02-PLAN.md -- Dockerfiles with uv, CI pipeline migration, Makefile for developer workflow
+
+### Phase 13: k8s deployment
+
+**Goal:** [To be planned]
+**Requirements**: TBD
+**Depends on:** Phase 12
+**Plans:** 1/2 plans executed
+
+Plans:
+- [ ] TBD (run /gsd:plan-phase 13 to break down)

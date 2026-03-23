@@ -3,10 +3,10 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 11-05-PLAN.md
-last_updated: "2026-03-22T17:47:29.862Z"
+stopped_at: Completed 12-01-PLAN.md
+last_updated: "2026-03-23T02:20:32.669Z"
 progress:
-  total_phases: 12
+  total_phases: 13
   completed_phases: 11
   total_plans: 43
   completed_plans: 42
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-20)
 
 **Core value:** Guests can seamlessly search, book, and manage room reservations with a polished experience that demonstrates real-world full-stack competency.
-**Current focus:** Phase 11 — new-phase-for-implementing-a-chatbot-agent-for-user-staff
+**Current focus:** Phase 12 — migrate-from-pip-to-uv-and-set-up-per-service-virtual-environments
 
 ## Current Position
 
-Phase: 11 (new-phase-for-implementing-a-chatbot-agent-for-user-staff) — EXECUTING
-Plan: 5 of 5
+Phase: 12 (migrate-from-pip-to-uv-and-set-up-per-service-virtual-environments) — EXECUTING
+Plan: 2 of 2
 
 ## Performance Metrics
 
@@ -83,6 +83,7 @@ Plan: 5 of 5
 | Phase 11 P02 | 6min | 2 tasks | 18 files |
 | Phase 11 P04 | 5min | 2 tasks | 28 files |
 | Phase 11 P05 | 6min | 2 tasks | 27 files |
+| Phase 12 P01 | 8min | 3 tasks | 56 files |
 
 ## Accumulated Context
 
@@ -92,6 +93,7 @@ Plan: 5 of 5
 - Phase 10 added: Deploy to online test server
 - Phase 12 added: Migrate from pip to uv and set up per-service virtual environments
 - Phase 11 added: New phase, for implementing a chatbot agent for user, staff
+- Phase 13 added: k8s deployment
 
 ### Decisions
 
@@ -202,6 +204,8 @@ Recent decisions affecting current work:
 - [Phase 11]: Chat feature organized in features/chat/ directory with types, api, stores, hooks, components
 - [Phase 11]: Staff chat dark theme uses hsl(217.2,32.6%,17.5%) bot bubbles and hsl(217.2,32.6%,29.4%) borders per UI-SPEC
 - [Phase 11]: Staff chat bot_type="staff" for backend RBAC tool filtering
+- [Phase 12]: Per-service pyproject.toml with [tool.uv.sources] path dependency on shared package
+- [Phase 12]: Per-service test isolation: cd services/{svc} && uv run pytest tests/ -x
 
 ### Pending Todos
 
@@ -213,6 +217,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-22T17:46:09Z
-Stopped at: Completed 11-05-PLAN.md
+Last session: 2026-03-23T02:20:32.659Z
+Stopped at: Completed 12-01-PLAN.md
 Resume file: None

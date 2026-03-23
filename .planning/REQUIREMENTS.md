@@ -75,10 +75,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Dependency Management (Phase 12)
 
-- [ ] **UV-01**: Each backend service has its own pyproject.toml with uv.lock for reproducible installs
-- [ ] **UV-02**: Shared package referenced as path dependency in all services
-- [ ] **UV-03**: Tests relocated into per-service directories and runnable via `uv run pytest`
-- [ ] **UV-04**: Old requirements.txt files deprecated with migration comment
+- [x] **UV-01**: Each backend service has its own pyproject.toml with uv.lock for reproducible installs
+- [x] **UV-02**: Shared package referenced as path dependency in all services
+- [x] **UV-03**: Tests relocated into per-service directories and runnable via `uv run pytest`
+- [x] **UV-04**: Old requirements.txt files deprecated with migration comment
 - [ ] **UV-05**: Dockerfiles use uv (COPY --from=ghcr.io/astral-sh/uv) with no pip commands
 - [ ] **UV-06**: CI pipeline uses astral-sh/setup-uv with caching for all Python jobs
 - [ ] **UV-07**: Root Makefile provides setup, sync, test, and lint targets for developer workflow
