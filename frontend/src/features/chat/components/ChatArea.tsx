@@ -16,14 +16,15 @@ export function ChatArea() {
     setPendingConfirmation,
   } = useChatStore();
 
-  // Load messages when conversation changes
+  // Load messages from DB when switching conversations
+  // Only fires when messages are empty (sidebar click clears them)
   const { data: historicMessages } = useMessages(currentConversationId);
 
   useEffect(() => {
-    if (historicMessages) {
+    if (historicMessages && messages.length === 0 && currentConversationId) {
       setMessages(historicMessages);
     }
-  }, [historicMessages, setMessages]);
+  }, [historicMessages, currentConversationId, messages.length, setMessages]);
 
   const showWelcome = !currentConversationId && messages.length === 0;
 

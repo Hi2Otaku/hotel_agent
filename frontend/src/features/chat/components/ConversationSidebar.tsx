@@ -13,7 +13,7 @@ export function ConversationSidebar() {
   const { data: conversations = [] } = useConversations();
   const renameMutation = useRenameConversation();
   const deleteMutation = useDeleteConversation();
-  const { currentConversationId, setCurrentConversation, clearChat } =
+  const { currentConversationId, setCurrentConversation, setMessages, clearChat } =
     useChatStore();
 
   const handleNewChat = () => {
@@ -21,6 +21,9 @@ export function ConversationSidebar() {
   };
 
   const handleSelect = (id: string) => {
+    if (id !== currentConversationId) {
+      setMessages([]);  // Clear messages so they reload from DB
+    }
     setCurrentConversation(id);
   };
 
