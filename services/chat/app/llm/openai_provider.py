@@ -99,6 +99,15 @@ class OpenAIProvider(LLMProvider):
                     cleaned["content"] = ""
                 openai_messages.append(cleaned)
 
+        # Final sanitization: ensure no message has null content
+        for m in openai_messages:
+            if "content" in m and m["content"] is None:
+                if m.get("tool_calls"):
+                    # Assistant messages with tool_calls: remove content entirely
+                    del m["content"]
+                else:
+                    m["content"] = ""
+
         kwargs = {
             "model": self.model,
             "max_tokens": max_tokens,

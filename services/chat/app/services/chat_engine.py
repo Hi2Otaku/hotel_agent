@@ -11,7 +11,7 @@ import logging
 import uuid
 from datetime import datetime, timezone
 
-from sqlalchemy import func, select
+from sqlalchemy import case, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.llm.base import LLMProvider, StreamChunk
@@ -177,10 +177,16 @@ class ChatEngine:
             return
 
         # c. Load conversation history (last 50 messages)
+        # Role ordering tiebreaker: user before assistant for same timestamp
+        role_order = case(
+            (Message.role == "user", 0),
+            (Message.role == "assistant", 1),
+            else_=2,
+        )
         history_result = await self.db.execute(
             select(Message)
             .where(Message.conversation_id == conversation.id)
-            .order_by(Message.created_at.desc())
+            .order_by(Message.created_at.desc(), role_order.desc())
             .limit(50)
         )
         history_messages = list(reversed(history_result.scalars().all()))
@@ -346,7 +352,7 @@ class ChatEngine:
                         # Append tool result to messages for next LLM call
                         llm_messages.append({
                             "role": "assistant",
-                            "content": "".join(accumulated_text) if accumulated_text else None,
+                            "content": "".join(accumulated_text) or "",
                             "tool_calls": [{"name": tool_name, "id": tool_id, "input": tool_input}],
                         })
                         llm_messages.append({
@@ -476,10 +482,15 @@ class ChatEngine:
         }
 
         # Continue to LLM with tool result for natural language summary
+        role_order = case(
+            (Message.role == "user", 0),
+            (Message.role == "assistant", 1),
+            else_=2,
+        )
         history_result = await self.db.execute(
             select(Message)
             .where(Message.conversation_id == conversation.id)
-            .order_by(Message.created_at.desc())
+            .order_by(Message.created_at.desc(), role_order.desc())
             .limit(50)
         )
         history_messages = list(reversed(history_result.scalars().all()))
@@ -568,7 +579,7 @@ class ChatEngine:
             if msg.role == "user":
                 messages.append({"role": "user", "content": msg.content})
             elif msg.role == "assistant":
-                entry: dict = {"role": "assistant", "content": msg.content}
+                entry: dict = {"role": "assistant", "content": msg.content or ""}
                 # Only include tool_calls if we also have tool_results
                 # (incomplete tool calls from crashed/interrupted sessions
                 # would break the LLM API which requires matching responses)

@@ -9,14 +9,17 @@ export async function getRoomStatusBoard(): Promise<RoomStatusBoard> {
 export async function getAvailableRooms(
   roomTypeId: string,
 ): Promise<RoomStatus[]> {
-  const { data } = await apiClient.get<RoomStatus[]>('/api/v1/rooms/list', {
-    params: {
-      room_type_id: roomTypeId,
-      room_status: 'available',
-      limit: 50,
+  const { data } = await apiClient.get<{ items: RoomStatus[]; total: number }>(
+    '/api/v1/rooms/list',
+    {
+      params: {
+        room_type_id: roomTypeId,
+        room_status: 'available',
+        limit: 50,
+      },
     },
-  });
-  return data;
+  );
+  return data.items;
 }
 
 export async function transitionRoomStatus(

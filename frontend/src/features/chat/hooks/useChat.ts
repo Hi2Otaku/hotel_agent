@@ -5,11 +5,16 @@ import { useChatStore } from '../stores/chatStore';
 import { sendMessageStream } from '../api/chatApi';
 import type { SSEEvent, ChatMessage } from '../types/chat';
 import { useQueryClient } from '@tanstack/react-query';
+import { useAuthStore } from '@/stores/authStore';
+
+const STAFF_ROLES = new Set(['admin', 'manager', 'front_desk', 'housekeeping']);
 
 export function useChat() {
   const [error, setError] = useState<string | null>(null);
   const abortRef = useRef<(() => void) | null>(null);
   const queryClient = useQueryClient();
+  const user = useAuthStore((s) => s.user);
+  const botType = user?.role && STAFF_ROLES.has(user.role) ? 'staff' : 'guest';
 
   const {
     currentConversationId,
@@ -152,7 +157,7 @@ export function useChat() {
 
       const { response, abort } = sendMessageStream(
         content,
-        'guest',
+        botType,
         currentConversationId ?? undefined,
       );
       abortRef.current = abort;
@@ -185,6 +190,7 @@ export function useChat() {
     [
       isStreaming,
       currentConversationId,
+      botType,
       addMessage,
       setStreaming,
       handleStream,
@@ -201,7 +207,7 @@ export function useChat() {
 
       const { response, abort } = sendMessageStream(
         '',
-        'guest',
+        botType,
         currentConversationId ?? undefined,
         messageId,
       );
@@ -234,6 +240,7 @@ export function useChat() {
     [
       isStreaming,
       currentConversationId,
+      botType,
       addMessage,
       setStreaming,
       handleStream,
